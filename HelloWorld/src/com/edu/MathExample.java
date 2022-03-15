@@ -26,7 +26,7 @@ public class MathExample {
 		System.out.println("두 수의 곱 : " + gob);
 		System.out.println("두 번째 수로 첫 번째 수를 나눴을 때 몫 : " + mok);
 		System.out.println("두 번째 수로 첫 번째 수를 나눴을 때 나머지 : " + na);
-
+		
 	}
 
 }
