@@ -3,9 +3,8 @@ package com.dev;
 import java.util.Scanner;
 
 class Bill {
-	public static int account;
-
-	static void billPrint() {
+	int account;
+	void billPrint() {
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.print("명세표를 출력하시겠습니까? (Y/N) > ");
@@ -33,10 +32,11 @@ public class WhileExample4 {
 	public static void main(String[] args) {
 		// 1:입금, 2:출금, 3:종료 프로그램 만들기
 
+		int menu = 0;
+		
 		Scanner scan = new Scanner(System.in);
 		Bill bill = new Bill();
 
-		int menu = 0;
 
 		while (true) {
 			System.out.println("-----------------");
@@ -46,19 +46,19 @@ public class WhileExample4 {
 
 			if (menu == 1) {
 				System.out.print("입금액 >> ");
-				Bill.account += scan.nextInt();
-				System.out.println("현재 잔액 >>> " + Bill.account);
+				bill.account += scan.nextInt();
+				System.out.println("현재 잔액 >>> " + bill.account);
 			} else if (menu == 2) {
 				System.out.print("출금액 >> ");
 				int minus = scan.nextInt();
-				if (minus > Bill.account) {
+				if (minus > bill.account) {
 					System.out.println("잔액이 부족합니다.");
 					continue;
 				}
-				Bill.account -= minus;
-				System.out.println("현재 잔액 >>> " + Bill.account);
+				bill.account -= minus;
+				System.out.println("현재 잔액 >>> " + bill.account);
 			} else if (menu == 3) {
-				Bill.billPrint();
+				bill.billPrint();
 				break;
 			} else {
 				System.out.println("잘못 입력하셨습니다. 다시 선택하세요.");
@@ -89,6 +89,7 @@ public class WhileExample4 {
 
 		System.out.println("End of Program");
 
+		scan.close();
 	}
 
 }
