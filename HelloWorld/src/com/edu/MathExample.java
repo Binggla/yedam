@@ -6,14 +6,14 @@ public class MathExample {
 
 	public static void main(String[] args) {
 		
-		Scanner snc = new Scanner(System.in);
+		Scanner scn = new Scanner(System.in);
 		
 		int num, num2, hap, cha, gob, mok, na;
 		
 		System.out.println("첫 번째 정수를 입력하세요.");
-		num = snc.nextInt();
+		num = scn.nextInt();
 		System.out.println("두 번째 정수를 입력하세요.");
-		num2 = snc.nextInt();
+		num2 = scn.nextInt();
 		
 		hap = num + num2;
 		cha = num - num2;
@@ -27,6 +27,7 @@ public class MathExample {
 		System.out.println("두 번째 수로 첫 번째 수를 나눴을 때 몫 : " + mok);
 		System.out.println("두 번째 수로 첫 번째 수를 나눴을 때 나머지 : " + na);
 		
+		scn.close();
 	}
 
 }

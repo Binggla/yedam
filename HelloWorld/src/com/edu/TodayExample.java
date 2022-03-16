@@ -11,12 +11,12 @@ public class TodayExample {
 		int age;
 		double height, weight, goodWeight;
 		
-//		System.out.println("이름을 입력하세요.");
-//		name = scn.nextLine();
-//		System.out.println("연락처를 입력하세요.");
-//		phoneNum = scn.nextLine();
-//		System.out.println("나이를 입력하세요.");
-//		age = scn.nextInt();
+		System.out.println("이름을 입력하세요.");
+		name = scn.nextLine();
+		System.out.println("연락처를 입력하세요.");
+		phoneNum = scn.nextLine();
+		System.out.println("나이를 입력하세요.");
+		age = scn.nextInt();
 		System.out.println("키를 입력하세요.");
 		height = scn.nextDouble();
 		System.out.println("몸무게를 입력하세요.");
@@ -24,10 +24,10 @@ public class TodayExample {
 		
 		goodWeight = (height - 100) * 0.9;
 		
-//		System.out.println("이름 : " + name);
-//		System.out.println("연락처 : " + phoneNum);
-//		System.out.println("나이 : " + age);
-//		System.out.println("키 : " + height);
+		System.out.println("이름 : " + name);
+		System.out.println("연락처 : " + phoneNum);
+		System.out.println("나이 : " + age);
+		System.out.println("키 : " + height);
 		System.out.println("몸무게 : " + weight);
 		System.out.println("적정 몸무게 : " + goodWeight);
 		

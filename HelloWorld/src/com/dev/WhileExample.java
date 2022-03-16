@@ -64,6 +64,7 @@ public class WhileExample {
 		System.out.println();
 		System.out.println("end of program");
 
+		scan.close();
 	}
 
 }

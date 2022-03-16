@@ -24,6 +24,7 @@ class Bill {
 				continue;
 			}
 		}
+		scan.close();
 	}
 }
 

@@ -17,6 +17,8 @@ public class IfExample3 {
 		} else {
 			System.out.println("틀렸습니다.");
 		}
+		
+		scan.close();
 
 		
 	}

@@ -22,6 +22,8 @@ public class ArrayExample8 {
 		
 		System.out.println("첫 번째 값 : " + numbers[0]);
 		System.out.println("두 번째 값 : " + numbers[1]);
+		
+		scan.close();
 	}
 
 }

@@ -113,7 +113,9 @@ public class CarExample {
 				continue;
 			}
 		}
-
+		
+		scan.close();
 	}
+	
 
 }

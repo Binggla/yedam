@@ -19,6 +19,7 @@ public class CashExample {
 		System.out.println("부가세 : " + tax + "원");
 		System.out.println("거스름돈 : " + change + "원");
 		
+		scn.close();
 	}
 
 }
