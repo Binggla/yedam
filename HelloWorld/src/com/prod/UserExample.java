@@ -76,7 +76,6 @@ public class UserExample {
 				users[i].getUserInfo();
 			}		
 		}
-		
 //		for (int i = 0; i < users.length; i++) {
 //			if (users[i].getUserPoint() > 1000) {
 //				users[i].getUserInfo();
