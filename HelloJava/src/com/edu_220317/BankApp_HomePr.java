@@ -2,15 +2,17 @@ package com.edu_220317;
 
 import java.util.Scanner;
 
-public class BankAppPr {
+public class BankApp_HomePr {
 	// 1.계좌 생성(번호, 예금액, 예금주)
 	// 2.예금(번호, 예금액) -> 최대 금액 10만원
 	// 3.출금(번호, 출금액) -> 잔액보다 큰 금액 출금 못하도록.
 	// 4.잔액조회
 	// 5.종료
 	// 9.계좌조회
+	
+	// 입금 출금 잔액조회 변경, 송금 기능 추가 + 명세표
 
-	static BankAccount[] banks = new BankAccount[100];
+	static BankAccount[] banks = new BankAccount[2];
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -60,26 +62,19 @@ public class BankAppPr {
 	public static void createAccount() {
 
 		System.out.println("\t[1. 계좌 생성]");
+		
 		String accNo;
-
+		
 		while (true) {
 			System.out.print("생성할 계좌번호 입력 >> ");
-			String inputAcc = scan.next();
+			String inputNo = scan.next();
 
-			int checkCnt = 0;
-			for (int i = 0; i < banks.length; i++) {
-				if (banks[i] != null && banks[i].getAccNo().equals(inputAcc)) {
-					checkCnt = 1;
-				}
-			}
-
-			if (checkCnt == 1) {
+			if (searchAccountNo(inputNo) != null) {
 				System.out.println("\t이미 동일한 계좌가 있습니다. 다시 입력해 주세요.");
 				continue;
-			} else if (checkCnt == 0) {
-				accNo = inputAcc;
-				break;
 			}
+			accNo = inputNo;
+			break;
 		}
 
 		System.out.print("예금주 입력 >> ");
@@ -102,12 +97,18 @@ public class BankAppPr {
 
 		BankAccount acnt = new BankAccount(accNo, accName, accMoney); // 인스턴스 생성
 
+		int checkCnt = 0;
 		for (int i = 0; i < banks.length; i++) { // banks 배열에 인스턴스 추가
 			if (banks[i] == null) {
+				checkCnt++;
 				banks[i] = acnt;
-				System.out.println("\t새로운 계좌 생성이 완료되었습니다.");
 				break;
 			}
+		}
+		if (checkCnt <= banks.length) {
+			System.out.println("\t새로운 계좌 생성이 완료되었습니다.");
+		} else if (checkCnt > banks.length) {
+			System.out.println("더이상 계좌를 생성할 수 없습니다.");
 		}
 
 	} // end of createAccount()
@@ -120,7 +121,7 @@ public class BankAppPr {
 		while (true) {
 			System.out.print("입금할 계좌번호 입력 >> ");
 			String inputAcc = scan.next();
-
+			
 			int checkCnt = 0;
 
 			for (int i = 0; i < banks.length; i++) {
@@ -141,9 +142,10 @@ public class BankAppPr {
 							System.out.println("\t정상적으로 처리되었습니다.");
 							System.out.println("\t" + banks[i].getAccNo() + "번 계좌의 현재 잔액 : " //
 									+ banks[i].getMoney());
+						
 							break;
 						} else if (accMoney + inputMoney > 100000) {
-							System.out.println("\t최대 한도를 초과하였습니다.");
+							System.out.println("\t최대 한도를 초과하였습니다. 초기 화면으로 돌아갑니다.");
 							System.out.println("\t" + banks[i].getAccNo() + "번 계좌의 현재 잔액 : " //
 									+ banks[i].getMoney());
 							break;
@@ -153,8 +155,8 @@ public class BankAppPr {
 				}
 
 			} else if (checkCnt == 0) {
-				System.out.println("\t해당하는 계좌 번호가 없습니다. 다시 입력해 주세요.");
-				continue;
+				System.out.println("\t해당하는 계좌 번호가 없습니다. 초기 화면으로 돌아갑니다.");
+				break;
 			}
 
 			if (checkCnt == 1) {
@@ -195,7 +197,7 @@ public class BankAppPr {
 									+ banks[i].getMoney());
 							break;
 						} else if (accMoney - inputMoney < 0) {
-							System.out.println("\t잔액이 부족합니다.");
+							System.out.println("\t잔액이 부족합니다. 초기 화면으로 돌아갑니다.");
 							System.out.println("\t" + banks[i].getAccNo() + "번 계좌의 현재 잔액 : " //
 									+ banks[i].getMoney());
 							break;
@@ -204,8 +206,8 @@ public class BankAppPr {
 				}
 
 			} else if (checkCnt == 0) {
-				System.out.println("\t해당하는 계좌 번호가 없습니다. 다시 입력해 주세요.");
-				continue;
+				System.out.println("\t해당하는 계좌 번호가 없습니다. 초기 화면으로 돌아갑니다.");
+				break;
 			}
 
 			if (checkCnt == 1) {
@@ -240,8 +242,8 @@ public class BankAppPr {
 					}
 				}
 			} else if (checkCnt == 0) {
-				System.out.println("\t해당하는 계좌번호가 없습니다. 다시 입력해 주세요.");
-				continue;
+				System.out.println("\t해당하는 계좌 번호가 없습니다. 초기 화면으로 돌아갑니다.");
+				break;
 			}
 
 			if (checkCnt == 1) {
@@ -258,5 +260,17 @@ public class BankAppPr {
 				System.out.println(banks[i].toString());
 			}
 		}
+
 	} // end of showList()
+
+	// 계좌번호를 입력했을 때 배열에서 동일한 계좌번호를 반환. 아니면 null을 반환.
+	public static BankAccount searchAccountNo(String accNo) {
+		for (int i = 0; i < banks.length; i++) {
+			if (banks[i] != null && accNo.equals(banks[i].getAccNo())) {
+				return banks[i];
+			}
+		}
+		return null;
+	}
+
 }

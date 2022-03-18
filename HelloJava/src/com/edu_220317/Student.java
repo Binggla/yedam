@@ -105,6 +105,15 @@ public class Student {
 		return str;
 	}
 	
+	
+	// static
+	
+	public static String schoolName;
+	public static String schoolWhere;
+	static {
+		schoolName = "예담";
+	}
+	
 	public static void callStatic() {				// 3번 static
 		System.out.println("정적 메소드 실행");
 	}

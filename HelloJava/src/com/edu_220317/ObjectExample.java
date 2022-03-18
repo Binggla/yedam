@@ -38,8 +38,8 @@ public class ObjectExample {
 		
 		// 생성자 -------------------------------------------------------------------------
 		
-//		Student stud2 = new Student(200);			// 1번
-//		Student stud3 = new Student(300, "홍길동");	// 2번
+//		Student stud2 = new Student(200);			// Student class 1번
+//		Student stud3 = new Student(300, "홍길동");	// Student class 2번
 	
 		Scanner scan = new Scanner(System.in);
 		
@@ -71,9 +71,15 @@ public class ObjectExample {
 	
 		// static ----------------------------------------------------------------------
 		
-		Student.callStatic();	// 3번 
-								// static method는 인스턴스 생성(=초기화) 없이 클래스 이름을 통해 사용 가능.
-								// 특히 main()는 class 실행 시에 바로 실행되는 메소드.
+		Student.callStatic();	// 정적 메소드 실행.
+								// Student class 3번 
+	
+		// static method는 인스턴스 생성(=초기화) 없이 클래스 이름을 통해 사용 가능.
+		// 특히 main()는 class 실행 시에 바로 실행되는 메소드.
+		
+		System.out.println(Student.schoolName);	// 예담.
+		Student.schoolWhere = "대구"; 			// 대구.
+		// static 변수는 인스턴스 생성 없이 클래스 이름을 통해 사용 가능하다.
 		
 		
 	

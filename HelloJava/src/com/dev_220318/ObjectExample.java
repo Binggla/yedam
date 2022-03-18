@@ -1,4 +1,4 @@
-package com.dev;
+package com.dev_220318;
 
 import com.edu_220317.Student;			// 다른 패키지의 클래스이기 때문에 import 필요.
 
