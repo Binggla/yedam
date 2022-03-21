@@ -26,7 +26,7 @@ public class BankAccount {
 	}
 	
 	public BankAccount(String accNo) {	// 오버로딩(overloading) : 동일한 이름의 메소드를 선언. 매개변수는 달라야한다.
-		this.accNo = accNo;
+		this(accNo, null, 0);			// this() : 다른 생성자를 호출하여 중복 줄이기.
 	}
 	
 	// 메소드(Method)
