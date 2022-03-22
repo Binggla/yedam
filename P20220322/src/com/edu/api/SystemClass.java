@@ -1,6 +1,6 @@
 package com.edu.api;
 
-public class SystemExample {
+public class SystemClass {
 
 	public static void main(String[] args) {
 

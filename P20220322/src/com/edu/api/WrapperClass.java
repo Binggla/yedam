@@ -2,7 +2,7 @@ package com.edu.api;
 
 import java.util.ArrayList;
 
-public class WrapperExample {
+public class WrapperClass {
 
 	public static void main(String[] args) {
 		// 기본타입(int, long, double, boolean ...)을 참조타입(== Integer, Long, Double, Boolean class ...)으로 변경하는 클래스.

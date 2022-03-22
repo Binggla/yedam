@@ -2,7 +2,7 @@ package com.edu.api;
 
 import java.lang.reflect.Method;
 
-public class ClassExample {
+public class ClassClass {
 
 	public static void main(String[] args) {
 		// Stirng, System, Member -> 관리하는 class
