@@ -14,8 +14,8 @@ public class SendExample {
 		/*
 		 * 서버에서 받은 API_KEY, API_SECRET를 입력해주세요.
 		 */
-		String api_key = "";
-		String api_secret = "";
+		String api_key = "NCSZRNMNU7IGTG37";
+		String api_secret = "UQOP284HTO8SLZ9SRLAXISRL3IOUE7XV";
 		Coolsms coolsms = new Coolsms(api_key, api_secret);
 
 		/*
