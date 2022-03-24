@@ -1,6 +1,6 @@
 package com.edu.student;
 
-public class StiduntExe {
+public class StuduntExe {
 
 	public static void main(String[] args) {
 		

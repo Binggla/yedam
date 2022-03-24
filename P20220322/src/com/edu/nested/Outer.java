@@ -29,7 +29,7 @@ public class Outer {
 	
 	// -----------------------------------------------------------------------
 	
-	// 함수적 인터페이스 : 구현해야할 메소드가 하나인 것.
+	// 함수형 인터페이스 : 구현해야할 메소드가 하나인 것. 오직 하나의 추상메서드만 정의할 수 있다.
 	interface Runnable {
 		void run();
 	}
@@ -45,7 +45,7 @@ public class Outer {
 	public void method4() {
 		
 		// 익명 구현 객체로 인터페이스를 구현. 
-		// 추상메소드를 재정의하여 한 번만 사용하는 객체. 메소드 안에서만 선언 가능.
+		// 추상메소드를 재정의하여 한 번만 사용하는 객체.
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {

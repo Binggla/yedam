@@ -37,7 +37,7 @@ public class MapExample {
 		// 2)
 		// 향상된 for문을 이용
 		for (String key : keySet) {
-			Integer val = map.get(key);
+			Integer val = map.get(key); 
 			System.out.printf("key : %-5svalue : %-5d\n", key, val);
 		}
 	}

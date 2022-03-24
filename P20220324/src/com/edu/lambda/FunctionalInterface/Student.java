@@ -1,4 +1,4 @@
-package com.edu.student;
+package com.edu.lambda.FunctionalInterface;
 
 public class Student {
 	

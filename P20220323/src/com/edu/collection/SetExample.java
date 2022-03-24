@@ -23,7 +23,7 @@ public class SetExample {
 		
 		System.out.println("set.size() : " + set.size()); // 2
 		
-		
+		// 순서가 없으니 반복자를 이용하여 출력한다/
 		// 반복자(iterator) : 요소를 하나씩 끄집어낸다.
 		Iterator<String> iter = set.iterator();
 			

@@ -34,7 +34,7 @@ public class CalenderExample {
 		for (String i : days) {
 			System.out.printf("%-4s", i);
 		}
-		System.out.p rintln();
+		System.out.println();
 
 		int gapDay = today.get(Calendar.DAY_OF_WEEK); // 앞 공백
 
