@@ -12,5 +12,6 @@ public interface StudentService {
 		public List<Student> searchStudentName(String name); // 이름으로 찾기
 		public void modifyStudent(Student stu); // 한 건 수정
 		public void removeStudent(int stuNo); // 한 건 삭제
+		public void saveToFile(); 
 
 }

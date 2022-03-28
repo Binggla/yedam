@@ -9,12 +9,6 @@ public class StudentApp {
 	List<Student> stuList = new ArrayList<Student>();
 	Scanner scan = new Scanner(System.in);
 
-	public StudentApp() {
-		stuList.add(new Student(101, "지수빈", 100, 100));
-		stuList.add(new Student(102, "지수빈", 100, 100));
-		stuList.add(new Student(103, "지수빈", 100, 100));
-	}
-
 	// 내부 클래스 (멤버 클래스)
 	class StudentServiceImpl implements StudentService {
 
@@ -103,16 +97,22 @@ public class StudentApp {
 
 		}
 
+		@Override
+		public void saveToFile() {
+			
+		}
+
 	} // end of StudentServiceImpl
 
 	public void execute() {
 
 		StudentService service = new StudentServiceImpl();
+					   service = new StudentServiceFile();
 		// StudentService : 인터페이스
-		// StudentServiceImpl : StudentService 인터페이스를 구현한 클래스
-		// 왜 다형성을 이용하느냐? StudentService 인터페이스를 구현한 클래스 변경이 필요할 시에
-		// 새로운 변수 선언 없이 현재 상태에서 선언 뒷 부분만 변경하면 되기 때문에 사용.
-		// 동일한 인터페이스를 새롭게 구현했기 때문에 오류가 나지 않을 것.
+		// StudentServiceImpl, StudentServiceFile : StudentService 인터페이스를 구현한 클래스
+			// 왜 다형성을 이용하느냐? StudentService 인터페이스를 구현한 클래스 변경이 필요할 시에
+			// 새로운 변수 선언 없이 현재 상태에서 선언 뒷 부분만 변경하면 되기 때문에 사용.
+			// 동일한 인터페이스를 새롭게 구현했기 때문에 오류가 나지 않을 것.
 
 		// 메뉴 -> 1.추가 2.리스트 3.조회 4.수정 9.종료
 		while (true) {
@@ -190,6 +190,7 @@ public class StudentApp {
 				service.removeStudent(stuNo);
 
 			} else if (menu == 9) {
+				service.saveToFile();
 				break;
 			}
 		}

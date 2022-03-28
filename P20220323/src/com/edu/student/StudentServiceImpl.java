@@ -38,5 +38,10 @@ public class StudentServiceImpl implements StudentService {
 		public void removeStudent(int stuNo) {
 			
 		}
+
+		@Override
+		public void saveToFile() {
+			
+		}
 	
 }
