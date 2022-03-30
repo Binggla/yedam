@@ -1,14 +1,34 @@
 package com.prod.emp;
 
 public class Employee {
-	
+
 	private int employeeId;
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String phoneNumber;
 	private int salary;
 	private String hireDate;
 	private String jobId;
+
+	public Employee()	{
+		
+	}
+	
+	public Employee(int employeeId, String firstName, String lastName, String email, String phoneNumber, int salary,
+			String hireDate, String jobId) {
+
+		this.employeeId = employeeId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.salary = salary;
+		this.hireDate = hireDate;
+		this.jobId = jobId;
+	}
+
+
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -66,10 +86,21 @@ public class Employee {
 		this.jobId = jobId;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", firstName=" + firstName + ", lastMane=" + lastName + ", email="
-				+ email + ", salary=" + salary + ", hireDate=" + hireDate + ", jobId=" + jobId + "]";
+		return "Employee [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
+				+ email + ", phoneNumber=" + phoneNumber + ", salary=" + salary + ", hireDate=" + hireDate + ", jobId="
+				+ jobId + "]";
 	}
+
+	
 
 }

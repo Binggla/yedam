@@ -1,4 +1,4 @@
-package com.prod.emp;
+package com.edu.student;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,19 +9,20 @@ import java.sql.Statement;
 
 public class DAO {
 	static Connection conn;
-	static Statement stmt;
 	static ResultSet rs;
-	static PreparedStatement psmt;
+	static Statement stmt;
+	static PreparedStatement psmt;	
 	
-	public static Connection getConnect() {
+	public static Connection getConnect() {	
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("연결 성공!");
+
+		System.out.println("<DB 연결 성공>");
 		return conn;
 	}
 	
