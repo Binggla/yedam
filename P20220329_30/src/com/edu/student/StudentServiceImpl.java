@@ -10,11 +10,6 @@ public class StudentServiceImpl implements StudentService {
 		}
 
 		@Override
-		public Student getStudent(int stuNo) {
-			return null;
-		}
-
-		@Override
 		public List<Student> studentList() {
 			return null;
 		}
@@ -42,6 +37,12 @@ public class StudentServiceImpl implements StudentService {
 		@Override
 		public void saveToFile() {
 			
+		}
+
+		@Override
+		public String sameOrNot(int stuNo) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	
 }
