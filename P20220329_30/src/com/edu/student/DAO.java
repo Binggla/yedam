@@ -22,7 +22,6 @@ public class DAO {
 			e.printStackTrace();
 		}
 
-		System.out.println("<DB 연결 성공>");
 		return conn;
 	}
 	
