@@ -7,37 +7,22 @@ public class Writing extends User {
 	private String writingDate;
 	private String writingSub;
 	private String writing;
-	private String userIdComment;
-	private String userComment;
-	private String userCommentDate;
 
 	public Writing() {
 		super();
 	}
 
-	public Writing(String boardName, int writingNo, String writingSub, String userId, String writingDate,
-			String writing) {
+	public Writing(String boardName, int writingNo, String writingSub, String userId, String writing) {
 		super(userId);
 		this.boardName = boardName;
 		this.writingNo = writingNo;
 		this.writingSub = writingSub;
-		this.writingDate = writingDate;
 		this.writing = writing;
 	}
-
-	public Writing(String userIdComment, String userComment, String userCommentDate) {
-		this();
-		this.userIdComment = userIdComment;
-		this.userComment = userComment;
-		this.userCommentDate = userCommentDate;
-	}
-
-	public String getUserIdComment() {
-		return userIdComment;
-	}
-
-	public void setUserIdComment(String userIdComment) {
-		this.userIdComment = userIdComment;
+	
+	public Writing(int writingNo, String userId) {
+		super(userId);
+		this.writingNo = writingNo;
 	}
 
 	public String getBoardName() {
@@ -80,30 +65,20 @@ public class Writing extends User {
 		this.writing = writing;
 	}
 
-	public String getUserComment() {
-		return userComment;
-	}
+	public String writingList() {
+		String str = "\t " + boardName + "\t " + writingNo + "\t" + writingDate.substring(0, 10) + "\t" + super.getUserId() + "\t" + writingSub; //
 
-	public void setUserComment(String userComment) {
-		this.userComment = userComment;
+		return str;
 	}
-
-	public String getUserCommentDate() {
-		return userCommentDate;
-	}
-
-	public void setUserCommentDate(String userCommentDate) {
-		this.userCommentDate = userCommentDate;
-	}
-
+	
 	@Override
 	public String toString() {
 
-		String str = "\n\t게시판\t" + boardName + "\r\n" //
-				+ "\t글 번호\t" + writingNo + "\r\n" //
-				+ "\t날짜\t" + writingDate + "\r\n" //
-				+ "\t작성자\t" + super.getUserId() + "\r\n" //
-				+ "\t제목\t" + writingSub + "\r\n" //
+		String str = "\n\t 게시판\t" + boardName + "\r\n" //
+				+ "\t 글 번호\t" + writingNo + "\r\n" //
+				+ "\t 날짜\t" + writingDate.substring(0, 10) + "\r\n" //
+				+ "\t 작성자\t" + super.getUserId() + "\r\n" //
+				+ "\t 제목\t" + writingSub + "\r\n" //
 				+ "\t\t" + writing; //
 
 		return str;

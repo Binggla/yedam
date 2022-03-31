@@ -19,38 +19,41 @@ public interface BlogService {
 	
 	// 블로그 접속
 	
-	// 1. 전체 게시글 목록 ( 메뉴 : 1. 게시글 보기 2. 게시글 조회 3. 게시글 등록 )
+	// 전체 게시글 목록 ( 메뉴 : 1. 게시글 보기 2. 게시글 조회 3. 게시글 등록 )
 	public List<Writing> getList();
 	
-	// 1.1. 게시글 보기 -> 게시글 번호 입력하여 글 상세보기
-	// 1.1.1. 게시글 ( 수정 / 삭제 / 댓글 달기 / 뒤로 가기 )
+	// 1. 게시글 보기 -> 게시글 번호 입력하여 글 상세보기
+	public Writing getWriting(int writingNo);
+	// 1.1. 게시글 보기 ( 1. 글 수정 / 2. 글 삭제 / 3. 댓글 달기 / 4. 댓글 수정 / 5. 댓글 삭제 / 6. 뒤로 가기 )
 	
-		// 게시글 수정 updatePost()
-		// 1. 수정할 게시글 번호 입력  -> 해당하는 번호 있는 지 check
-		// 2. 제목 입력
-		// 3. 글 입력
+		// 1. 게시글 수정 updatePost()
+		// 1.1. 수정할 게시글 번호 입력  -> 해당하는 번호 있는 지 check
+		// 1.2. 제목 입력
+		// 1.3. 글 입력
 		public boolean updatePost(Writing writing);
 		
-		// 게시글 삭제 deletePost()
-		// 1. 게시판 선택
-		// 2. 삭제할 게시글 번호 입력   -> 해당하는 번호 있는 지 check
+		// 2. 게시글 삭제 deletePost()
+		// 2.1. 삭제할 게시글 번호 입력   -> 해당하는 번호 있는 지 check
 		public boolean deletePost(int writingNo);
 		
-		// 댓글 달기 
-		public boolean commenting();
+		// 3. 댓글 달기 
+		public boolean commenting(Comment comment);
+		
+		// 4. 댓글 수정
+		public boolean updateComment(Comment comment);
+		
+		// 5. 댓글 삭제
+		public boolean deleteComment(int commentNo);
 		
 	// 1.2. 게시글 조회 ( 메뉴 : 1. 게시판별 조회 2. 글 번호 조회 3. 제목 조회 4. 날짜 조회 )
 	
 		// 1.2.1. 게시판별 조회 selectListName()
 		// 		( 메뉴 : 1. diary 2. life info 3. food info )
 		public List<Writing> selectListName(String boardName);
-		// 1.2.2. 게시글 번호로 조회 selectListNo() -> Primary key
-		// 		게시글 번호 입력
-		public List<Writing> selectListNo(int writingNo);
-		// 1.2.3. 제목으로 조회 selectListSubject()
+		// 1.2.2. 제목으로 조회 selectListSubject()
 		//		제목 입력
 		public List<Writing> selectListSubject(String writingSub);
-		// 1.2.4. 날짜로 조회 selectListDate()
+		// 1.2.3. 날짜로 조회 selectListDate()
 		//		검색할 첫번째 날짜, 두번째 날짜 입력
 		public List<Writing> selectListDate(String writingDate1, String writingDate2);
 	
