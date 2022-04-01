@@ -9,9 +9,20 @@ public class Writing extends User {
 	private String writing;
 
 	public Writing() {
-		super();
+		
+	}
+	
+	public Writing(String userId) {
+		super(userId);
 	}
 
+	public Writing(String boardName, String writingSub, String userId, String writing) {
+		super(userId);
+		this.boardName = boardName;
+		this.writingSub = writingSub;
+		this.writing = writing;
+	}
+	
 	public Writing(String boardName, int writingNo, String writingSub, String userId, String writing) {
 		super(userId);
 		this.boardName = boardName;
@@ -66,7 +77,7 @@ public class Writing extends User {
 	}
 
 	public String writingList() {
-		String str = "\t " + boardName + "\t " + writingNo + "\t" + writingDate.substring(0, 10) + "\t" + super.getUserId() + "\t" + writingSub; //
+		String str = "\t" + boardName + "\t " + writingNo + "\t" + writingDate.substring(0, 10) + "\t" + super.getUserId() + "\t" + writingSub; //
 
 		return str;
 	}
@@ -74,11 +85,11 @@ public class Writing extends User {
 	@Override
 	public String toString() {
 
-		String str = "\n\t 게시판\t" + boardName + "\r\n" //
-				+ "\t 글 번호\t" + writingNo + "\r\n" //
-				+ "\t 날짜\t" + writingDate.substring(0, 10) + "\r\n" //
-				+ "\t 작성자\t" + super.getUserId() + "\r\n" //
-				+ "\t 제목\t" + writingSub + "\r\n" //
+		String str = "\n\t게시판\t" + boardName + "\r\n" //
+				+ "\t번호\t" + writingNo + "\r\n" //
+				+ "\t날짜\t" + writingDate.substring(0, 10) + "\r\n" //
+				+ "\t작성자\t" + super.getUserId() + "\r\n" //
+				+ "\t제목\t" + writingSub + "\r\n" //
 				+ "\t\t" + writing; //
 
 		return str;

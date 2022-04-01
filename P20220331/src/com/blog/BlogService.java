@@ -24,7 +24,7 @@ public interface BlogService {
 	
 	// 1. 게시글 보기 -> 게시글 번호 입력하여 글 상세보기
 	public Writing getWriting(int writingNo);
-	// 1.1. 게시글 보기 ( 1. 글 수정 / 2. 글 삭제 / 3. 댓글 달기 / 4. 댓글 수정 / 5. 댓글 삭제 / 6. 뒤로 가기 )
+	// 1.1. 게시글 보기 ( 1. 글 수정 / 2. 글 삭제 / 3. 댓글 보기 / 4. 뒤로 가기 )
 	
 		// 1. 게시글 수정 updatePost()
 		// 1.1. 수정할 게시글 번호 입력  -> 해당하는 번호 있는 지 check
@@ -36,13 +36,19 @@ public interface BlogService {
 		// 2.1. 삭제할 게시글 번호 입력   -> 해당하는 번호 있는 지 check
 		public boolean deletePost(int writingNo);
 		
-		// 3. 댓글 달기 
-		public boolean commenting(Comment comment);
+		// 3. 댓글 보기 ( 1. 댓글 달기 / 2. 댓글 수정 / 3. 댓글 삭제 / 4. 뒤로 가기 )
+		public List<ReComment> getComment(int writingNo);
 		
-		// 4. 댓글 수정
+		// 3.1. 댓글 달기 ( 1. 새 댓글 / 2. 대댓글 )
+		// 3.1.1 새 댓글
+		public boolean commenting(Comment comment);
+		// 3.1.2 대댓글
+		public boolean reCommenting(ReComment reCom);
+		
+		// 3.2. 댓글 수정
 		public boolean updateComment(Comment comment);
 		
-		// 5. 댓글 삭제
+		// 3.3 댓글 삭제
 		public boolean deleteComment(int commentNo);
 		
 	// 1.2. 게시글 조회 ( 메뉴 : 1. 게시판별 조회 2. 글 번호 조회 3. 제목 조회 4. 날짜 조회 )
@@ -50,9 +56,9 @@ public interface BlogService {
 		// 1.2.1. 게시판별 조회 selectListName()
 		// 		( 메뉴 : 1. diary 2. life info 3. food info )
 		public List<Writing> selectListName(String boardName);
-		// 1.2.2. 제목으로 조회 selectListSubject()
-		//		제목 입력
-		public List<Writing> selectListSubject(String writingSub);
+		// 1.2.2. 작성자로 조회 selectListSubject()
+		//		작성자 입력
+		public List<Writing> selectListUser(String userId);
 		// 1.2.3. 날짜로 조회 selectListDate()
 		//		검색할 첫번째 날짜, 두번째 날짜 입력
 		public List<Writing> selectListDate(String writingDate1, String writingDate2);
@@ -65,13 +71,21 @@ public interface BlogService {
 	public boolean insertPost(Writing writing);
 		
 	
-	// 유저 체크 checkUser()
+	// 유저 체크(회원가입) checkUser()
+	// 이미 생성된 아이디가 있는 지 체크한다.
+	public boolean checkUser(String userId);
+	
+	// 유저 체크(글) checkUser()
 	// 본인이 작성한 글만 수정, 삭제할 수 있도록 체크한다.
 	public boolean checkUser(User user, int writingNo);
 	
-	// 중복 체크 searchWriting()
-	// 동일한 번호의 게시글이 있는 지 체크.
-	public boolean searchWriting(int writingNo);
+	// 유저 체크(댓글) checkUserComment()
+	// 본인이 작성한 댓글만 수정, 삭제할 수 있도록 체크한다.
+	public boolean checkUserComment(User user, int comentNo);
+	
+	// 댓글 중복 체크 searchComment()
+	// 동일한 번호의 댓글이 있는 지 체크.
+	public boolean searchComment(int writingNo, int commentNo);
 
 
 	
