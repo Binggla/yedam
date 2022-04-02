@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class BlogDAO {
 	static Connection conn;
 	static ResultSet rs;
 	static PreparedStatement psmt;
+	static Statement stmt;
 
 	public static Connection getConnect() {
 		try {
@@ -33,6 +35,9 @@ public class BlogDAO {
 			}
 			if (psmt != null) {
 				psmt.close();
+			}
+			if (stmt != null) {
+				stmt.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

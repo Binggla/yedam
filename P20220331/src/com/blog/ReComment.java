@@ -11,6 +11,10 @@ public class ReComment extends Comment {
 		
 	}
 	
+	public ReComment(int writingNo, String userId, int commentNo, String userComment) {
+		super(writingNo, userId, commentNo, userComment);
+	}
+	
 	public ReComment(String userId, int commentNo, String userReComment) {
 		super(userId, commentNo);
 		this.userReComment = userReComment;
@@ -47,19 +51,26 @@ public class ReComment extends Comment {
 	public void setUserReComment(String userReComment) {
 		this.userReComment = userReComment;
 	}
-	
-	public String printComment() {
-		String str = "\t[" + super.getCommentNo() + "] " +  super.getUserId() + " : " + super.getUserComment() + "\t" + super.getCommentDate(); //
-		
-		return str;
+
+	@Override
+	public String toString() {
+		return "  ㄴ [" + reCommentNo + "] [" + reUserId + "] " + userReComment + " (" + reCommentDate.substring(0, 10) + ")";
 	}
 	
-	public String printReComment() {
-		String str = "\t[" + super.getCommentNo() + "] " +  super.getUserId() + " : " + super.getUserComment() + "\t" + super.getCommentDate() //
-					+ "\n\t ㄴ[" + reCommentNo + "] " + reUserId + " : " + userReComment + "\t" + reCommentDate; //
-		
-		return str;
-	}
+//	public String printComment() {
+//		String str = "\t[" + super.getCommentNo() + "] " +  super.getUserId() + " : " + super.getUserComment() + "\t" + super.getCommentDate(); //
+//		
+//		return str;
+//	}
+//	
+//	public String printReComment() {
+//		String str = "\t[" + super.getCommentNo() + "] " +  super.getUserId() + " : " + super.getUserComment() + "\t" + super.getCommentDate() //
+//					+ "\n\t ㄴ[" + reCommentNo + "] " + reUserId + " : " + userReComment + "\t" + reCommentDate; //
+//		
+//		return str;
+//	}
+	
+	
 	
 	
 

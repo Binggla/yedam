@@ -10,7 +10,7 @@ public class BlogApp {
 	public void execute() {
 
 		BlogService bs = new BlogServiceOracle();
-		User user;
+		User loginUser;
 
 		// 로그인
 		while (true) {
@@ -25,24 +25,25 @@ public class BlogApp {
 				System.out.print("비밀번호 입력 > ");
 				String inputPw = scan.next();
 
-				user = new User(inputId, inputPw);
+				loginUser = new User(inputId, inputPw);
 
-				if (bs.login(user) == true) {
+				if (bs.login(loginUser) == true) {
 
-					System.out.println("\n\t로그인 성공!");
+					System.out.println("\n\t[ 로그인 성공! ]");
 
 					// 메인 메뉴
 					while (true) {
 
 						List<Writing> getList = bs.getList();
 
-						System.out.println("\n\t게시판\t 번호\t날짜\t\t작성자\t제목");
-						System.out.println("\t----------------------------------------------------------------");
-
+						System.out.println("\n----------------------------------------------------------------");
+						System.out.println(" 말머리\t  번호\t작성일\t\t작성자\t제목");
+						System.out.println("----------------------------------------------------------------");
+						
 						for (Writing w : getList) {
 							System.out.println(w.writingList());
 						}
-						System.out.print("\n1. 게시글 상세보기 2. 게시글 조회 3. 게시글 등록 9. 로그아웃 > ");
+						System.out.print("\n1 게시글 상세보기  2 게시글 조회  3 게시글 등록  4 마이페이지  9 로그아웃    선택 > ");
 						int inputMenu = scan.nextInt();
 
 						if (inputMenu == 1) { // 게시글 상세보기
@@ -51,25 +52,27 @@ public class BlogApp {
 							int inputWritingNo = scan.nextInt();
 
 							while (true) {
-
 								System.out.println(bs.getWriting(inputWritingNo).toString());
-								System.out.println("\n\t댓글");
-								List<ReComment> comments = bs.getComment(inputWritingNo);
-								for (ReComment c : comments) {
-									if (c.getReUserId() == null) {
-										System.out.println(c.printComment());
-									} else {
-										System.out.println(c.printReComment());
+								System.out.println("");
+								List<Comment> comments = bs.getComment(inputWritingNo);
+								for (Comment c : comments) {
+									System.out.println(c);
+									List<ReComment> recomments = bs.getReComment(c.getCommentNo());
+									if (recomments == null) {
+										continue;
+									}
+									for (ReComment rc : recomments) {
+										System.out.println(rc);
 									}
 								}
-								System.out.print("\n1. 수정 2. 삭제 3. 댓글 등록 4. 댓글 수정 5. 댓글 삭제 9. 뒤로가기 > ");
+								System.out.print("\n1 수정  2 삭제  3 댓글 등록  4 댓글 수정  5 댓글 삭제  9 뒤로가기    선택 > ");
 								int inputWritingMenu = scan.nextInt();
 
 								if (inputWritingMenu == 1) { // 게시글 수정
 
 									while (true) {
 
-										if (bs.checkUser(user, inputWritingNo) == true) {
+										if (bs.checkUser(loginUser, inputWritingNo) == true) {
 
 											System.out.print("글 제목 수정 > ");
 											String inputWritingSub = scan.nextLine();
@@ -79,16 +82,16 @@ public class BlogApp {
 											String inputWriting = scan.nextLine();
 
 											Writing writing = new Writing(null, inputWritingNo, inputWritingSub,
-													user.getUserId(), inputWriting);
+													loginUser.getUserId(), inputWriting);
 
 											if (bs.updatePost(writing) == true) {
-												System.out.println("\n\t수정 완료!");
+												System.out.println("\n\t[ 수정 완료! ]");
 												break;
 											} else {
-												System.out.println("\n\t정상적으로 처리되지 않았습니다.");
+												System.out.println("\n\t[ 정상적으로 처리되지 않았습니다. ]");
 											}
 										} else {
-											System.out.println("\n\t본인이 작성한 글만 수정할 수 있습니다.");
+											System.out.println("\n\t[ 본인이 작성한 글만 수정할 수 있습니다. ]");
 										}
 										break;
 
@@ -96,68 +99,67 @@ public class BlogApp {
 
 								} else if (inputWritingMenu == 2) { // 게시글 삭제
 
-									if (bs.checkUser(user, inputWritingNo) == true) {
+									if (bs.checkUser(loginUser, inputWritingNo) == true) {
 
-										System.out.print("\n\t정말로 글을 삭제하시겠습니까? (Y/N) > ");
+										System.out.print("\n\t[ 정말로 글을 삭제하시겠습니까? (Y/N) ] > ");
 										String inputAnswer = scan.next();
 
 										if (inputAnswer.equals("Y") || inputAnswer.equals("y")) {
 
 											if (bs.deletePost(inputWritingNo) == true) {
 
-												System.out.println("\t삭제 완료!\n");
+												System.out.println("\t[ 삭제 완료! ]");
 												break;
 
 											} else {
-												System.out.println("\n\t정상적으로 처리되지 않았습니다.");
+												System.out.println("\t[ 정상적으로 처리되지 않았습니다. ]");
 											}
 
 										} else if (inputAnswer.equals("N") || inputAnswer.equals("n")) {
 											continue;
 										} else {
-											System.out.println("\n\t잘못 입력하셨습니다.");
+											System.out.println("\t[ 잘못 입력하셨습니다. ]");
 										}
 
 									} else {
-										System.out.println("\n\t본인이 작성한 글만 삭제할 수 있습니다.");
+										System.out.println("\n\t[ 본인이 작성한 글만 삭제할 수 있습니다. ]");
 									}
 
 								} else if (inputWritingMenu == 3) { // 댓글 등록
-									
-									System.out.println("1. 새 댓글 등록 2. 답글 등록");
+
+									System.out.print("1 새 댓글 등록  2 답글 등록    선택 > ");
 									int inputAnswer = scan.nextInt();
-									
+
 									if (inputAnswer == 1) {
-										
+
 										System.out.print("댓글 등록 > ");
 										String inputComment = scan.nextLine();
 										inputComment = scan.nextLine();
-										
-										Comment com = new Comment(inputWritingNo, user.getUserId(), inputComment);
+
+										Comment com = new Comment(inputWritingNo, loginUser.getUserId(), inputComment);
 										bs.commenting(com);
-										
-										System.out.println("\n\t새 댓글 등록 완료!");
-					
+
+										System.out.println("\n\t[ 새 댓글 등록 완료! ]");
+
 									} else if (inputAnswer == 2) {
-										
+
 										System.out.print("답글을 달 댓글 번호 > ");
 										int inputCommentNo = scan.nextInt();
 										System.out.print("답글 등록 > ");
 										String inputReComment = scan.nextLine();
 										inputReComment = scan.nextLine();
-										
-										
-										ReComment reCom = new ReComment(user.getUserId(), inputCommentNo, inputReComment);
+
+										ReComment reCom = new ReComment(loginUser.getUserId(), inputCommentNo,
+												inputReComment);
 										if (bs.reCommenting(reCom) == true) {
-											System.out.println("\n\t답글 등록 완료!");
+											System.out.println("\n\t[ 답글 등록 완료! ]");
 										} else {
-											System.out.println("\\n\\t정상적으로 처리되지 않았습니다.");
+											System.out.println("\\n\\t[ 정상적으로 처리되지 않았습니다. ]");
 										}
-										
+
 									} else {
-										System.out.println("\n\t잘못 입력하셨습니다.");
+										System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
 									}
-									
 
 								} else if (inputWritingMenu == 4) { // 댓글 수정
 
@@ -166,34 +168,36 @@ public class BlogApp {
 										System.out.print("수정할 댓글 번호 > ");
 										int inputCommentNo = scan.nextInt();
 
-										if (bs.searchComment(inputWritingNo, inputCommentNo) == true) {
+										if (bs.checkUserComment(loginUser, inputCommentNo) == true
+												|| bs.checkUserReComment(loginUser, inputCommentNo) == true) {
 
-											if (bs.checkUserComment(user, inputCommentNo) == true) {
+											System.out.print("댓글 수정 > ");
+											String inputComment = scan.nextLine();
+											inputComment = scan.nextLine();
 
-												System.out.print("댓글 수정 > ");
-												String inputComment = scan.nextLine();
-												inputComment = scan.nextLine();
+											Comment com = new ReComment(inputWritingNo, loginUser.getUserId(),
+													inputCommentNo, inputComment);
 
-												Comment com = new Comment(inputWritingNo, user.getUserId(),
-														inputCommentNo, inputComment);
+											if (bs.updateComment(com) == true) {
 
-												if (bs.updateComment(com) == true) {
-
-													System.out.println("\n\t댓글 수정 완료!");
-													break;
-
-												} else {
-													System.out.println("\n\t정상적으로 처리되지 않았습니다.");
-												}
+												System.out.println("\n\t[ 댓글 수정 완료! ]");
+												break;
 
 											} else {
-												System.out.println("\n\t본인이 작성한 댓글만 수정할 수 있습니다.");
-												break;
-											}
 
+												if (bs.updateReComment(com) == true) {
+													System.out.println("\n\t[ 답글 수정 완료! ]");
+													break;
+												} else {
+													System.out.println("\n\t[ 정상적으로 처리되지 않았습니다. ]");
+													break;
+												}
+											}
 										} else {
-											System.out.println("\n\t해당하는 댓글 번호가 없습니다.");
+											System.out.println("\n\t[ 본인이 작성한 댓글만 수정할 수 있습니다. ]");
+											break;
 										}
+
 									}
 
 								} else if (inputWritingMenu == 5) { // 댓글 삭제
@@ -203,35 +207,38 @@ public class BlogApp {
 										System.out.print("삭제할 댓글 번호 > ");
 										int inputCommentNo = scan.nextInt();
 
-										if (bs.searchComment(inputWritingNo, inputCommentNo) == true) {
+										if (bs.checkUserComment(loginUser, inputCommentNo) == true
+												|| bs.checkUserReComment(loginUser, inputCommentNo) == true) {
 
-											if (bs.checkUserComment(user, inputCommentNo) == true) {
+											System.out.print("\n\t[ 정말로 댓글을 삭제하시겠습니까? (Y/N) ] > ");
+											String inputAnswer = scan.next();
 
-												System.out.print("\n\t정말로 댓글을 삭제하시겠습니까? (Y/N) > ");
-												String inputAnswer = scan.next();
+											if (inputAnswer.equals("Y") || inputAnswer.equals("y")) {
 
-												if (inputAnswer.equals("Y") || inputAnswer.equals("y")) {
+												if (bs.deleteComment(inputCommentNo) == true) {
 
-													if (bs.deleteComment(inputCommentNo) == true) {
+													System.out.print("\t[ 댓글 삭제 완료! ]\n");
+													break;
 
-														System.out.print("\t댓글 삭제 완료!\n");
+												} else {
+
+													if (bs.deleteReComment(inputCommentNo) == true) {
+
+														System.out.print("\t[ 댓글 삭제 완료! ]\n");
 														break;
 
 													} else {
-														System.out.println("\\n\\t정상적으로 처리되지 않았습니다.");
+														System.out.println("\n\t[ 정상적으로 처리되지 않았습니다. ]");
+														break;
 													}
-
-												} else if (inputAnswer.equals("N") || inputAnswer.equals("n")) {
-													break;
 												}
 
-											} else {
-												System.out.println("\n\t본인이 작성한 댓글만 삭제할 수 있습니다.");
+											} else if (inputAnswer.equals("N") || inputAnswer.equals("n")) {
 												break;
 											}
-
 										} else {
-											System.out.println("\n\t해당하는 댓글 번호가 없습니다.");
+											System.out.println("\n\t[ 본인이 작성한 댓글만 삭제할 수 있습니다. ]");
+											break;
 										}
 
 									}
@@ -239,98 +246,141 @@ public class BlogApp {
 								} else if (inputWritingMenu == 9) { // 뒤로가기
 									break;
 								} else {
-									System.out.println("\n\t잘못 입력하셨습니다.");
+									System.out.println("\n\t[ 잘못 입력하셨습니다. ]\t");
 								}
 							}
 
 						} else if (inputMenu == 2) { // 게시글 조회
-							System.out.print("게시글 조회 > 1. 게시판별 조회 2. 작성자 조회 3. 날짜 조회 > ");
-							int inputSelect = scan.nextInt();
 
-							if (inputSelect == 1) { // 게시판 이름 조회
+							while (true) {
+								
+								System.out.print("1 말머리 조회  2 제목 조회  3 작성자 조회  4 작성일 조회    선택 > ");
+								int inputSelect = scan.nextInt();
 
-								String selectBoardName = null;
-								while (true) {
+								if (inputSelect == 1) { // 말머리 조회
 
-									System.out.print("게시판별 조회 > 1. 일기 2. 생활정보 3. 음식정보 > ");
-									int inputBoardName = scan.nextInt();
+									String selectBoardName = null;
+									while (true) {
 
-									if (inputBoardName == 1) {
-										selectBoardName = "일기";
-										break;
-									} else if (inputBoardName == 2) {
-										selectBoardName = "생활정보";
-										break;
-									} else if (inputBoardName == 3) {
-										selectBoardName = "음식정보";
-										break;
-									} else {
-										System.out.println("\t잘못 입력하셨습니다.");
+										System.out.print("1 일기  2 생활정보  3 음식정보    선택 > ");
+										int inputBoardName = scan.nextInt();
+
+										if (inputBoardName == 1) {
+											selectBoardName = "일기";
+											break;
+										} else if (inputBoardName == 2) {
+											selectBoardName = "생활정보";
+											break;
+										} else if (inputBoardName == 3) {
+											selectBoardName = "음식정보";
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]\n");
+										}
 									}
-								}
+									
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
+									System.out.println("----------------------------------------------------------------");
+									getList = bs.selectListName(selectBoardName);
+									for (Writing w : getList) {
+										System.out.println(w.writingList());
+									}
+									while (true) {
 
-								System.out.println("\n\t게시판\t 번호\t날짜\t\t작성자\t제목");
-								System.out
-										.println("\t----------------------------------------------------------------");
-								getList = bs.selectListName(selectBoardName);
-								for (Writing w : getList) {
-									System.out.println(w.writingList());
-								}
+										System.out.print("\n9 뒤로가기 > ");
+										int inputAnswer = scan.nextInt();
 
-								System.out.print("\n9. 뒤로가기 > ");
-								int inputAnswer = scan.nextInt();
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
+										}
+									}
+									break;
 
-								if (inputAnswer == 9) {
-									continue;
+								} else if (inputSelect == 2) { // 제목 조회
+									System.out.print("조회할 단어 입력 > ");
+									String inputWord = scan.next();
+									
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
+									System.out.println("----------------------------------------------------------------");
+									getList = bs.selectListSub(inputWord);
+									for (Writing w : getList) {
+										System.out.println(w.writingList());
+									}
+
+									while (true) {
+
+										System.out.print("\n9 뒤로가기 > ");
+										int inputAnswer = scan.nextInt();
+
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
+										}
+									}
+									break;
+								
+								} else if (inputSelect == 3) { // 게시글 작성자 조회
+									System.out.print("작성자 ID 입력 > ");
+									String inputUserId = scan.next();
+									
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
+									System.out.println("----------------------------------------------------------------");
+									getList = bs.selectListUser(inputUserId);
+									for (Writing w : getList) {
+										System.out.println(w.writingList());
+									}
+
+									while (true) {
+
+										System.out.print("\n9 뒤로가기 > ");
+										int inputAnswer = scan.nextInt();
+
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
+										}
+									}
+									break;
+
+								} else if (inputSelect == 4) { // 게시글 날짜 조회
+									System.out.print("입력 날짜부터 조회 ex.00-00-00 > ");
+									String inputWritingDate1 = scan.next();
+									System.out.print("입력 날짜까지 조회 ex.00-00-00 > ");
+									String inputWritingDate2 = scan.next();
+									
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
+									System.out.println("----------------------------------------------------------------");
+									getList = bs.selectListDate(inputWritingDate1, inputWritingDate2);
+
+									for (Writing w : getList) {
+										System.out.println(w.writingList());
+									}
+
+									while (true) {
+
+										System.out.print("\n9 뒤로가기 > ");
+										int inputAnswer = scan.nextInt();
+
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
+										}
+									}
+									break;
 								} else {
-									System.out.println("잘못 입력하셨습니다.");
-								}
-
-							} else if (inputSelect == 2) { // 게시글 작성자 조회
-								System.out.print("작성자 조회 > 작성자 ID > ");
-								String inputUserId = scan.next();
-
-								System.out.println("\n\t게시판\t 번호\t날짜\t\t작성자\t제목");
-								System.out
-										.println("\t----------------------------------------------------------------");
-								getList = bs.selectListUser(inputUserId);
-								for (Writing w : getList) {
-									System.out.println(w.writingList());
-								}
-
-								System.out.print("\n9. 뒤로가기 > ");
-								int inputAnswer = scan.nextInt();
-
-								if (inputAnswer == 9) {
-									continue;
-								} else {
-									System.out.println("잘못 입력하셨습니다.");
-								}
-
-							} else if (inputSelect == 3) { // 게시글 날짜 조회
-								System.out.print("날짜 조회 > 첫 번째 날짜부터 조회합니다. ex.00-00-00 > ");
-								String inputWritingDate1 = scan.next();
-								System.out.print("날짜 조회 > 두 번째 날짜까지 조회합니다. ex.00-00-00 > ");
-								String inputWritingDate2 = scan.next();
-
-								System.out.println("\n\t게시판\t 번호\t날짜\t\t작성자\t제목");
-								System.out
-										.println("\t----------------------------------------------------------------");
-								getList = bs.selectListDate(inputWritingDate1, inputWritingDate2);
-
-								for (Writing w : getList) {
-									System.out.println(w.writingList());
-								}
-
-								System.out.print("\n9. 뒤로가기 > ");
-								int inputAnswer = scan.nextInt();
-
-								if (inputAnswer == 9) {
-									continue;
-								} else {
-									System.out.println("\t잘못 입력하셨습니다.");
+									System.out.println("\n\t[ 잘못 입력하셨습니다. ]\n");
 								}
 							}
+							
 
 						} else if (inputMenu == 3) { // 게시글 등록
 							// (board_name, writing_no, writing_date, user_id, writing_sub, writing)
@@ -338,7 +388,7 @@ public class BlogApp {
 							String selectBoardName = null;
 							while (true) {
 
-								System.out.print("등록할 게시판 > 1. 일기 2. 생활정보 3. 맛집정보 > ");
+								System.out.print("1 일기  2 생활정보  3 맛집정보    말머리 선택 > ");
 								int inputBoardName = scan.nextInt();
 
 								if (inputBoardName == 1) { // diary
@@ -351,59 +401,134 @@ public class BlogApp {
 									selectBoardName = "맛집정보";
 									break;
 								} else {
-									System.out.println("\n\t잘못 입력하셨습니다.");
+									System.out.println("\n\t[ 잘못 입력하셨습니다. ]\n");
 								}
 							}
 
-							System.out.print("글 제목 > ");
+							System.out.print("글 제목 입력 > ");
 							String inputWritingSub = scan.nextLine();
 							inputWritingSub = scan.nextLine();
 
-							System.out.print("글 > ");
+							System.out.print("글 입력 > ");
 							String inputWriting = scan.nextLine();
 
-							Writing writing = new Writing(selectBoardName, inputWritingSub, user.getUserId(),
+							Writing writing = new Writing(selectBoardName, inputWritingSub, loginUser.getUserId(),
 									inputWriting);
 
 							if (bs.insertPost(writing) == true) {
-								System.out.println("\n\t작성 완료!");
+								System.out.println("\n\t[ 게시글 등록 완료! ]");
 							} else {
-								System.out.println("\n\t정상적으로 처리되지 않았습니다.");
+								System.out.println("\n\t[ 정상적으로 처리되지 않았습니다. ]");
 							}
 
+						} else if (inputMenu == 4) { // 마이페이지
+							
+							while (true) {
+								
+								printMyPage();
+								int inputAnswer = scan.nextInt();
+								
+								if (inputAnswer == 1) { // 내 정보
+									System.out.println(bs.selectMyInfo(loginUser.getUserId()));
+									System.out.print("\n1 내 정보 수정  2 회원 탈퇴  3 뒤로가기    선택 > ");
+									inputAnswer = scan.nextInt();
+									
+									while (true) {
+										if (inputAnswer == 1) {
+//											 아이디	user1
+//											 이름	지수빈
+//											 생년월일	1995-11-01
+//											 휴대폰	010-1234-1234
+											System.out.print("이름 수정 입력 > ");
+											break;
+										} else if (inputAnswer == 2) {
+											System.out.println("회원 탈퇴");
+											break;
+										} else if (inputAnswer == 3) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]\n");
+										}
+									}
+									
+								} else if (inputAnswer == 2) { // 내 게시글
+									System.out.println("내 게시글");
+									
+									while (true) {
+
+										System.out.print("\n9. 뒤로가기 > ");
+										inputAnswer = scan.nextInt();
+
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
+										}
+									}
+									
+								} else if (inputAnswer == 3) { // 내 댓글
+									System.out.println("내 댓글");
+									
+									while (true) {
+
+										System.out.print("\n9. 뒤로가기 > ");
+										inputAnswer = scan.nextInt();
+
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
+										}
+									}
+									
+								} else if (inputAnswer == 4) {
+									break;
+								} else {
+									System.out.println("\n\t[ 잘못 입력하셨습니다. ]\n");
+								}
+								
+							}
+							
 						} else if (inputMenu == 9) { // 로그아웃
 							break;
 						} else {
-							System.out.println("\n\t잘못 입력하셨습니다.");
+							System.out.println("\n\t[ 잘못 입력하셨습니다. ]");
 						}
 
 					} // end of while
 
 				} else {
-					System.out.println("\n\t입력한 아이디, 비밀번호를 찾을 수 없습니다.");
+					System.out.println("\n\t[ 입력한 아이디, 비밀번호를 찾을 수 없습니다. ]\n");
 					continue;
 				}
 
 			} else if (inputLogin == 2) { // 회원가입
 
 				while (true) {
-					System.out.print("아이디 입력 >> ");
+					System.out.print("아이디 입력 > ");
 					String inputId = scan.next();
-					System.out.print("비밀번호 입력 >> ");
-					String inputPw = scan.next();
 
 					if (bs.checkUser(inputId) == true) {
-						System.out.println("중복된 아이디가 있습니다.");
+						System.out.println("\n\t[ 중복된 아이디가 있습니다. ]\n");
 					} else {
-						User newUser = new User(inputId, inputPw);
+
+						System.out.print("비밀번호 입력 > ");
+						String inputPw = scan.next();
+						System.out.print("이름 입력 > ");
+						String inputName = scan.next();
+						System.out.print("생일 입력 ex.00-00-00 > ");
+						String inputBirth = scan.next();
+						System.out.print("휴대폰 번호 입력 ex.000-0000-0000 > ");
+						String inputPhone = scan.next();
+						User newUser = new User(inputId, inputPw, inputName, inputBirth, inputPhone);
 						if (bs.insertUser(newUser) == true) {
 
-							System.out.println("\n\t회원가입 완료!");
-							System.out.println("\t다시 실행하여 로그인해 주세요.");
+							System.out.println("\n\t[ 회원가입 완료! ]");
+							System.out.println("\t[ 다시 실행하여 로그인해 주세요. ]\n");
 
 						} else {
 
-							System.out.println("\n\t정상적으로 처리되지 않았습니다.");
+							System.out.println("\n\t[ 정상적으로 처리되지 않았습니다. ]");
 
 						}
 						break;
@@ -426,11 +551,24 @@ public class BlogApp {
 	} // end of main()
 
 	public void printLogin() {
-		String str = "\t------------\n" //
-				+ "\t  1. 로그인\n" //
-				+ "\t  2. 회원가입\n" //
-				+ "\t  3. 종료\n" //
-				+ "\t------------\n" //
+		String str = "\n-------------\n" //
+				+ " 1 로그인\n" //
+				+ " 2 회원가입\n" //
+				+ " 3 종료\n" //
+				+ "-------------\n" //
+				+ "선택 > ";
+		System.out.print(str);
+	}
+
+	public void printMyPage() {
+		String str = "\n-------------\n" //
+				+ " 마이페이지\n" //
+				+ "-------------\n" //
+				+ " 1 내 정보\n" //
+				+ " 2 내 게시글\n" //
+				+ " 3 내 댓글\n" //
+				+ " 4 돌아가기\n"
+				+ "-------------\n" //
 				+ "선택 > ";
 		System.out.print(str);
 	}
