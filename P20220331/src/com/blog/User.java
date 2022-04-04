@@ -22,6 +22,13 @@ public class User {
 		this.userPw = userPw;
 	}
 
+	public User(String userId, String userName, String userBirth, String userPhone) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userPhone = userPhone;
+	}
 	public User(String userId, String userPw, String userName, String userBirth, String userPhone) {
 		super();
 		this.userId = userId;

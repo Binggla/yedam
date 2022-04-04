@@ -666,13 +666,18 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		
 		conn = getConnect();
 
-		String sql = "UPDATE * " //
-				+ "FROM user_info " //
+		String sql = "UPDATE user_info " //
+				+ "SET user_name = ? " //
+				+ "SET user_birth = ? " //
+				+ "SET user_phone = ? " //
 				+ "WHERE user_id = ?";
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, user.getUserId());
+			psmt.setString(1, user.getUserName());
+			psmt.setString(2, user.getUserBirth());
+			psmt.setString(3, user.getUserPhone());
+			psmt.setString(4, user.getUserId());
 			rs = psmt.executeQuery();
 			
 			int r = psmt.executeUpdate();
@@ -689,6 +694,23 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	// 4.1.2 탈퇴하기
 	@Override
 	public boolean deleteUser(User user) {
+		conn = getConnect();
+
+		String sql = "DELETE user_info " //
+					+ "WHERE user_id = ?";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user.getUserId());
+			rs = psmt.executeQuery();
+			
+			int r = psmt.executeUpdate();
+			if (r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
