@@ -191,10 +191,10 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
-				
+
 				writings.add(wri);
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -631,6 +631,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		return false;
 	}
 
+	// 내 정보 불러오기
 	@Override
 	public User selectMyInfo(String userId) {
 		conn = getConnect();
@@ -655,6 +656,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 
 		return user;
@@ -663,13 +666,13 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	// 내 정보 수정
 	@Override
 	public boolean updateMyInfo(User user) {
-		
+
 		conn = getConnect();
 
 		String sql = "UPDATE user_info " //
-				+ "SET user_name = ? " //
-				+ "SET user_birth = ? " //
-				+ "SET user_phone = ? " //
+				+ "SET user_name = ?, " //
+				+ "    user_birth = ?, " //
+				+ "    user_phone = ? " //
 				+ "WHERE user_id = ?";
 
 		try {
@@ -679,52 +682,136 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			psmt.setString(3, user.getUserPhone());
 			psmt.setString(4, user.getUserId());
 			rs = psmt.executeQuery();
-			
+
 			int r = psmt.executeUpdate();
 			if (r > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+
+	}
+	
+	// 비밀번호 체크
+	@Override
+	public boolean checkMyPw(User user, String userPw) {
+		
+		conn = getConnect();
+		String sql = "SELECT user_id FROM user_info " //
+				+ "WHERE user_id = ? AND user_pw = ?";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user.getUserId());
+			psmt.setString(2, userPw);
+
+			int r = psmt.executeUpdate();
+			if (r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	// 비밀번호 수정
+	@Override
+	public boolean updateMyPw(User user) {
+		
+		conn = getConnect();
+
+		String sql = "UPDATE user_info " //
+				+ "SET user_pw = ? " //
+				+ "WHERE user_id = ?";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user.getUserPw());
+			psmt.setString(2, user.getUserId());
+			rs = psmt.executeQuery();
+
+			int r = psmt.executeUpdate();
+			if (r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 		return false;
 		
 	}
 
-	// 4.1.2 탈퇴하기
+	// 탈퇴하기
 	@Override
-	public boolean deleteUser(User user) {
+	public boolean deleteUser(User user, String userPw) {
 		conn = getConnect();
 
 		String sql = "DELETE user_info " //
-					+ "WHERE user_id = ?";
+				+ "WHERE user_id = ? AND user_pw = ?";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user.getUserId());
+			psmt.setString(2, userPw);
+			rs = psmt.executeQuery();
+
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+
+		} finally {
+			disconnect();
+		}
+	}
+
+	// 내가 쓴 글 불러오기
+	@Override
+	public List<Writing> selectMyPost(User user) {
+		
+		conn = getConnect();
+		List<Writing> writings = new ArrayList<>();
+		String sql = "SELECT * FROM writing_list " //
+				+ "WHERE user_id = ? "
+				+ "ORDER BY writing_no";
 
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, user.getUserId());
 			rs = psmt.executeQuery();
-			
-			int r = psmt.executeUpdate();
-			if (r > 0) {
-				return true;
+
+			while (rs.next()) {
+				Writing wri = new Writing();
+				wri.setBoardName(rs.getString("board_name"));
+				wri.setWritingNo(rs.getInt("writing_no"));
+				wri.setWritingDate(rs.getString("writing_date"));
+				wri.setUserId(rs.getString("user_id"));
+				wri.setWritingSub(rs.getString("writing_sub"));
+				wri.setWriting(rs.getString("writing"));
+
+				writings.add(wri);
+
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
-		return false;
+
+		return writings;
+
 	}
 
-	// 4.2 내가 쓴 글
-	@Override
-	public boolean selectMyPost(User user) {
-		return false;
-	}
-
-	// 4.3 내가 쓴 댓글
-	@Override
-	public boolean selectMyComment(User user) {
-		return false;
-	}
 	// 댓글 번호 동일 체크
 //	public boolean searchComment(int writingNo, int commentNo) {
 //
@@ -768,7 +855,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return false;
 	}
 

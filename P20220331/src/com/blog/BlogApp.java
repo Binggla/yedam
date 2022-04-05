@@ -1,11 +1,15 @@
 package com.blog;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
 public class BlogApp {
 
 	Scanner scan = new Scanner(System.in);
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public void execute() {
 
@@ -32,6 +36,7 @@ public class BlogApp {
 					System.out.println("\n\t- 로그인 성공! -");
 
 					// 메인 메뉴
+					int cnt = 0;
 					while (true) {
 
 						List<Writing> getList = bs.getList();
@@ -79,7 +84,11 @@ public class BlogApp {
 											inputWritingSub = scan.nextLine();
 
 											System.out.print("글 수정 > ");
-											String inputWriting = scan.nextLine();
+											String inputWriting = "";
+
+											while (scan.next() != null) {
+												inputWriting += scan.nextLine();
+											}
 
 											Writing writing = new Writing(null, inputWritingNo, inputWritingSub,
 													loginUser.getUserId(), inputWriting);
@@ -394,7 +403,6 @@ public class BlogApp {
 							}
 
 						} else if (inputMenu == 3) { // 게시글 등록
-							// (board_name, writing_no, writing_date, user_id, writing_sub, writing)
 
 							String selectBoardName = null;
 							while (true) {
@@ -422,7 +430,14 @@ public class BlogApp {
 							inputWritingSub = scan.nextLine();
 
 							System.out.print("글 입력 > ");
-							String inputWriting = scan.nextLine();
+							String inputWriting = "";
+							try {
+								while ((inputWriting = br.readLine()) != null) {
+								}
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 							Writing writing = new Writing(selectBoardName, inputWritingSub, loginUser.getUserId(),
 									inputWriting);
@@ -442,12 +457,13 @@ public class BlogApp {
 
 								if (inputAnswer == 1) { // 내 정보
 									System.out.println(bs.selectMyInfo(loginUser.getUserId()));
-									System.out.print("\n1 내 정보 수정  2 회원 탈퇴  3 뒤로가기    선택 > ");
+									System.out.print("\n1 내 정보 수정  2 비밀번호 수정  3 회원 탈퇴  9 뒤로가기    선택 > ");
 									inputAnswer = scan.nextInt();
 
 									while (true) {
 
-										if (inputAnswer == 1) {
+										if (inputAnswer == 1) { // 내 정보 수정
+
 											System.out.println("\n[ 내 정보 수정 ]");
 											System.out.print("이름 입력 > ");
 											String inputName = scan.next();
@@ -466,70 +482,173 @@ public class BlogApp {
 											}
 											break;
 
-										} else if (inputAnswer == 2) {
+										} else if (inputAnswer == 2) { // 비밀번호 수정
+
+											System.out.println("\n[ 비밀번호 수정 ]");
+											System.out.print("현재 비밀번호 입력 > ");
+											String currentPw = scan.next();
+
+											if (bs.checkMyPw(loginUser, currentPw) == true) {
+
+												System.out.print("수정할 비밀번호 입력 > ");
+												String changePw = scan.next();
+												loginUser.setUserPw(changePw);
+
+												if (bs.updateMyPw(loginUser) == true) {
+													cnt = 1;
+													System.out.println("\n\t- 비밀번호 수정 완료! -");
+													System.out.println("\t- 다시 로그인해 주세요. -");
+												} else {
+													System.out.println("\n\t- 정상적으로 처리되지 않았습니다. -");
+												}
+
+											} else {
+												System.out.println("\n\t- 틀린 비밀번호입니다. -");
+											}
+											break;
+
+										} else if (inputAnswer == 3) { // 회원 탈퇴
 
 											System.out.print("\n\t정말로 탈퇴하시겠습니까? (Y/N)  > ");
 											String inputYesNo = scan.next();
 
 											if (inputYesNo.equals("Y") || inputYesNo.equals("y")) {
 
-												System.out.print(
-														"\t회원 탈퇴 시 작성된 글과 댓글이 모두 삭제됩니다. 그래도 탈퇴하시겠습니까? (Y/N)  > ");
+												System.out.print("\t비밀번호 입력 > ");
+												inputPw = scan.next();
 
-												if (inputYesNo.equals("Y") || inputYesNo.equals("y")) {
+												if (bs.checkMyPw(loginUser, inputPw) == true) {
 
-													if (bs.deleteUser(loginUser) == true) {
-														System.out.println("\n\t- 회원 탈퇴 완료! -");
-														break;
-													}
-													
-												} else if (inputYesNo.equals("N") || inputYesNo.equals("n")) {
+													bs.deleteUser(loginUser, inputPw);
+													cnt = 1;
+													System.out.println("\n\t- 회원 탈퇴 완료! -");
+
+												} else {
+													System.out.println("\n\t- 틀린 비밀번호입니다. -");
 													break;
 												}
 
 											} else if (inputYesNo.equals("N") || inputYesNo.equals("n")) {
 												break;
 											}
+
 											break;
 
-										} else if (inputAnswer == 3) {
+										} else if (inputAnswer == 9) {
 											break;
 										} else {
 											System.out.println("\n\t- 잘못 입력하셨습니다. -\n");
 										}
 									}
 
+									if (cnt == 1) {
+										break;
+									}
+
 								} else if (inputAnswer == 2) { // 내 게시글
-									System.out.println("내 게시글");
 
 									while (true) {
 
-										System.out.print("\n9. 뒤로가기 > ");
+										List<Writing> userList = bs.selectMyPost(loginUser);
+
+										System.out.println(
+												"\n----------------------------------------------------------------");
+										System.out.println(" 말머리\t  번호\t작성일\t\t작성자\t제목");
+										System.out.println(
+												"----------------------------------------------------------------");
+
+										for (Writing w : userList) {
+											System.out.println(w.writingList());
+										}
+
+										System.out.print("\n1 게시글 상세보기  9 뒤로가기    선택 > ");
 										inputAnswer = scan.nextInt();
 
-										if (inputAnswer == 9) {
+										if (inputAnswer == 1) {
+
+											System.out.print("글 번호 입력 > ");
+											int inputWritingNo = scan.nextInt();
+
+											while (true) {
+												System.out.println(bs.getWriting(inputWritingNo).toString());
+												System.out.println("");
+												List<Comment> comments = bs.getComment(inputWritingNo);
+												for (Comment c : comments) {
+													System.out.println(c);
+													List<ReComment> recomments = bs.getReComment(c.getCommentNo());
+													if (recomments == null) {
+														continue;
+													}
+													for (ReComment rc : recomments) {
+														System.out.println(rc);
+													}
+												}
+												System.out.print("\n1 수정  2 삭제  9 뒤로가기    선택 > ");
+												int inputWritingMenu = scan.nextInt();
+
+												if (inputWritingMenu == 1) { // 게시글 수정
+
+													while (true) {
+
+														System.out.print("글 제목 수정 > ");
+														String inputWritingSub = scan.nextLine();
+														inputWritingSub = scan.nextLine();
+
+														System.out.print("글 수정 > ");
+														String inputWriting = scan.nextLine();
+
+														Writing writing = new Writing(null, inputWritingNo,
+																inputWritingSub, loginUser.getUserId(), inputWriting);
+
+														if (bs.updatePost(writing) == true) {
+															System.out.println("\n\t- 수정 완료! -");
+															break;
+														} else {
+															System.out.println("\n\t- 정상적으로 처리되지 않았습니다. -");
+														}
+													}
+													break;
+
+												} else if (inputWritingMenu == 2) { // 게시글 삭제
+
+													System.out.print("\n\t 정말로 글을 삭제하시겠습니까? (Y/N)  > ");
+													String inputYesNo = scan.next();
+
+													if (inputYesNo.equals("Y") || inputYesNo.equals("y")) {
+
+														if (bs.deletePost(inputWritingNo) == true) {
+
+															System.out.println("\t- 삭제 완료! -");
+															break;
+
+														} else {
+															System.out.println("\t- 정상적으로 처리되지 않았습니다. -");
+														}
+
+													} else if (inputYesNo.equals("N") || inputYesNo.equals("n")) {
+														continue;
+													} else {
+														System.out.println("\t- 잘못 입력하셨습니다. -");
+													}
+
+												} else if (inputWritingMenu == 9) {
+
+													break;
+
+												} else {
+													System.out.println("\n\t- 잘못 입력하셨습니다. -");
+												}
+											}
+
+										} else if (inputAnswer == 9) {
 											break;
 										} else {
 											System.out.println("\n\t- 잘못 입력하셨습니다. -");
 										}
+
 									}
 
-								} else if (inputAnswer == 3) { // 내 댓글
-									System.out.println("내 댓글");
-
-									while (true) {
-
-										System.out.print("\n9. 뒤로가기 > ");
-										inputAnswer = scan.nextInt();
-
-										if (inputAnswer == 9) {
-											break;
-										} else {
-											System.out.println("\n\t- 잘못 입력하셨습니다. -");
-										}
-									}
-
-								} else if (inputAnswer == 4) {
+								} else if (inputAnswer == 9) {
 									break;
 								} else {
 									System.out.println("\n\t- 잘못 입력하셨습니다. -\n");
@@ -543,10 +662,14 @@ public class BlogApp {
 							System.out.println("\n\t- 잘못 입력하셨습니다. -");
 						}
 
+						if (cnt == 1) {
+							break;
+						}
+
 					} // end of while
 
 				} else {
-					System.out.println("\n\t- 입력한 아이디, 비밀번호를 찾을 수 없습니다. -\n");
+					System.out.println("\n\t- 입력한 아이디, 비밀번호를 찾을 수 없습니다. -");
 					continue;
 				}
 
@@ -572,7 +695,6 @@ public class BlogApp {
 						if (bs.insertUser(newUser) == true) {
 
 							System.out.println("\n\t- 회원가입 완료! -");
-							System.out.println("\t- 다시 실행하여 로그인해 주세요. -\n");
 
 						} else {
 
@@ -584,7 +706,7 @@ public class BlogApp {
 
 				}
 
-			} else if (inputLogin == 3) { // 프로그램 종료
+			} else if (inputLogin == 9) { // 프로그램 종료
 				break;
 
 			} else {
@@ -602,7 +724,7 @@ public class BlogApp {
 		String str = "\n-------------\n" //
 				+ " 1 로그인\n" //
 				+ " 2 회원가입\n" //
-				+ " 3 종료\n" //
+				+ " 9 종료\n" //
 				+ "-------------\n" //
 				+ "선택 > ";
 		System.out.print(str);
@@ -614,8 +736,8 @@ public class BlogApp {
 				+ "-------------\n" //
 				+ " 1 내 정보\n" //
 				+ " 2 내 게시글\n" //
-				+ " 3 내 댓글\n" //
-				+ " 4 돌아가기\n" + "-------------\n" //
+				+ " 9 돌아가기\n" //
+				+ "-------------\n" //
 				+ "선택 > ";
 		System.out.print(str);
 	}

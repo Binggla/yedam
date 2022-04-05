@@ -95,13 +95,15 @@ public interface BlogService {
 		public User selectMyInfo(String userId);
 		// 4.1.1 내 정보 수정
 		public boolean updateMyInfo(User user);
-		// 4.1.2 회원 탈퇴
-		public boolean deleteUser(User user);
+		// 4.1.2 비밀번호 수정
+		public boolean checkMyPw(User user, String currentPw);
+		public boolean updateMyPw(User user);
+		// 4.1.3 회원 탈퇴
+		public boolean deleteUser(User user, String userPw);
 		
 		// 4.2 내 게시글
-		public boolean selectMyPost(User user);
-		// 4.3 내 댓글
-		public boolean selectMyComment(User user);
+		public List<Writing> selectMyPost(User user);
+
 	
 	// 유저 체크(회원가입) checkUser()
 	// 이미 생성된 아이디가 있는 지 체크

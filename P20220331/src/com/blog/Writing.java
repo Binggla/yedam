@@ -86,7 +86,7 @@ public class Writing extends User {
 	public String toString() {
 
 		String str = "\n----------------------------------------------------------------\n" //
-				+ " " + writingSub + "\t|  " + boardName + "  |  " + super.getUserId() + "  |  " + writingDate.substring(0,10) + "\n"
+				+ " " + writingSub + "\t\t|  " + boardName + "  |  " + super.getUserId() + "  |  " + writingDate.substring(0,10) + "\n"
 				+ "----------------------------------------------------------------\n"
 				+ " " + writing;
 		
@@ -98,5 +98,4 @@ public class Writing extends User {
 
 		return str;
 	}
-
 }
