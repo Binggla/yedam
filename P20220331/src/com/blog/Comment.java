@@ -10,9 +10,10 @@ public class Comment extends Writing {
 		super();
 	}
 
-	public Comment(int writingNo, String userId, String userComment) {
+	public Comment(int writingNo, String userId, String userComment, String userNickname) {
 		super(writingNo, userId);
 		this.userComment = userComment;
+		super.setUserNickname(userNickname);
 	}
 	
 	public Comment(int writingNo, String userId, int commentNo, String userComment) {

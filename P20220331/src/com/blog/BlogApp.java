@@ -13,6 +13,10 @@ public class BlogApp {
 
 	public void execute() {
 
+		
+		// 글번호/ 댓글 번호 없을 때 문구 출력.
+		// 유저체크 --> 스트링을 매개변수로 넣어서 하나의 메소드로 할 수 있을지?
+		
 		BlogService bs = new BlogServiceOracle();
 		User loginUser;
 
@@ -34,6 +38,7 @@ public class BlogApp {
 				if (bs.login(loginUser) == true) {
 
 					System.out.println("\n\t- 로그인 성공! -");
+					loginUser = bs.selectMyInfo(loginUser.getUserId());
 
 					// 메인 메뉴
 					int cnt = 0;
@@ -42,11 +47,11 @@ public class BlogApp {
 						List<Writing> getList = bs.getList();
 
 						System.out.println("\n----------------------------------------------------------------");
-						System.out.println(" 말머리\t  번호\t작성일\t\t작성자\t제목");
+						System.out.printf(" 말머리\t  번호\t작성일\t\t%-10s\t제목\n", "작성자");
 						System.out.println("----------------------------------------------------------------");
 						
 						for (Writing w : getList) {
-							System.out.println(w.writingList());
+							w.writingList();
 						}
 						System.out.print("\n1 게시글 상세보기  2 게시글 조회  3 게시글 등록  4 마이페이지  9 로그아웃    선택 > ");
 						int inputMenu = scan.nextInt();
@@ -57,17 +62,22 @@ public class BlogApp {
 							int inputWritingNo = scan.nextInt();
 
 							while (true) {
-								System.out.println(bs.getWriting(inputWritingNo).toString());
-								List<Comment> comments = bs.getComment(inputWritingNo);
-								System.out.println("");
-								for (Comment c : comments) {
-									System.out.println(c);
-									List<ReComment> recomments = bs.getReComment(c.getCommentNo());
-									if (recomments == null) {
-										continue;
-									}
-									for (ReComment rc : recomments) {
-										System.out.println(rc);
+								if (bs.getWriting(inputWritingNo) == null) {
+									System.out.println("\n\t- 잘못된 번호를 입력하였습니다. -");
+								} else {
+
+									System.out.println(bs.getWriting(inputWritingNo).toString());
+									List<Comment> comments = bs.getComment(inputWritingNo);
+									System.out.println("");
+									for (Comment c : comments) {
+										System.out.println(c);
+										List<ReComment> recomments = bs.getReComment(c.getCommentNo());
+										if (recomments == null) {
+											continue;
+										}
+										for (ReComment rc : recomments) {
+											System.out.println(rc);
+										}
 									}
 								}
 								System.out.print("\n1 수정  2 삭제  3 댓글 등록  4 댓글 수정  5 댓글 삭제  9 뒤로가기    선택 > ");
@@ -97,7 +107,7 @@ public class BlogApp {
 											}
 
 											Writing writing = new Writing(null, inputWritingNo, inputWritingSub,
-													loginUser.getUserId(), inputWritingAll);
+													loginUser.getUserId(), inputWritingAll, loginUser.getUserNickname());
 
 											if (bs.updatePost(writing) == true) {
 												System.out.println("\n\t- 수정 완료! -");
@@ -151,7 +161,7 @@ public class BlogApp {
 										String inputComment = scan.nextLine();
 										inputComment = scan.nextLine();
 
-										Comment com = new Comment(inputWritingNo, loginUser.getUserId(), inputComment);
+										Comment com = new Comment(inputWritingNo, loginUser.getUserId(), inputComment, loginUser.getUserNickname());
 										bs.commenting(com);
 
 										System.out.println("\n\t- 새 댓글 등록 완료! -");
@@ -165,7 +175,7 @@ public class BlogApp {
 										inputReComment = scan.nextLine();
 
 										ReComment reCom = new ReComment(loginUser.getUserId(), inputCommentNo,
-												inputReComment);
+												inputReComment, loginUser.getUserNickname());
 										if (bs.reCommenting(reCom) == true) {
 											System.out.println("\n\t- 답글 등록 완료! -");
 										} else {
@@ -302,7 +312,7 @@ public class BlogApp {
 											"----------------------------------------------------------------");
 									getList = bs.selectListName(selectBoardName);
 									for (Writing w : getList) {
-										System.out.println(w.writingList());
+										w.writingList();
 									}
 									while (true) {
 
@@ -322,14 +332,12 @@ public class BlogApp {
 									System.out.print("조회할 단어 입력 > ");
 									String inputWord = scan.next();
 
-									System.out.println(
-											"\n----------------------------------------------------------------");
-									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
-									System.out.println(
-											"----------------------------------------------------------------");
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.printf(" 말머리\t  번호\t작성일\t\t%-10s\t제목\n", "작성자");
+									System.out.println("----------------------------------------------------------------");
 									getList = bs.selectListSub(inputWord);
 									for (Writing w : getList) {
-										System.out.println(w.writingList());
+										w.writingList();
 									}
 
 									while (true) {
@@ -350,14 +358,12 @@ public class BlogApp {
 									System.out.print("작성자 ID 입력 > ");
 									String inputUserId = scan.next();
 
-									System.out.println(
-											"\n----------------------------------------------------------------");
-									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
-									System.out.println(
-											"----------------------------------------------------------------");
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.printf(" 말머리\t  번호\t작성일\t\t%-10s\t제목\n", "작성자");
+									System.out.println("----------------------------------------------------------------");
 									getList = bs.selectListUser(inputUserId);
 									for (Writing w : getList) {
-										System.out.println(w.writingList());
+										w.writingList();
 									}
 
 									while (true) {
@@ -380,15 +386,13 @@ public class BlogApp {
 									System.out.print("입력 날짜까지 조회 ex.00-00-00 > ");
 									String inputWritingDate2 = scan.next();
 
-									System.out.println(
-											"\n----------------------------------------------------------------");
-									System.out.println(" 말머리\t  번호\t날짜\t\t작성자\t제목");
-									System.out.println(
-											"----------------------------------------------------------------");
+									System.out.println("\n----------------------------------------------------------------");
+									System.out.printf(" 말머리\t  번호\t작성일\t\t%-10s\t제목\n", "작성자");
+									System.out.println("----------------------------------------------------------------");
 									getList = bs.selectListDate(inputWritingDate1, inputWritingDate2);
 
 									for (Writing w : getList) {
-										System.out.println(w.writingList());
+										w.writingList();
 									}
 
 									while (true) {
@@ -449,7 +453,7 @@ public class BlogApp {
 							}
 
 							Writing writing = new Writing(selectBoardName, inputWritingSub, loginUser.getUserId(),
-									inputWritingAll);
+									inputWritingAll, loginUser.getUserNickname());
 
 							if (bs.insertPost(writing) == true) {
 								System.out.println("\n\t- 게시글 등록 완료! -");
@@ -563,14 +567,12 @@ public class BlogApp {
 
 										List<Writing> userList = bs.selectMyPost(loginUser);
 
-										System.out.println(
-												"\n----------------------------------------------------------------");
-										System.out.println(" 말머리\t  번호\t작성일\t\t작성자\t제목");
-										System.out.println(
-												"----------------------------------------------------------------");
+										System.out.println("\n----------------------------------------------------------------");
+										System.out.printf(" 말머리\t  번호\t작성일\t\t%-10s\t제목\n", "작성자");
+										System.out.println("----------------------------------------------------------------");
 
 										for (Writing w : userList) {
-											System.out.println(w.writingList());
+											w.writingList();
 										}
 
 										System.out.print("\n1 게시글 상세보기  9 뒤로가기    선택 > ");
@@ -620,7 +622,7 @@ public class BlogApp {
 														}
 
 														Writing writing = new Writing(null, inputWritingNo,
-																inputWritingSub, loginUser.getUserId(), inputWritingAll);
+																inputWritingSub, loginUser.getUserId(), inputWritingAll, loginUser.getUserNickname());
 
 														if (bs.updatePost(writing) == true) {
 															System.out.println("\n\t- 수정 완료! -");
@@ -721,6 +723,7 @@ public class BlogApp {
 			} else if (inputLogin == 2) { // 회원가입
 
 				while (true) {
+					System.out.println("[ 회원가입 ]");
 					System.out.print("아이디 입력 > ");
 					String inputId = scan.next();
 
@@ -737,7 +740,7 @@ public class BlogApp {
 						inputNickname = scan.nextLine();
 						System.out.print("생일 입력 ex.00-00-00 > ");
 						String inputBirth = scan.next();
-						System.out.print("휴대폰 번호 입력 ex.000-0000-0000 > ");
+						System.out.print("휴대폰 번호 입력 ex.00000000000 > ");
 						String inputPhone = scan.next();
 						User newUser = new User(inputId, inputPw, inputName, inputBirth, inputPhone, inputNickname);
 						if (bs.insertUser(newUser) == true) {
@@ -754,6 +757,30 @@ public class BlogApp {
 
 				}
 
+			} else if (inputLogin == 3) { // 비밀번호 찾기
+				
+				System.out.println("\n[ 비밀번호 찾기 ]");
+				System.out.print("비밀번호를 찾고자하는 아이디 입력 > ");
+				String inputUserId = scan.next();
+				
+				User user = bs.selectMyInfo(inputUserId);
+				
+				if (user == null) {
+					System.out.println("\n\t- 해당하는 아이디가 없습니다. -");
+				} else {
+					System.out.print("연락처 입력 > ");
+					String inputToPhone = scan.next();
+					
+					if (user.getUserPhone().equals(inputToPhone)) {
+						
+						SendExample.sendPwSms(inputToPhone, inputUserId);
+					} else {
+						System.out.println("\n\t- 연락처가 일치하지 않습니다. -");
+					}
+					
+				}
+				
+				
 			} else if (inputLogin == 9) { // 프로그램 종료
 				break;
 
@@ -772,6 +799,7 @@ public class BlogApp {
 		String str = "\n-------------\n" //
 				+ " 1 로그인\n" //
 				+ " 2 회원가입\n" //
+				+ " 3 비밀번호 찾기\n" //				
 				+ " 9 종료\n" //
 				+ "-------------\n" //
 				+ "선택 > ";

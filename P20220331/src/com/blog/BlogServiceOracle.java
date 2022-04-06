@@ -662,6 +662,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			if (rs.next()) {
 				user = new User();
 				user.setUserId(rs.getString("user_id"));
+				user.setUserPw(rs.getString("user_pw"));
 				user.setUserName(rs.getString("user_name"));
 				user.setUserBirth(rs.getString("user_birth"));
 				user.setUserPhone(rs.getString("user_phone"));
@@ -684,6 +685,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 		String sql = "UPDATE user_info " //
 				+ "SET user_name = ?, " //
+				+ "    user_pw = ?, "
 				+ "    user_birth = ?, " //
 				+ "    user_phone = ?, " //
 				+ "    user_nickname = ? "
@@ -892,6 +894,40 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		
 		return false;
 	}
+	
+	// 유저 체크 (비밀번호 찾기)
+	
+//	public User checkUser(String userId) {
+//		conn = getConnect();
+//
+//		String sql = "SELECT * " //
+//				+ "FROM user_info " //
+//				+ "WHERE user_id = ?";
+//
+//		User user = null;
+//
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setString(1, userId);
+//
+//			rs = psmt.executeQuery();
+//			if (rs.next()) {
+//				user = new User();
+//				user.setUserId(rs.getString("user_id"));
+//				user.setUserPw((rs.getString("user_pw"));
+//				user.setUserName(rs.getString("user_name"));
+//				user.setUserBirth(rs.getString("user_birth"));
+//				user.setUserPhone(rs.getString("user_phone"));
+//				user.setUserNickname(rs.getString("user_nickname"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			disconnect();
+//		}
+//
+//		return user;
+//	}
 
 	// 유저 체크 (글)
 	@Override
@@ -964,5 +1000,6 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 		return false;
 	}
+	
 
 }

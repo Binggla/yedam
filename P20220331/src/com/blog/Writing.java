@@ -16,19 +16,21 @@ public class Writing extends User {
 		super(userId);
 	}
 
-	public Writing(String boardName, String writingSub, String userId, String writing) {
+	public Writing(String boardName, String writingSub, String userId, String writing, String userNickname) {
 		super(userId);
 		this.boardName = boardName;
 		this.writingSub = writingSub;
 		this.writing = writing;
+		super.setUserNickname(userNickname);
 	}
 	
-	public Writing(String boardName, int writingNo, String writingSub, String userId, String writing) {
+	public Writing(String boardName, int writingNo, String writingSub, String userId, String writing, String userNickname) {
 		super(userId);
 		this.boardName = boardName;
 		this.writingNo = writingNo;
 		this.writingSub = writingSub;
 		this.writing = writing;
+		super.setUserNickname(userNickname);
 	}
 	
 	public Writing(int writingNo, String userId) {
@@ -76,10 +78,9 @@ public class Writing extends User {
 		this.writing = writing;
 	}
 
-	public String writingList() {
-		String str =" " + boardName + "\t  " + writingNo + "\t" + writingDate.substring(0, 10) + "\t" + super.getUserNickname() + "\t" + writingSub; //
+	public void writingList() {
+		System.out.printf(" " + boardName + "\t  " + writingNo + "\t" + writingDate.substring(0, 10) + "\t%-10s" + "\t" + writingSub + "\n", super.getUserNickname());
 
-		return str;
 	}
 	
 	@Override

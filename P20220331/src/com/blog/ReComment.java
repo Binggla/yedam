@@ -15,9 +15,10 @@ public class ReComment extends Comment {
 		super(writingNo, userId, commentNo, userComment);
 	}
 	
-	public ReComment(String userId, int commentNo, String userReComment) {
+	public ReComment(String userId, int commentNo, String userReComment, String userNickname) {
 		super(userId, commentNo);
 		this.userReComment = userReComment;
+		super.setUserNickname(userNickname);
 	}
 	
 	public String getReUserId() {
