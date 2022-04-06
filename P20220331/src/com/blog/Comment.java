@@ -53,8 +53,13 @@ public class Comment extends Writing {
 
 	@Override
 	public String toString() {
-		String str = " [" + commentNo + "] [" +  super.getUserId() + "] " + userComment + " (" + commentDate.substring(0, 10) + ")"; //
+		String str = " [" + commentNo + "] [" +  super.getUserNickname() + "] " + userComment + " (" + commentDate.substring(0, 10) + ")"; //
 
+		return str;
+	}
+	
+	public String printMyComment() {
+		String str = " " + super.getWritingNo() + "\t" + this.getCommentNo() + "\t" + this.getCommentDate().substring(0, 10) + "\t" + this.getUserComment();
 		return str;
 	}
 

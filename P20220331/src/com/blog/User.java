@@ -7,6 +7,7 @@ public class User {
 	private String userName;
 	private String userBirth;
 	private String userPhone;
+	private String userNickname;
 
 	public User() {
 		
@@ -22,20 +23,22 @@ public class User {
 		this.userPw = userPw;
 	}
 
-	public User(String userId, String userName, String userBirth, String userPhone) {
+	public User(String userId, String userName, String userBirth, String userPhone, String userNickname) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.userBirth = userBirth;
 		this.userPhone = userPhone;
+		this.userNickname = userNickname;
 	}
-	public User(String userId, String userPw, String userName, String userBirth, String userPhone) {
+	public User(String userId, String userPw, String userName, String userBirth, String userPhone, String userNickname) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
 		this.userBirth = userBirth;
 		this.userPhone = userPhone;
+		this.userNickname = userNickname;
 	}
 
 	public String getUserId() {
@@ -77,6 +80,14 @@ public class User {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
+	
+	public String getUserNickname() {
+		return userNickname;
+	}
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
 
 	@Override
 	public String toString() {
@@ -85,6 +96,7 @@ public class User {
 				+ " 내 정보\r\n"
 				+ "----------------------\r\n"
 				+ " 아이디\t" + userId + "\r\n"
+				+ " 닉네임\t" + userNickname + "\r\n"
 				+ " 이름\t" + userName + "\r\n"
 				+ " 생년월일\t" + userBirth.substring(0, 10) + "\r\n"
 				+ " 휴대폰\t" + userPhone + "\r\n"

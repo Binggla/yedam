@@ -39,8 +39,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 //		conn = getConnect();
 
-		String sql = "INSERT INTO user_info (user_id, user_pw, user_name, user_birth, user_phone) " //
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO user_info (user_id, user_pw, user_name, user_birth, user_phone, user_nickname) " //
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 
@@ -50,6 +50,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			psmt.setString(3, user.getUserName());
 			psmt.setString(4, user.getUserBirth());
 			psmt.setString(5, user.getUserPhone());
+			psmt.setString(6, user.getUserNickname());
 
 			int r = psmt.executeUpdate();
 			if (r > 0) {
@@ -86,6 +87,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 
 				writings.add(wri);
 
@@ -121,6 +123,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 			}
 
 		} catch (SQLException e) {
@@ -153,6 +156,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 
 				writings.add(wri);
 
@@ -191,6 +195,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 
 				writings.add(wri);
 			}
@@ -224,6 +229,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 
 				writings.add(wri);
 
@@ -261,6 +267,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 
 				writings.add(wri);
 
@@ -280,8 +287,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	public boolean insertPost(Writing writing) {
 
 		conn = getConnect();
-		String sql = "insert into writing_list (board_name, writing_no, writing_date, user_id, writing_sub, writing)\r\n"
-				+ "values (?, writing_seq.NEXTVAL, sysdate, ?, ?, ?)";
+		String sql = "insert into writing_list (board_name, writing_no, writing_date, user_id, writing_sub, writing, user_nickname)\r\n"
+				+ "values (?, writing_seq.NEXTVAL, sysdate, ?, ?, ?, ?)";
 
 		try {
 
@@ -290,6 +297,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			psmt.setString(2, writing.getUserId());
 			psmt.setString(3, writing.getWritingSub());
 			psmt.setString(4, writing.getWriting());
+			psmt.setString(5, writing.getUserNickname());
 
 			int r = psmt.executeUpdate();
 			if (r > 0) {
@@ -383,6 +391,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				com.setCommentDate(rs.getString("comment_date"));
 				com.setUserId(rs.getString("user_id"));
 				com.setUserComment(rs.getString("user_comment"));
+				com.setUserNickname(rs.getString("user_nickname"));
 
 				comments.add(com);
 
@@ -455,6 +464,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				reCom.setReCommentDate(rs.getString("recomment_date"));
 				reCom.setReUserId(rs.getString("re_user_id"));
 				reCom.setUserReComment(rs.getString("user_recomment"));
+				reCom.setUserNickname(rs.getString("user_nickname"));
 
 				recomments.add(reCom);
 			}
@@ -476,14 +486,15 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	public boolean commenting(Comment comment) {
 
 		conn = getConnect();
-		String sql = "INSERT INTO comment_list (writing_no, comment_no, comment_date, user_id, user_comment)\r\n"
-				+ "values (?, comment_seq.NEXTVAL, sysdate, ?, ?)";
+		String sql = "INSERT INTO comment_list (writing_no, comment_no, comment_date, user_id, user_comment, user_nickname)\r\n"
+				+ "values (?, comment_seq.NEXTVAL, sysdate, ?, ?, ?)";
 		try {
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, comment.getWritingNo());
 			psmt.setString(2, comment.getUserId());
 			psmt.setString(3, comment.getUserComment());
+			psmt.setString(4, comment.getUserNickname());
 
 			int r = psmt.executeUpdate();
 			if (r > 0) {
@@ -503,8 +514,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	public boolean reCommenting(ReComment reCom) {
 
 		conn = getConnect();
-		String sql = "insert into recomment_list (comment_no, recomment_no, recomment_date, re_user_id, user_recomment)\r\n"
-				+ "values (?, ?||recomment_seq.NEXTVAL, sysdate, ?, ?)";
+		String sql = "insert into recomment_list (comment_no, recomment_no, recomment_date, re_user_id, user_recomment, user_nickname)\r\n"
+				+ "values (?, ?||recomment_seq.NEXTVAL, sysdate, ?, ?, ?)";
 		try {
 
 			psmt = conn.prepareStatement(sql);
@@ -512,6 +523,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			psmt.setInt(2, reCom.getCommentNo());
 			psmt.setString(3, reCom.getUserId());
 			psmt.setString(4, reCom.getUserReComment());
+			psmt.setString(5, reCom.getUserNickname());
 
 			int r = psmt.executeUpdate();
 			if (r > 0) {
@@ -653,6 +665,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				user.setUserName(rs.getString("user_name"));
 				user.setUserBirth(rs.getString("user_birth"));
 				user.setUserPhone(rs.getString("user_phone"));
+				user.setUserNickname(rs.getString("user_nickname"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -672,7 +685,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		String sql = "UPDATE user_info " //
 				+ "SET user_name = ?, " //
 				+ "    user_birth = ?, " //
-				+ "    user_phone = ? " //
+				+ "    user_phone = ?, " //
+				+ "    user_nickname = ? "
 				+ "WHERE user_id = ?";
 
 		try {
@@ -680,7 +694,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			psmt.setString(1, user.getUserName());
 			psmt.setString(2, user.getUserBirth());
 			psmt.setString(3, user.getUserPhone());
-			psmt.setString(4, user.getUserId());
+			psmt.setString(4, user.getUserNickname());
+			psmt.setString(5, user.getUserId());
 			rs = psmt.executeQuery();
 
 			int r = psmt.executeUpdate();
@@ -797,6 +812,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 				wri.setUserId(rs.getString("user_id"));
 				wri.setWritingSub(rs.getString("writing_sub"));
 				wri.setWriting(rs.getString("writing"));
+				wri.setUserNickname(rs.getString("user_nickname"));
 
 				writings.add(wri);
 
@@ -811,31 +827,49 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		return writings;
 
 	}
+	
+	// 내 댓글 불러오기
+	@Override
+	public List<Comment> selectMyComment(User user) {
+		
+		conn = getConnect();
+		List<Comment> comments = new ArrayList<>();
+		String sql = "SELECT user_id, user_nickname, writing_no, comment_no, user_comment, comment_date "
+				+ "FROM (SELECT user_id, user_nickname, writing_no, comment_no, user_comment, comment_date "
+				+ "         FROM comment_list "
+				+ "         UNION "
+				+ "         SELECT re_user_id, user_nickname, writing_no, recomment_no, user_recomment , recomment_date "
+				+ "         FROM recomment_list) "
+				+ "WHERE user_id = ?";
 
-	// 댓글 번호 동일 체크
-//	public boolean searchComment(int writingNo, int commentNo) {
-//
-//		conn = getConnect();
-//
-//		String sql = "SELECT * FROM comment_list\r\n" //
-//				+ "WHERE writing_no = ? AND comment_no = ?";
-//
-//		try {
-//			psmt = conn.prepareStatement(sql);
-//
-//			psmt.setInt(1, writingNo);
-//			psmt.setInt(2, commentNo);
-//
-//			int r = psmt.executeUpdate();
-//			if (r > 0) {
-//				return true;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		return false;
-//	}
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user.getUserId());
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				Comment com = new Comment();
+
+				com.setUserId(rs.getString("user_id"));
+				com.setWritingNo(rs.getInt("writing_no"));
+				com.setCommentNo(rs.getInt("comment_no"));
+				com.setUserComment(rs.getString("user_comment"));
+				com.setCommentDate(rs.getString("comment_date"));
+				com.setUserNickname(rs.getString("user_nickname"));
+
+				comments.add(com);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return comments;
+
+	}
 
 	// 유저 체크(회원가입)
 	@Override

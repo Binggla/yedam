@@ -54,7 +54,7 @@ public class ReComment extends Comment {
 
 	@Override
 	public String toString() {
-		return "  ㄴ [" + reCommentNo + "] [" + reUserId + "] " + userReComment + " (" + reCommentDate.substring(0, 10) + ")";
+		return "  ㄴ [" + reCommentNo + "] [" + super.getUserNickname() + "] " + userReComment + " (" + reCommentDate.substring(0, 10) + ")";
 	}
 	
 //	public String printComment() {

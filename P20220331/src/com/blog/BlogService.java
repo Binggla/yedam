@@ -103,6 +103,8 @@ public interface BlogService {
 		
 		// 4.2 내 게시글
 		public List<Writing> selectMyPost(User user);
+		// 4.3 내 댓글
+		public List<Comment> selectMyComment(User user);
 
 	
 	// 유저 체크(회원가입) checkUser()

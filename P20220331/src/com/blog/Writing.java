@@ -77,7 +77,7 @@ public class Writing extends User {
 	}
 
 	public String writingList() {
-		String str =" " + boardName + "\t  " + writingNo + "\t" + writingDate.substring(0, 10) + "\t" + super.getUserId() + "\t" + writingSub; //
+		String str =" " + boardName + "\t  " + writingNo + "\t" + writingDate.substring(0, 10) + "\t" + super.getUserNickname() + "\t" + writingSub; //
 
 		return str;
 	}
@@ -86,15 +86,10 @@ public class Writing extends User {
 	public String toString() {
 
 		String str = "\n----------------------------------------------------------------\n" //
-				+ " " + writingSub + "\t\t|  " + boardName + "  |  " + super.getUserId() + "  |  " + writingDate.substring(0,10) + "\n"
+				+ " " + writingSub + "          |  " + boardName + "  |  " + super.getUserNickname() + "  |  " + writingDate.substring(0,10) + "\n"
 				+ "----------------------------------------------------------------\n"
-				+ " " + writing;
-		
-//		String str = " 말머리\t" + boardName + "\r\n" //
-//				+ " 날짜\t" + writingDate.substring(0, 10) + "\r\n" //
-//				+ " 작성자\t" + super.getUserId() + "\r\n" //
-//				+ " 제목\t" + writingSub + "\r\n" //
-//				+ "\t" + writing; //
+				+ writing;
+	
 
 		return str;
 	}

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BlogApp {
-
+	
 	Scanner scan = new Scanner(System.in);
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -44,7 +44,7 @@ public class BlogApp {
 						System.out.println("\n----------------------------------------------------------------");
 						System.out.println(" 말머리\t  번호\t작성일\t\t작성자\t제목");
 						System.out.println("----------------------------------------------------------------");
-
+						
 						for (Writing w : getList) {
 							System.out.println(w.writingList());
 						}
@@ -58,8 +58,8 @@ public class BlogApp {
 
 							while (true) {
 								System.out.println(bs.getWriting(inputWritingNo).toString());
-								System.out.println("");
 								List<Comment> comments = bs.getComment(inputWritingNo);
+								System.out.println("");
 								for (Comment c : comments) {
 									System.out.println(c);
 									List<ReComment> recomments = bs.getReComment(c.getCommentNo());
@@ -79,19 +79,25 @@ public class BlogApp {
 
 										if (bs.checkUser(loginUser, inputWritingNo) == true) {
 
-											System.out.print("글 제목 수정 > ");
+											System.out.print("게시글 제목 수정 > ");
 											String inputWritingSub = scan.nextLine();
 											inputWritingSub = scan.nextLine();
 
-											System.out.print("글 수정 > ");
+											System.out.println("게시글 수정 (마지막 줄에 -를 입력하여 저장) > ");
+											String inputWritingAll = "";
 											String inputWriting = "";
 
-											while (scan.next() != null) {
-												inputWriting += scan.nextLine();
+											while (scan.hasNext()) {
+										
+													if ((inputWriting = scan.nextLine()).equals("-")) {
+														break;
+													}
+													inputWritingAll += (" " + inputWriting + "\r\n");
+											
 											}
 
 											Writing writing = new Writing(null, inputWritingNo, inputWritingSub,
-													loginUser.getUserId(), inputWriting);
+													loginUser.getUserId(), inputWritingAll);
 
 											if (bs.updatePost(writing) == true) {
 												System.out.println("\n\t- 수정 완료! -");
@@ -110,7 +116,7 @@ public class BlogApp {
 
 									if (bs.checkUser(loginUser, inputWritingNo) == true) {
 
-										System.out.print("\n\t 정말로 글을 삭제하시겠습니까? (Y/N)  > ");
+										System.out.print("\n\t 정말로 게시글을 삭제하시겠습니까? (Y/N)  > ");
 										String inputAnswer = scan.next();
 
 										if (inputAnswer.equals("Y") || inputAnswer.equals("y")) {
@@ -163,7 +169,7 @@ public class BlogApp {
 										if (bs.reCommenting(reCom) == true) {
 											System.out.println("\n\t- 답글 등록 완료! -");
 										} else {
-											System.out.println("\\n\\t- 정상적으로 처리되지 않았습니다. -");
+											System.out.println("\n\t- 정상적으로 처리되지 않았습니다. -");
 										}
 
 									} else {
@@ -429,18 +435,21 @@ public class BlogApp {
 							String inputWritingSub = scan.nextLine();
 							inputWritingSub = scan.nextLine();
 
-							System.out.print("글 입력 > ");
+							System.out.println("글 입력 (마지막 줄에 -를 입력하여 저장) > ");
+							String inputWritingAll = "";
 							String inputWriting = "";
-							try {
-								while ((inputWriting = br.readLine()) != null) {
-								}
 
-							} catch (IOException e) {
-								e.printStackTrace();
+							while (scan.hasNext()) {
+						
+									if ((inputWriting = scan.nextLine()).equals("-")) {
+										break;
+									}
+									inputWritingAll += (" " + inputWriting + "\r\n");
+							
 							}
 
 							Writing writing = new Writing(selectBoardName, inputWritingSub, loginUser.getUserId(),
-									inputWriting);
+									inputWritingAll);
 
 							if (bs.insertPost(writing) == true) {
 								System.out.println("\n\t- 게시글 등록 완료! -");
@@ -467,13 +476,16 @@ public class BlogApp {
 											System.out.println("\n[ 내 정보 수정 ]");
 											System.out.print("이름 입력 > ");
 											String inputName = scan.next();
+											System.out.println("닉네임 입력 > ");
+											String inputNickname = scan.nextLine();
+											inputNickname = scan.nextLine();
 											System.out.print("생년월일 입력 ex.00-00-00 > ");
 											String inputBirth = scan.next();
 											System.out.print("연락처 입력 ex.000-0000-0000 > ");
 											String inputPhone = scan.next();
 
 											User updateUser = new User(loginUser.getUserId(), inputName, inputBirth,
-													inputPhone);
+													inputPhone, inputNickname);
 
 											if (bs.updateMyInfo(updateUser) == true) {
 												System.out.println("\n\t- 내 정보 수정 완료! -");
@@ -590,15 +602,25 @@ public class BlogApp {
 
 													while (true) {
 
-														System.out.print("글 제목 수정 > ");
+														System.out.print("게시글 제목 수정 > ");
 														String inputWritingSub = scan.nextLine();
 														inputWritingSub = scan.nextLine();
 
-														System.out.print("글 수정 > ");
-														String inputWriting = scan.nextLine();
+														System.out.println("게시글 수정 (마지막 줄에 -를 입력하여 저장) > ");
+														String inputWritingAll = "";
+														String inputWriting = "";
+
+														while (scan.hasNext()) {
+													
+																if ((inputWriting = scan.nextLine()).equals("-")) {
+																	break;
+																}
+																inputWritingAll += (" " + inputWriting + "\r\n");
+														
+														}
 
 														Writing writing = new Writing(null, inputWritingNo,
-																inputWritingSub, loginUser.getUserId(), inputWriting);
+																inputWritingSub, loginUser.getUserId(), inputWritingAll);
 
 														if (bs.updatePost(writing) == true) {
 															System.out.println("\n\t- 수정 완료! -");
@@ -611,7 +633,7 @@ public class BlogApp {
 
 												} else if (inputWritingMenu == 2) { // 게시글 삭제
 
-													System.out.print("\n\t 정말로 글을 삭제하시겠습니까? (Y/N)  > ");
+													System.out.print("\n\t 정말로 게시글을 삭제하시겠습니까? (Y/N)  > ");
 													String inputYesNo = scan.next();
 
 													if (inputYesNo.equals("Y") || inputYesNo.equals("y")) {
@@ -632,9 +654,7 @@ public class BlogApp {
 													}
 
 												} else if (inputWritingMenu == 9) {
-
 													break;
-
 												} else {
 													System.out.println("\n\t- 잘못 입력하셨습니다. -");
 												}
@@ -648,12 +668,37 @@ public class BlogApp {
 
 									}
 
+								} else if (inputAnswer == 3) { // 내 댓글
+								
+									List<Comment> getCommentList = bs.selectMyComment(loginUser);
+									
+									System.out.println(
+											"\n----------------------------------------------------------------");
+									System.out.println(" 글 번호\t댓글 번호\t작성일\t\t댓글");
+									System.out.println(
+											"----------------------------------------------------------------");
+									
+									for (Comment c : getCommentList) {
+										System.out.println(c.printMyComment());
+									}
+									
+									while (true) {
+
+										System.out.print("\n9 뒤로가기 > ");
+										inputAnswer = scan.nextInt();
+
+										if (inputAnswer == 9) {
+											break;
+										} else {
+											System.out.println("\n\t- 잘못 입력하셨습니다. -");
+										}
+									}
+									
 								} else if (inputAnswer == 9) {
 									break;
 								} else {
 									System.out.println("\n\t- 잘못 입력하셨습니다. -\n");
 								}
-
 							}
 
 						} else if (inputMenu == 9) { // 로그아웃
@@ -687,11 +732,14 @@ public class BlogApp {
 						String inputPw = scan.next();
 						System.out.print("이름 입력 > ");
 						String inputName = scan.next();
+						System.out.print("닉네임 입력 > ");
+						String inputNickname = scan.nextLine();
+						inputNickname = scan.nextLine();
 						System.out.print("생일 입력 ex.00-00-00 > ");
 						String inputBirth = scan.next();
 						System.out.print("휴대폰 번호 입력 ex.000-0000-0000 > ");
 						String inputPhone = scan.next();
-						User newUser = new User(inputId, inputPw, inputName, inputBirth, inputPhone);
+						User newUser = new User(inputId, inputPw, inputName, inputBirth, inputPhone, inputNickname);
 						if (bs.insertUser(newUser) == true) {
 
 							System.out.println("\n\t- 회원가입 완료! -");
@@ -736,6 +784,7 @@ public class BlogApp {
 				+ "-------------\n" //
 				+ " 1 내 정보\n" //
 				+ " 2 내 게시글\n" //
+				+ " 3 내 댓글\n" //
 				+ " 9 돌아가기\n" //
 				+ "-------------\n" //
 				+ "선택 > ";
