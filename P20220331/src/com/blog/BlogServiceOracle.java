@@ -685,7 +685,6 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 		String sql = "UPDATE user_info " //
 				+ "SET user_name = ?, " //
-				+ "    user_pw = ?, "
 				+ "    user_birth = ?, " //
 				+ "    user_phone = ?, " //
 				+ "    user_nickname = ? "

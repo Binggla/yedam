@@ -83,6 +83,5 @@ public class SendExample extends BlogDAO {
 			System.out.println(result.get("message")); // 에러메시지
 		}
 
-		System.out.println("end of send");
 	}
 }

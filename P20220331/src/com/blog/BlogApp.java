@@ -16,6 +16,7 @@ public class BlogApp {
 		
 		// 글번호/ 댓글 번호 없을 때 문구 출력.
 		// 유저체크 --> 스트링을 매개변수로 넣어서 하나의 메소드로 할 수 있을지?
+		// 휴대폰 번호 입력받을 때 - 삭제해서 insert 넣기
 		
 		BlogService bs = new BlogServiceOracle();
 		User loginUser;
@@ -480,13 +481,18 @@ public class BlogApp {
 											System.out.println("\n[ 내 정보 수정 ]");
 											System.out.print("이름 입력 > ");
 											String inputName = scan.next();
-											System.out.println("닉네임 입력 > ");
+											System.out.print("닉네임 입력 > ");
 											String inputNickname = scan.nextLine();
 											inputNickname = scan.nextLine();
 											System.out.print("생년월일 입력 ex.00-00-00 > ");
 											String inputBirth = scan.next();
-											System.out.print("연락처 입력 ex.000-0000-0000 > ");
+											System.out.print("휴대폰 번호 입력 ex.000-0000-0000 > ");
 											String inputPhone = scan.next();
+											String [] phoneAry = inputPhone.split("-");
+											inputPhone = "";
+											for (int i = 0; i < phoneAry.length; i++) {
+												inputPhone += phoneAry[i];
+											}
 
 											User updateUser = new User(loginUser.getUserId(), inputName, inputBirth,
 													inputPhone, inputNickname);
@@ -740,8 +746,15 @@ public class BlogApp {
 						inputNickname = scan.nextLine();
 						System.out.print("생일 입력 ex.00-00-00 > ");
 						String inputBirth = scan.next();
-						System.out.print("휴대폰 번호 입력 ex.00000000000 > ");
+						
+						System.out.print("휴대폰 번호 입력 ex.000-0000-0000 > ");
 						String inputPhone = scan.next();
+						String [] phoneAry = inputPhone.split("-");
+						inputPhone = "";
+						for (int i = 0; i < phoneAry.length; i++) {
+							inputPhone += phoneAry[i];
+						}
+						
 						User newUser = new User(inputId, inputPw, inputName, inputBirth, inputPhone, inputNickname);
 						if (bs.insertUser(newUser) == true) {
 
@@ -768,8 +781,14 @@ public class BlogApp {
 				if (user == null) {
 					System.out.println("\n\t- 해당하는 아이디가 없습니다. -");
 				} else {
-					System.out.print("연락처 입력 > ");
+					System.out.print("휴대폰 번호 입력 ex.000-0000-0000 > ");
 					String inputToPhone = scan.next();
+					
+					String [] phoneAry = inputToPhone.split("-");
+					inputToPhone = "";
+					for (int i = 0; i < phoneAry.length; i++) {
+						inputToPhone += phoneAry[i];
+					}
 					
 					if (user.getUserPhone().equals(inputToPhone)) {
 						
