@@ -17,7 +17,9 @@ public class BlogDAO {
 		try {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.109:1521:xe", "hr", "hr");
+			
+			// 192.168.0.109
 
 		} catch (ClassNotFoundException | SQLException e) {
 

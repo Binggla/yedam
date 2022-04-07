@@ -79,7 +79,8 @@ public class Writing extends User {
 	}
 
 	public void writingList() {
-		System.out.printf(" " + boardName + "\t  " + writingNo + "\t" + writingDate.substring(0, 10) + "\t%-10s" + "\t" + writingSub + "\n", super.getUserNickname());
+		System.out.printf(" %-11s%-6s%-15s%-17s%-20s\n", boardName, writingNo, writingDate.substring(0, 10), super.getUserNickname(), writingSub);
+//		System.out.printf(" " + boardName + "\t  " + writingNo + "\t" + writingDate.substring(0, 10) + "\t%-10s" + "\t" + writingSub + "\n", super.getUserNickname());
 
 	}
 	

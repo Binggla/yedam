@@ -37,7 +37,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	@Override
 	public boolean insertUser(User user) {
 
-//		conn = getConnect();
+		conn = getConnect();
 
 		String sql = "INSERT INTO user_info (user_id, user_pw, user_name, user_birth, user_phone, user_nickname) " //
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
@@ -202,6 +202,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 
 		return writings;
@@ -214,7 +216,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		conn = getConnect();
 		List<Writing> writings = new ArrayList<>();
 		String sql = "SELECT * FROM writing_list " //
-				+ "where user_id = ?" + "order by writing_date";
+				+ "where user_nickname = ?" + "order by writing_date";
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -405,41 +407,6 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 		return comments;
 
-//		List<ReComment> comments = new ArrayList<>();
-//
-//		conn = getConnect();
-//		String sql = "select *\r\n"
-//				+ "from comment_list LEFT OUTER JOIN recomment_list ON comment_list.comment_no = recomment_list.comment_no\r\n"
-//				+ "where writing_no = ?";
-//
-//		try {
-//			psmt = conn.prepareStatement(sql);
-//			psmt.setInt(1, writingNo);
-//			rs = psmt.executeQuery();
-//
-//			while (rs.next()) {
-//				ReComment reCom = new ReComment();
-//				reCom.setWritingNo(writingNo);
-//				reCom.setUserId(rs.getString("user_id"));
-//				reCom.setCommentNo(rs.getInt("comment_no"));
-//				reCom.setCommentDate(rs.getString("comment_date"));
-//				reCom.setUserComment(rs.getString("user_comment"));
-//				reCom.setReUserId(rs.getString("re_user_id"));
-//				reCom.setReCommentNo(rs.getInt("recomment_no"));
-//				reCom.setReCommentDate(rs.getString("recomment_date"));
-//				reCom.setUserReComment(rs.getString("user_recomment"));
-//
-//				comments.add(reCom);
-//
-//			}
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//
-//		return comments;
 	}
 
 	// 답글 리턴
@@ -473,6 +440,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 		if (r > 0) {
 			return recomments;
@@ -543,7 +512,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	@Override
 	public boolean updateComment(Comment comment) {
 
-//		conn = getConnect();
+		conn = getConnect();
 		String sql = "UPDATE comment_list\r\n" //
 				+ "SET user_comment = ?" //
 				+ "WHERE comment_no = ?";
@@ -570,7 +539,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	@Override
 	public boolean updateReComment(Comment recomment) {
 
-//		conn = getConnect();
+		conn = getConnect();
 		String sql = "UPDATE recomment_list\r\n" //
 				+ "SET user_recomment = ?" //
 				+ "WHERE recomment_no = ?";
@@ -597,7 +566,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	@Override
 	public boolean deleteComment(int commentNo) {
 
-//		conn = getConnect();
+		conn = getConnect();
 		String sql = "DELETE comment_list\r\n" + "WHERE comment_no = ?";
 		try {
 
@@ -622,7 +591,7 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	@Override
 	public boolean deleteReComment(int recommentNo) {
 
-//		conn = getConnect();
+		conn = getConnect();
 
 		String sql = "DELETE recomment_list\r\n" + "WHERE recomment_no = ?";
 		try {
@@ -731,6 +700,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 
 		return false;
@@ -889,6 +860,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 		
 		return false;
@@ -947,6 +920,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 
 		return false;
@@ -971,6 +946,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 
 		return false;
@@ -995,6 +972,8 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disconnect();
 		}
 
 		return false;
