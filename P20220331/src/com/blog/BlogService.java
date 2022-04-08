@@ -26,6 +26,8 @@ public interface BlogService {
 	// 2.2 비밀번호 입력
 	// 2.3 성명
 	
+	// 3. 비밀번호 찾기
+	
 	
 	// 블로그 접속
 	

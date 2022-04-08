@@ -806,13 +806,13 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 		
 		conn = getConnect();
 		List<Comment> comments = new ArrayList<>();
-		String sql = "SELECT user_id, user_nickname, writing_no, comment_no, user_comment, comment_date "
-				+ "FROM (SELECT user_id, user_nickname, writing_no, comment_no, user_comment, comment_date "
-				+ "         FROM comment_list "
-				+ "         UNION "
-				+ "         SELECT re_user_id, user_nickname, writing_no, recomment_no, user_recomment , recomment_date "
-				+ "         FROM recomment_list) "
-				+ "WHERE user_id = ?";
+		String sql = "SELECT user_id, user_nickname, writing_no, comment_no, user_comment, comment_date " //
+				+ "FROM (SELECT user_id, user_nickname, writing_no, comment_no, user_comment, comment_date " //
+				+ "      FROM comment_list " //
+				+ "      UNION " //
+				+ "      SELECT re_user_id, user_nickname, writing_no, recomment_no, user_recomment , recomment_date " //
+				+ "      FROM recomment_list) " //
+				+ "WHERE (user_id = ? AND writing_no IS NOT NULL)";
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -904,6 +904,10 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	// 유저 체크 (글)
 	@Override
 	public boolean checkUser(User user, int writingNo) {
+		
+		if (user.getUserId().equals("admin")) {
+			return true;
+		}
 
 		conn = getConnect();
 		String sql = "SELECT * FROM writing_list\r\n" //
@@ -930,6 +934,10 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	// 유저 체크 (댓글)
 	@Override
 	public boolean checkUserComment(User user, int commentNo) {
+		
+		if (user.getUserId().equals("admin")) {
+			return true;
+		}
 
 		conn = getConnect();
 		String sql = "SELECT * FROM comment_list\r\n" //
@@ -956,6 +964,10 @@ public class BlogServiceOracle extends BlogDAO implements BlogService {
 	// 유저 체크 (답글)
 	@Override
 	public boolean checkUserReComment(User user, int commentNo) {
+		
+		if (user.getUserId().equals("admin")) {
+			return true;
+		}
 
 		conn = getConnect();
 		String sql = "SELECT * FROM recomment_list\r\n" //
