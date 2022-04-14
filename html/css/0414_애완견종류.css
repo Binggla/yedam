@@ -1,0 +1,123 @@
+body {
+    font-family: "맑은 고딕", "돋움", "굴림";
+}
+
+#container {
+    width: 1000px;
+    margin: 10px auto;
+}
+
+/* 헤더 영역 */
+header {
+    background: #74B5A0;
+    padding: 10px;
+}
+
+nav {
+    width: 70%;
+    margin-left: 400px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 섹션 영역 */
+section {
+    padding: 20px;
+    background: #fffef2;
+}
+
+section h1 {
+    padding-left: 40px;
+}
+
+#anchor {
+    text-align: center;
+}
+
+#anchor li {
+    display: inline-block;
+    margin: 0 20px;
+    background-color: #74B5A0;
+    padding : 10px 20px;
+}
+
+#anchor li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+article {
+    padding: 10px;
+}
+
+article dl {
+    margin-bottom: 0px;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+#pet1 {
+    border: 2px solid #74B5A0;
+    border-radius: 10px;
+    padding: 40px;
+    margin: 40px;
+}
+
+#pet2 {
+    border: 2px dotted #74B5A0;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 40px;
+}
+
+#pet3 {
+    border: 2px dashed #74B5A0;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 40px;
+    margin: 40px;
+}
+
+figure {
+    text-align: center;
+}
+
+.link_top {
+    text-align: right;
+    margin-right: 40px;
+}
+
+.link_top a {
+    text-decoration: none;
+    color: #D1C0AA;
+    font-weight: bold;
+}
+
+/* 사이드 영역 */
+aside {
+    background: #D1ACAA;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* 푸터 영역 */
+footer {
+    background: #74B5A0;
+    padding: 10px;
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
