@@ -1,0 +1,46 @@
+#container {
+  border: 1px solid rgb(190, 190, 190);
+  width: 960px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.greentext {
+  color: rgb(55, 129, 55);
+}
+
+header {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+section {
+  border: 1px solid rgb(190, 190, 190);
+  width: 383.35px;
+  padding: 20px;
+  float: left;
+  margin: 0 5px 20px 5px;
+}
+
+aside {
+  border: 1px solid rgb(190, 190, 190);
+  width: 220px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: rgb(190, 190, 190);
+}
+
+#ad_left {
+  float: left;
+}
+
+#ad_right {
+  float: right;
+}
+
+footer {
+  border: 1px solid rgb(190, 190, 190);
+  clear: both;
+  padding: 10px;
+}
