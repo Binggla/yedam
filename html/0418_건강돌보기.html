@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>건강 돌보기</title>
+  <style>
+    #container {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    header {
+      background-color: #74B5A0;
+      height: 100px;
+    }
+
+    header h1 {
+      width: 30%;
+      display: inline;
+      float: left;
+      color: white;
+      margin: 30px;
+    }
+
+    header nav {
+      width: 40%;
+      float: right;
+      margin: 15px 25px 0 0;
+    }
+
+    header nav li {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    header nav li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* section */
+
+    section {
+      border: 5px solid #74B5A0;
+      padding: 40px 30px ;
+      height: 500px;
+    }
+
+    section h3 {
+      display: inline;
+      color:white;
+      background-color: #74B5A0;
+      padding: 5px;
+      border-radius: 10px;
+    }
+
+    .firstline {
+      width: 33%;
+      float: left;
+    }
+
+    section ul {
+      list-style-type: square;
+    }
+
+    section ol {
+      list-style-type: lower-alpha;
+    }
+
+    .boldtext {
+      font-weight: bold;
+      color: #74B5A0;
+    }
+    
+    .secondline {
+      clear: both;
+    }
+
+    section dl {
+      width: 65%
+    }
+    section dl dt {
+      font-weight: bold;
+    }
+
+    section img {
+      float: right;
+      width: 30%;
+      margin: 40px 40px 0 0;
+    }
+
+    /* footer */
+    footer {
+            clear: both;
+            background: #74B5A0;
+            padding: 10px;
+            color: white;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+        }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>건강 돌보기</h1>
+      <nav>
+        <ul>
+          <li><a href="#">애완견 종류</a></li>
+          <li><a href="#">강아지 용품</a></li>
+          <li><a href="#">건강 돌보기</a></li>
+          <li><a href="#">더불어 살기</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+  
+        <article class="firstline">
+          <h3>검사와 접종</h3>
+          <ul>
+            <li>예방접종</li>
+            <li>종합검진</li>
+            <li>스케일링</li>
+            <li>중성화 수술</li>
+          </ul>
+        </article>
+        <article class="firstline">
+          <h3>예방접종</h3>
+          <ol>
+            <li>종합백신(DHPPL)</li>
+            <li>코로나 장염</li>
+            <li>켄넬코프</li>
+            <li>광견병</li>
+          </ol>
+        </article>
+        <article class="firstline">
+          <p>
+            <span class="boldtext">종합백신(DHPPL)</span> : 다섯가지 질병에 대한 예방접종<br>
+            <span class="boldtext">코로나 장염</span> : 코로나 바이러스성 장염을 예방하는 백신<br>
+            <span class="boldtext">v켄넬코프</span> : 켄넬코프 감기 예방 접종<br>
+            <span class="boldtext">광견병</span> : 생후 3개월 이상된 강아지에게 1회 접종한 후 6개월 후 재접종한다. 매년 추가 접종을 해야 한다.<br><br>
+            태어난 첫 해에는 6~8주 후부터 2주 간격으로 <span class="boldtext">총 5회 접종</span>을 하고 그 다음부터는 1년에 한 번씩 접종하면 된다.
+          </p>
+        </article>
+      <article class="secondline">
+        
+        <h3>애완견에 해로운 음식</h3>
+        <img class="secondline" src="img\동물병원.jpg" alt="동물병원">
+        <dl>
+          <dt>닭뼈</dt>
+          <dd>닭뼈는 개의 이빨로 깨물 수 없고, 닭뼈를 그대로 삼키면 목이나 위를 찌를 수 있다.</dd>
+          <dt>차가운 우유</dt>
+          <dd>강아지는 몸이 미숙하여 설사의 원인이 될 수 있다.</dd>
+          <dt>양파</dt>
+          <dd>개의 혈액에 한해 강한 독성을 가지고 있어 적혈구를 녹인다. 심하면 급성 빈혈로 목숨이 위태로울 수 있다. 파 종류는 모두 좋지 않다.</dd>
+        </dl>
+      </article>
+    </section>
+    <footer>
+      <p>copyright ⓒ2022 Binggla</p>
+    </footer>
+  </div>
+</body>
+
+</html>
