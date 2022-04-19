@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="uft-8">
+  <title>Form, Input Type</title>
+  <style>
+    form {
+      width: 600px;
+      margin: 20px auto;
+      border: 1px solid #c9c9c9;
+      padding: 20px;
+    }
+
+    fieldset {
+      margin-bottom: 20px;
+    }
+
+    .redtext {
+      color: red;
+    }
+
+    form ul {
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: inline-block;
+      width: 150px;
+      text-align: left;
+    }
+
+    input {
+      padding: 5px;
+    }
+
+    legend {
+      font-weight: 700;
+    }
+
+    .t_center {
+      text-align: center;
+    }
+
+    .t_center input {
+      border: none;
+      background: none;
+      /* background: #333333;
+      color: white;
+      font-weight: 900;
+      padding: 7px; */
+    }
+  </style>
+</head>
+
+<body>
+  <form action="abc.jsp" method="post">
+
+    <fieldset>
+      <legend>로그인 정보</legend>
+      <ul>
+        <li><label for="u_id">아이디<span class="redtext">*</span></label>
+          <input id="u_id" type="text">
+        </li>
+        <li><label for="u_pw">비밀번호<span class="redtext">*</span></label>
+          <input id="u_pw" type="password">
+        </li>
+        <li><label for="u_pw1">비밀번호 확인</label>
+          <input id="u_pw1" type="password">
+        </li>
+      </ul>
+    </fieldset>
+
+    <fieldset>
+      <legend>개인 정보</legend>
+      <ul>
+        <li><label for="g_name">이름</label>
+          <input id="g_name" type="text">
+        </li>
+        <li><label for="g_email">이메일</label>
+          <input id="g_email" type="email">
+        </li>
+        <li><label for="g_tel">연락처</label>
+          <input id="g_tel" type="tel">
+        </li>
+        <li><label for="g_url">홈페이지</label>
+          <input id="g_url" type="url">
+        </li>
+      </ul>
+    </fieldset>
+
+    <fieldset class="t_center">
+      <input type="submit" value="가입하기">
+    </fieldset>
+    
+    <fieldset>
+      <legend>등록 정보</legend>
+      <ul>
+        <li><label for="d_inwon">참여 인원<small> (최대 10명)</small></label>
+          <input id="d_inwon" type="number" max="10" min="2" value="2" step="2">
+        </li>
+        <li><label for="d_giwon">지원 물품<small> (1인당 5개)</small></label>
+          <input id="d_giwon" type="number" min="1" max="5" step="1" value="1">
+        </li>
+        <li><label for="d_dan">단계<small> (상,중,하)</small></label>
+          <input id="d_dan" type="range">
+        </li>
+      </ul>
+    </fieldset>
+
+    <fieldset>
+      <legend>신청 과목</legend>
+      <p>이 달에 신청할 과목을 선택하세요.<small> (1과목만 가능)</small></p>
+      <label for="r_but"><input id="r_but" type="radio" name="s_radio" value="speak"> 회화</label>
+      <label for="r_but"><input type="radio" name="s_radio" value="gram"> 문법</label>
+      <label for="r_but"><input type="radio" name="s_radio" value="write"> 작문</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>메일링</legend>
+      <p>메일로 받고 싶은 뉴스 주제를 선택해 주세요.<small> (복수 선택 가능)</small></p>
+      <label for="r_but"><input id="r_but" type="checkbox" name="s_checkbox" value="news"> 해외단신</label>
+      <label for="r_but"><input type="checkbox" name="s_checkbox" value="5speak"> 5분 회화</label>
+      <label for="r_but"><input type="checkbox" name="s_checkbox" value="morningpops"> 모닝 팝스</label>
+    </fieldset>
+
+    <fieldset>
+      <input type="color" value="##ff0000">
+      <input type="datetime-local">
+      <input type="button" value="새창열기">
+    </fieldset>
+    
+  </form>
+</body>
+
+</html>
