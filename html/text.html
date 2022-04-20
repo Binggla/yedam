@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <title>프로필 작성</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         #container {
             width: 1000px;
             margin: 0 auto;
@@ -12,7 +16,8 @@
 
         #leftside {
             float: left;
-            width: 20%;
+            width: 25%;
+            height: 800px;
             padding: 20px;
             background: rgb(235, 232, 222);
         }
@@ -30,18 +35,42 @@
             color: black;
         }
 
+        .jump {
+            margin-bottom: 100px;
+        }
+
         #rightside {
-            width: 60%;
+            width: 75%;
             float: left;
             padding: 0 20px;
         }
 
         #rightside article {
-            padding:20px;
+            padding: 20px;
         }
 
         #rightside h2 {
             margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+        
+        table caption {
+            margin-bottom: 5px;
+        }
+
+        table th {
+            border: 1px solid rgb(85, 85, 85);
+            background: rgb(85, 85, 85);
+            color: white;
+            padding: 5px;
+        }
+
+        table td {
+            border: 1px solid rgb(85, 85, 85);
+            padding: 5px;
         }
     </style>
 </head>
@@ -51,16 +80,16 @@
         <section>
             <article id="leftside">
                 <img src="img\cute.jpg" alt="프로필 사진" width="200" usemap="#eyes">
-                <!-- <map name="eyes">
+                <map name="eyes">
                 <area shape="rect" coords="52,107,92,136" href="https://www.naver.com" alt="네이버" target="_blank"
                     title="네이버로 가기">
                 <area shape="circle" coords="153,116,25" href="https://www.daum.net" alt="다음" target="_blank"
                     title="다음으로 가기">
-            </map> -->
-                <h3>Binggla</h3>
+                </map>
+                <h3 class="jump">Binggla</h3>
                 <p>간생간사</p>
                 <p>Daegu, Korea</p>
-                <p>bingglajee@gmail.com</p>
+                <p class="jump">bingglajee@gmail.com</p>
                 <h3>SNS</h3>
                 <ul>
                     <li><a href="https://www.instagram.com" target="_blank">instagram</a></li>
@@ -96,8 +125,12 @@
             <hr>
 
             <article>
+                <h2>Skills</h2>
+            </article>
+            <hr>
+            <article>
                 <h2>Education</h2>
-                <table border="1">
+                <table>
                     <caption>학력 사항</caption>
                     <thead>
                         <tr>
