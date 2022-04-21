@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메안페이지입니다.</title>
+</head>
+<body>
+	<h3>반갑습니다. 지수빈입니다.</h3>
+	<a href="info/myinfo.html">내 정보 보기</a>
+	<h3>내가 좋아하는 과일</h3>
+	<ul>
+		<li>딸기</li>
+		<li>귤</li>
+		<li>청포도</li>
+	</ul>
+	<script>
+		var h3s = document.getElementsByTagName('h3');
+		// var : 변수 지정. 자바스크립트는 변수 타입이 따로 없다.
+		h3s[0].innerText = 'Hello, Subin!';
+
+		var li = document.querySelector('ul>li');
+		// querySelector 선택자 불러오기. 가장 첫 번째 요소 하나만 불러온다.,
+		li.style.background = 'yellow';
+	
+		var li2 = document.querySelector('ul>li:nth-child(1)');
+		li2.onclick = function() {
+			alert('리스트 태그를 클릭했습니다.');
+		}
+
+
+
+		console.log(h3s[0]); 
+	</script>
+</body>
+</html>
