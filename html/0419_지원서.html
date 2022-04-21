@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>국제 개발자 지원서</title>
+  <style>
+    section {
+      width: 700px;
+      margin: 50px auto;
+    }
+
+    fieldset {
+      border: none;
+      margin: 20px 0;
+    }
+
+    legend {
+      font-weight: 900;
+      font-size: 1.2em;
+      color:rgb(16, 16, 148);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .u_label {
+      float: left;
+      width: 80px;
+    }
+
+  </style>
+</head>
+<body>
+  <section>
+    <h1>국제 개발자 지원서</h1>
+    <p>HTML, CSS, Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</p>
+    <hr>
+    <form action="abc.jsp" method="post">
+
+      <fieldset>
+        <legend>개인정보</legend>
+        <ul>
+          <li><label class="u_label" for="u_name">이름</label>
+                <input id="u_name" type="text" placeholder="공백 없이 입력하세요." autofocus required></li>
+          <li><label class="u_label" for="u_tel">연락처</label>
+               <input id="u_tel" type="tel"></li>
+        </ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>지원 분야</legend>
+        <ul>
+          <li><label for="g_webpub">
+               <input id="g_webpub" type="radio" name="giwon" value="webpub" checked> 웹 퍼블리싱</label></li>
+          <li><label for="g_webapp">
+                <input id="g_webapp" type="radio" name="giwon" value="webapp"> 웹 애플리케이션 개발</label></li>
+          <li><label for="g_prog">
+               <input id="g_prog" type="radio" name="giwon" value="prog"> 개발 환경 개선</label></li>
+        </ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>지원 동기</legend>
+        <ul>
+          <li><textarea name="donggi" cols="60" rows="5" placeholder="지원동기를 간략히 써 주세요."></textarea></li>
+          <li><input type="submit" value="접수하기">
+            <input type="reset" value="다시쓰기"></li>
+        </ul>
+      </fieldset>
+
+    </form>
+
+  </section>
+</body>
+</html>

@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Malgun Gothic';
+}
+
+#container {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+/* header */
+header {
+  text-align: center;
+}
+
+nav {
+  background-color: black;
+  overflow: hidden;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav li {
+  float: left;
+}
+
+#login {
+  float: right;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  display: block;
+}
+
+nav a:hover {
+  background: pink;
+  color: black;
+}
+
+/* leftaside */
+#leftaside {
+  float: left;
+  width: 200px;
+  height: 700px;
+  background: rgb(204, 204, 204);
+  text-align: center;
+}
+
+/* section */
+section {
+  float:left;
+  width: 600px;
+  height: 700px;
+  text-align: center;
+  padding: 10px;
+}
+
+form {
+  display: inline-block;
+  width: 500px;
+  padding: 10px 20px;
+  background: rgb(182, 182, 182);
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+fieldset {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+fieldset ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+fieldset li {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(247, 247, 247, 0.5);
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+label {
+  width: 130px; 
+  padding: 3px;
+  float: left;
+}
+
+input {
+  width: 250px;
+  padding: 3px 5px;
+}
+
+.button {
+  font-size: 1.1em;
+  font-weight: bold;
+  width: 150px;
+  padding: 15px;
+  border: none;
+  border-radius: 20px;
+  background: rgb(204, 204, 204);
+}
+
+/* rightaside */
+#rightaside {
+  float: right;
+  width: 200px;
+  height: 700px;
+  background: rgb(204, 204, 204);
+  text-align: center;
+}
+
+/* footer */
+footer {
+  clear: both;
+  background: rgb(182, 182, 182);
+  padding: 10px;
+  text-align: center;
+}

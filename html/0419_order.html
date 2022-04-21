@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>상품 주문서</title>
+  <style>
+    section {
+      width: 700px;
+      border: 1px solid #c9c9c9;
+      padding: 10px 25px 25px 25px;
+      margin: 0 auto;
+    }
+
+    fieldset {
+      margin-bottom: 30px;
+    }
+
+    legend {
+      font-size: 1.2em;
+      font-weight: 900;
+      color: #4680ff;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    label {
+      float: left;
+      width: 100px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    #button {
+      border: 0px;
+      text-align: center;
+      margin-bottom: 0px;
+    }
+
+    #labelsizefull label {
+      width: 500px;
+    }
+
+    .boldtext {
+      font-weight: 900;
+    }
+
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>상품 주문서</h1>
+    <form action="abc.jsp" method="post">
+      <fieldset>
+        <legend>개인 정보</legend>
+        <ul>
+          <li><label class="boldtext" for="u_name">이름</label>
+            <input id="u_name" type="text" placeholder="여백없이 입력">
+          </li>
+          <li><label class="boldtext" for="u_pw">연락처</label>
+            <input id="u_pw" type="tel" placeholder="연락 가능한 번호">
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend>배송지 정보</legend>
+        <ul>
+          <li><label class="boldtext" for="b_addr">주소</label>
+            <input id="b_addr" type="text" size="40">
+          </li>
+          <li><label class="boldtext" for="b_tel">전화번호</label>
+            <input id="b_tel" type="tel">
+          </li>
+          <li><label class="boldtext" for="b_memo">메모</label>
+            <textarea cols="42" rows="5"></textarea>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend>주문 정보</legend>
+        <ul id="labelsizefull">
+          <li><label for="order"><input id="order" type="checkbox" name="o_check">경북성주 참외<small>(5kg) </small><input
+                id="order" type="number" min="1" max="99" step="1" value="0"> Box</label></li>
+          <li><label for="order"><input id="order" type="checkbox" name="o_check">경북영천 포도<small>(5kg) </small><input
+                id="order" type="number" min="1" max="99" step="1" value="0"> Box</label></li>
+          <li><label for="order"><input id="order" type="checkbox" name="o_check">경북봉화 수박<small>(5kg) </small><input
+                id="order" type="number" min="1" max="99" step="1" value="0"> Box</label></li>
+        </ul>
+      </fieldset>
+      <fieldset id="button">
+        <input type="submit" value="주문하기">
+        <input type="reset" value="다시 작성">
+      </fieldset>
+    </form>
+  </section>
+</body>
+
+</html>

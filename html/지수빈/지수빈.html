@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>지수빈</title>
+    <link rel="stylesheet" href="css\지수빈.css">
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>header 영역</h1>
+        <p>지수빈 페이지에 온 것을 환영합니다</p>
+        <nav>
+          <ul>
+            <li><a href="#">첫번째 메인메뉴</a></li>
+            <li><a href="#">두번째 메인메뉴</a></li>
+            <li><a href="#">세번째 메인메뉴</a></li>
+            <li id="login"><a href="#">로그인</a></li>
+          </ul>
+        </nav>
+      </header>
+      <aside id="leftaside">
+        <h2>좌측 사이드</h2>
+        <p>좌측영역 정의 내립니다</p>
+        <p>좌측영역 정의 내립니다</p>
+        <p>좌측영역 정의 내립니다</p>
+      </aside>
+      <section>
+        <h2>회원가입 영역입니다</h2>
+        <form action="abc.jsp" method="post">
+          <fieldset>
+            <legend>step1 : 로그인 정보</legend>
+            <ul>
+              <li><label for="u_id">계정아이디</label>
+                    <input id="u_id" type="text" autofocus></li>
+              <li><label for="u_pw">비밀번호</label>
+                    <input id="u_pw" type="password"></li>
+              <li><label for="u_pw_c">비밀번호 확인</label>
+                    <input id="u_pw_c" type="password"></li>
+            </ul>
+          </fieldset>
+          <fieldset>
+            <legend>step2 : 개인 정보</legend>
+            <ul>
+              <li><label for="u_name">이름</label>
+                    <input id="u_name" type="text" placeholder="5자 미만 공백없이"></li>
+              <li><label for="u_email">이메일 계정</label>
+                    <input id="u_email" type="email" placeholder="abc@naver.com"></li>
+              <li><label for="u_tel">전화번호</label>
+                    <input id="u_tel" type="tel"></li>
+            </ul>
+          </fieldset>
+          <fieldset>
+            <input class="button" type="submit" value="회원 가입">
+            <input class="button" type="reset" value="정보 수정">
+          </fieldset>
+        </form>
+      </section>
+      <aside id="rightaside">
+        <h2>우측 사이드</h2>
+        <p>우측영역 정의 내립니다</p>
+        <p>우측영역 정의 내립니다</p>
+        <p>우측영역 정의 내립니다</p>
+      </aside>
+      <footer>
+        <h2>푸터영역 입니다</h2>
+      </footer>
+    </div>
+  </body>
+</html>

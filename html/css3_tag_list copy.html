@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <title>CSS3 요약</title>
+        <style>
+            caption {
+                text-align: left;
+                margin: 10px;
+                color: rgb(77, 77, 126);
+                font-weight: bold;
+            }
+            
+            table {
+                width: 100%;
+                border: 1px solid rgb(77, 77, 126);
+                border-collapse: collapse;
+            }
+              th, td {
+                border: 1px solid rgb(77, 77, 126);
+                padding: 5px;
+            }
+
+            thead tr th {
+                background: rgb(77, 77, 126);
+                color: white;
+            }
+
+            #accent {
+                background: rgb(169, 169, 192);
+            }
+
+        </style>
+    </head>
+    <body>
+        <table>
+            <caption>CSS3 요약</caption>
+            <thead>
+                <tr>
+                    <th>선택자</th>
+                    <th>설명</th>
+                    <th>사용 예</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>전체 선택자</td>
+                    <td>모든 요소에 적용</td>
+                    <td>* {...}</td>
+                </tr>
+                <tr>
+                    <td>태그 선택자</td>
+                    <td>특정 태그에 적용</td>
+                    <td>P {...}</td>
+                </tr>
+                <tr>
+                    <td>그룹 선택자</td>
+                    <td>여러 태그에 적용</td>
+                    <td>p,a,li {...}</td>
+                </tr>
+                <tr>
+                    <td>클래스 선택자</td>
+                    <td>특정 부분에 적용(여러 번 사용)</td>
+                    <td>.red {...} -> &lt;p class="red"&gt;</td>
+                </tr>
+                <tr>
+                    <td>id 선택자</td>
+                    <td>특정 부분에 적용(한 번만 사용)</td>
+                    <td>#red {...} -> &lt;p id="red"&gt;</td>
+                </tr>
+                <tr>
+                    <td>하위 선택자</td>
+                    <td>모든 하위 요소에 스타일 적용</td>
+                    <td>section p {...}</td>
+                </tr>
+                <tr>
+                    <td>자식 선택자</td>
+                    <td>자식 요소에만 적용</td>
+                    <td>section > p {...}</td>
+                </tr>
+                <tr>
+                    <td>인접 형제 선택자</td>
+                    <td>첫 번째 동생 요소에 적용</td>
+                    <td>h1 + p {...}</td>
+                </tr>
+                <tr>
+                    <td>형제 선택자</td>
+                    <td>모든 형제 요소에 적용</td>
+                    <td>h1 ~ p {...}</td>
+                </tr>
+                <tr>
+                    <td>속성 선택자</td>
+                    <td>속성값을 비교해서 스타일 적용</td>
+                    <td>a[target] {...}<br>
+                        a[target="_blank] {...}<br>
+                        a[class~="button"]<br>
+                        a[href^="http://"]<br>
+                        a[href$=".zip"]<br>
+                        a[href|="en"]<br>
+                        a[class*="accent"]<br><br>
+                        ~= : or<br>
+                        ^= : 문자로 시작하는<br>
+                        $= : 문자로 끝나는<br> 
+                        |= : 문자로 시작하는(-포함)<br>
+                        *= : 값ㅇ ㅣ포함된</td>
+                </tr>
+                <tr>
+                    <td colspan = 3 id = "accent">[텍스트 관련 스타일] 규칙 : 선택자{속성:속성값;}</td>
+                </tr>
+                <tr>
+                    <td>font-family</td>
+                    <td>글꼴 지정</td>
+                    <td>p {font-family: "맑은 고딕";}</td>
+                </tr>
+                <tr>
+                    <td>font-size</td>
+                    <td>글자 크기</td>
+                    <td>xx-small~xx-large | larger, smaller | em, em, px, pt (1em = 16px)</td>
+                </tr>
+                <tr>
+                    <td>font-weight</td>
+                    <td>글자 굵기</td>
+                    <td>normal | bold | bolder | 100~900 (400=normal, 700=bold)</td>
+                </tr>
+                <tr>
+                    <td>font-variant</td>
+                    <td>작은 대문자 표시</td>
+                    <td>normal | small-caps</td>
+                </tr>
+                <tr>
+                    <td>font-style</td>
+                    <td>글자 스타일 지정</td>
+                    <td>normal | italic</td>
+                </tr>
+                <tr>
+                    <td>font</td>
+                    <td>글꼴 속성 한꺼번에 지정</td>
+                    <td>p {font: 16px/25px "맑은 고딕" bold italic;} (16px/25px=사이즈/줄간격)</td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>글자색</td>
+                    <td>rgba(255, 255, 255, 0.5) | #ff0022 | red</td>
+                </tr>
+                <tr>
+                    <td>text-decoration</td>
+                    <td>텍스트 줄 표시/없애기</td>
+                    <td>none | underline | overline | line-through</td>
+                </tr>
+                <tr>
+                    <td>text-transform</td>
+                    <td>대소문자 변환</td>
+                    <td>none | caplitalize } uppercase | lowercase | fullwidth</td>
+                </tr>
+                <tr>
+                    <td>text-shadow</td>
+                    <td>그림자 효과</td>
+                    <td>text-shadow: 7px - 7px 5px #000 [가로 세로 번짐 색상]</td>
+                </tr>
+                <tr>
+                    <td>white-space</td>
+                    <td>공백 처리</td>
+                    <td>normal | nowrap | pre | pre-line | pre-wrap</td>
+                </tr>
+                <tr>
+                    <td>letter-spacing</td>
+                    <td>글자 간격</td>
+                    <td>normal | px</td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table> 
+    </body>
+</html>

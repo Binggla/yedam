@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>신상품 목록</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #container {
+      width: 670px;
+      margin: 30px auto;
+      overflow: hidden;
+    }
+
+    header {
+      
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    header img {
+      width: 100px;
+      margin: 0 0 40px 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: rgb(139, 139, 139);
+    }
+
+    #menu {
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .menu_li {
+      float: left;
+      font-size: 10pt;
+    }
+    .menu_a {
+      display: inline-block;
+      width: 130px;
+      padding: 15px 5px;
+      margin-bottom: 10px;;
+      border: 1px solid rgb(223, 223, 223);
+
+    }
+
+    .submenu {
+      visibility: hidden;
+    }
+
+    .submenu_li {
+      text-align: center;
+      font-size: 8pt;
+    }
+
+    .submenu_a {
+      display: inline-block;
+      width: 130px;
+      padding: 5px;
+      /* border: 1px solid rgb(223, 223, 223); */
+    }
+
+    .menu_a:hover {
+      background: rgb(223, 223, 223);
+    }
+    .menu_li:hover .submenu {
+      visibility: visible;
+    }
+
+
+
+    /* section */
+
+    h1 {
+      clear: left;
+      text-align: center;
+      font-size: 20px;
+      margin: 0 0 10px 0;
+      color: rgb(255, 111, 135);
+    }
+
+    section {
+      text-align: center;
+    }
+    section img {
+      width: 200px;
+      height: 280px;
+    }
+
+    section ul li {
+      float: left;
+      position: relative;
+      overflow: hidden;
+      margin: 5px;
+    }
+
+    .caption {
+      width: 200px;
+      height: 280px;
+      padding: 100px 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      visibility: hidden;
+    }
+
+    .caption p {
+      font-size: 10pt;
+    }
+
+
+    ul li:hover .caption {
+      visibility: visible;
+      text-align: center;
+      color: white;
+    }
+
+    .textbold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <a href="#"><img src="img\logo.jpg" alt="logo"></a>
+      <nav>
+        <ul id="menu">
+          <li class="menu_li">
+            <a class="menu_a" href="#">Bagic</a>
+            <ul class="submenu">
+              <li class="submenu_li"><a class="submenu_a" href="#">~3세</a></li>
+              <li class="submenu_li"><a class="submenu_a"  href="#">3~4세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">4~5세</a></li>
+            </ul>
+          </li>
+          <li class="menu_li">
+            <a class="menu_a" href="#">상의</a>
+            <ul class="submenu">
+              <li class="submenu_li"><a class="submenu_a" href="#">~3세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">3~4세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">4~5세</a></li>
+            </ul>
+          </li>
+          <li class="menu_li">
+            <a class="menu_a" href="#">하의</a>
+            <ul class="submenu">
+              <li class="submenu_li"><a class="submenu_a" href="#">~3세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">3~4세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">4~5세</a></li>
+            </ul>
+          </li>
+          <li class="menu_li">
+            <a class="menu_a" href="#">원피스&세트</a>
+            <ul class="submenu">
+              <li class="submenu_li"><a class="submenu_a" href="#">~3세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">3~4세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">4~5세</a></li>
+            </ul>
+          </li>
+          <li class="menu_li">
+            <a class="menu_a" href="#">아우터</a>
+            <ul class="submenu">
+              <li class="submenu_li"><a class="submenu_a" href="#">~3세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">3~4세</a></li>
+              <li class="submenu_li"><a class="submenu_a" href="#">4~5세</a></li>
+            </ul>
+          </li>
+        </ul>
+        
+      </nav>
+      
+    </header>
+
+    <section>
+
+      <h1>NEW!</h1>
+
+      <ul>
+        <li>
+          <div class="caption">
+            <p>플라워스무디 원피스</p>
+            <p><span class="textbold">31,900원</span></p>
+          </div>
+          <img src="img\의류1.jpg" alt="플라워스무디 원피스">
+        </li>
+        <li>
+          <div class="caption">
+            <p>오버더레인보우 원피스</p>
+            <p><span class="textbold">25,900원</span></p>
+          </div>
+          <img src="img\의류2.jpg" alt="오버더레인보우 원피스">
+        </li>
+        <li>
+          <div class="caption">
+            <p>에리나 린넨 원피스</p>
+            <p><span class="textbold">32,900원</span></p>
+          </div>
+          <img src="img\의류3.jpg" alt="에리나 린넨 원피스">
+        </li>
+      </ul>
+      <ul>
+        
+      </ul>
+      
+
+      <ul>
+        <li>
+          <div class="caption">
+            <p>브레드이발소 샤스타마카롱 원피스</p>
+            <p><span class="textbold">39,900원</span></p>
+          </div>
+          <img src="img\의류4.jpg" alt="브레드이발소 샤스타마카롱 원피스">
+        </li>
+        <li>
+          <div class="caption">
+            <p>브레드이발소 러블리디저트LED 젤리슈즈</p>
+            <p><span class="textbold">19,900원</span></p>
+          </div>
+          <img src="img\의류5.jpg" alt="브레드이발소 러블리디저트LED 젤리슈즈">
+        </li>
+        <li>
+          <div class="caption">
+            <p>브레드이발소 러블리컵케이크 티셔츠</p>
+            <p><span class="textbold">16,900원</span></p>
+          </div>
+          <img src="img\의류6.jpg" alt="브레드이발소 러블리컵케이크 티셔츠">
+        </li>
+      </ul>
+
+    </section>
+  </div>
+</body>
+
+</html>
