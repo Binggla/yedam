@@ -26,13 +26,13 @@ let newPersons = persons.map((val, idx) =>val.age);
 console.log(newPersons); // (3) [20, 27, 23]
 
 newPersons = persons.map(function (val, idx) {
-  let newObj = {};                            // Object Type 선언
-  newObj.idx = idx;                      // Object의 Field(=Attribute) 추가
+  let newObj = {};                   // Object Type 선언
+  newObj.idx = idx;                  // Object의 Field(=Attribute) 추가
   newObj.fullName = val.fullName;
   newObj.age = val.age;
   newObj.height = val.height;
 
-  return newObj;                             // Object를 반환
+  return newObj;                     // Object를 반환
 });
 
 console.log(newPersons);
