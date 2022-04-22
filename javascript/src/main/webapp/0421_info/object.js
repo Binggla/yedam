@@ -19,6 +19,12 @@ let member3 = {
   score: 95
 };
 
+// 객체는 참조 타입.
+// person4와 person1은 같은 주소값을 참조하고 있다.
+const person4 = person1;
+console.log(person4.fullName);
+console.log(person1.fullName);
+
 // 객체명.객체변수명
 member1.fullName = "Jee";
 
