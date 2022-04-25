@@ -21,12 +21,12 @@ for (let num of numbers) {
 
 // 값을 입력 받아서 배열에 저장하기
 // prompt : 입력값 받기
-// const inputs = [];
-// for (let i = 0; i < numbers.length; i++) {
-//   var inputVal = prompt('값을 입력하세요...');
-//   console.log(typeof inputVal, inputVal);
-//   inputs[i] = inputVal;
-// }
+const inputs = [];
+for (let i = 0; i < numbers.length; i++) {
+  var inputVal = prompt('값을 입력하세요...');
+  console.log(typeof inputVal, inputVal);
+  inputs[i] = inputVal;
+}
 
 // 5개의 값을 입력 받아서 합계, 평균 구하기
 

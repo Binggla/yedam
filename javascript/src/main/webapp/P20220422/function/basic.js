@@ -86,7 +86,7 @@ persons.forEach(function (val, ind, ary){
       // forEach() : 오직 array 객체에 활용이 가능한 메서드로, 파라미터로 주어진 함수를 배열 요소 각각에 대해 실행하는 메서드이다. map() 메서드와 거의 비슷하지만 차이점은 따로 return 하는 값이 없다.
       // 첫 번째 인수는 value, 두 번째 인수는 index, 세 번째 인수는 array
 
-console.clear();
+// console.clear();
 
 let funcParam = function (val, ind, ary) {
   console.log(`요소: ${val.fullName}, 인덱스: ${ind}`);

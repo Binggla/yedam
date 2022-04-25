@@ -20,7 +20,7 @@ const person3 = {
 
 const persons = [person1, person2, person3];
 
-//map() : forEach()와 기능은 유사하지만, return값을 새로운 배열에 담아 반환한다.
+//map() : forEach()와 기능은 유사하지만, 결과값을 새로운 배열에 담아 반환한다.
 // 배열의 길이만큼 가지고 와서 배열의 길이만큼 반환해줄게.
 let newPersons = persons.map((val, idx) =>val.age);
 console.log(newPersons); // (3) [20, 27, 23]
