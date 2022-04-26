@@ -97,8 +97,8 @@ function makeTr(obj) {
 
   // addEventListener() : 지정한 유형의 이벤트를 대상이 수신할 때마다 호출할 함수를 설정한다.
   // addEventListener(type, listener);
-  // type 수신할 이벤트 유형을 나타내는 대소문자 구분 문자열입니다.
-  // listener 지정한 이벤트(Event 인터페이스를 구현한 객체)를 수신할 객체입니다. EventListener 인터페이스를 구현하는 객체거나, JavaScript 함수여야 합니다.
+  // type 수신할 이벤트 유형을 나타내는 대소문자 구분 문자열이다.
+  // listener 지정한 이벤트(Event 인터페이스를 구현한 객체)를 수신할 객체입니다. EventListener 인터페이스를 구현하는 객체거나, JavaScript 함수여야 한다.
   btn.addEventListener('click', deleteCallBack);
 
   let tdTag = document.createElement('td');

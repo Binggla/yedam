@@ -6,7 +6,7 @@
 </head>
 <body>
   <div id="addForm">
-    <form name="frm" action="../index.html" method="post" onsubmit="saveFnc(event)">
+    <form name="frm" action="" method="post" onsubmit="saveFnc(event)">
       ID : <input type="text" name="uid" id="userId" value="101"><br>
       Name : <input type="text" name="uname" id="userName" value="지수빈"><br>
       Score : <input type="text" name="uscore" id="userScore" value="1000"><br>
@@ -33,8 +33,6 @@
 
   <script>
     
-    
-
     function saveFnc(e) {
       e.preventDefault(); // 기본 기능을 차단한다.
 
@@ -47,30 +45,61 @@
       let score = document.forms['frm'].elements['uscore'].value;
       let age = document.forms['frm'].elements['uage'].value;
 
-      let person = {}
-      person.id = id;
-      person.name = name;
-      person.score = score;
-      person.age = age;
+      if (id == '' || name == '' || score == '' || age == '') {
+        alert('값을 입력하세요!!');
+        return;
+      }
+
+      let person = {
+        id: id,
+        name: name,
+        score: score,
+        age: age
+      }
 
       document.getElementById('body').appendChild(makeTr(person));
+
+      // 초기화
+      document.forms['frm'].elements['uid'].value = '';
+      document.forms['frm'].elements['uname'].value = '';
+      document.forms['frm'].elements['uscore'].value = '';
+      document.forms['frm'].elements['uage'].value = '';
+
+      // 포커스
+      document.forms['frm'].elements['uid'].focus();
+
+
     }
 
     function makeTr(obj) {
 
       let tr = document.createElement('tr');
 
-      let fields = ['id', 'name', 'score', 'age'];
-
-      fields.forEach(function(field) {
+      for (let field in obj) {
         let td = document.createElement('td');
-        let text = document.createTextNode(obj[field]);
-        td.appendChild(text);
+        td.appendChild(document.createTextNode(obj[field]));
         tr.appendChild(td);
-
-      })
+      }
+    
       return tr;
     }
+
+
+    function init() {
+      let data = [
+        {id: 101, name: '홍길동', score: 80, age: 19},
+        {id: 102, name: '지길동', score: 40, age: 29},
+        {id: 103, name: '박길동', score: 60, age: 14}
+      ];
+
+      data.forEach(function(person, idx){
+        document.getElementById('body').appendChild(makeTr(person));
+        console.log(makeTr(person));
+      })
+
+    }
+    init();
+
   </script>
 </body>
 </html>
