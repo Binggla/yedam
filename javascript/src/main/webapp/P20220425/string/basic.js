@@ -22,7 +22,9 @@ console.log(result); // 세요. 반갑습니다.
 result = '안녕하세요. 반갑습니다.'.slice(-6); // -6~끝까지
 console.log(result); // 반갑습니다.
 // substring(start, end)
-result = str1.substring(2); // index 0번 ~ 2번 잘라내기
+result = str1.substring(0, 2); // index 0번 ~ 2번 잘라내기
+console.log(result);
+result = str1.substring(1); // index 0번 ~ 2번 잘라내기
 console.log(result);
 // substr(start, length) -> Deprecated 
 result = str2.substr(1, 2); // index 0 크기 1 잘라내기
@@ -65,6 +67,7 @@ console.log(result); // (3) ['문자열', '공백', '테스트']
 
 // join() : 문자열 배열을 문자열로 변환. 매개값으로 들어온 값을 인덱스 사이에 반환한다.
 console.log(result.join('')) // 문자열공백테스트
+console.log(result.join(', ')) // 문자열공백테스트
 
 
 // 위 문장들을 한 문장으로 입력하기.

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM</title>
+</head>
+<body>
+  <div id="addForm">
+    <form name="frm" action="../index.html" method="post" onsubmit="saveFnc(event)">
+      ID : <input type="text" name="uid" id="userId" value="101"><br>
+      Name : <input type="text" name="uname" id="userName" value="지수빈"><br>
+      Score : <input type="text" name="uscore" id="userScore" value="1000"><br>
+      Age : <input type="text" name="uage" id="userAge" value="28"><br>
+      <input type="submit" value="저장">
+    </form>
+  </div>
+
+  <div id="show">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>아이디</th>
+          <th>이름</th>
+          <th>점수</th>
+          <th>나이</th>
+        </tr>
+      </thead>
+      <tbody id="body">
+        
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    
+    
+
+    function saveFnc(e) {
+      e.preventDefault(); // 기본 기능을 차단한다.
+
+      // forms : form 요소를 읽어오는 기능 (name 속성을 통해서)
+      // []는 위치 값을 넣어도 되고, form name을 직접 입력해도 된다.
+      // console.log(document.forms['frm'].elements);  // 전체 요소 보기
+      // console.log(document.forms['frm'].uname);     // uname 요소만 보기
+      let id = document.forms['frm'].elements['uid'].value;
+      let name = document.forms['frm'].elements['uname'].value;
+      let score = document.forms['frm'].elements['uscore'].value;
+      let age = document.forms['frm'].elements['uage'].value;
+
+      let person = {}
+      person.id = id;
+      person.name = name;
+      person.score = score;
+      person.age = age;
+
+      document.getElementById('body').appendChild(makeTr(person));
+    }
+
+    function makeTr(obj) {
+
+      let tr = document.createElement('tr');
+
+      let fields = ['id', 'name', 'score', 'age'];
+
+      fields.forEach(function(field) {
+        let td = document.createElement('td');
+        let text = document.createTextNode(obj[field]);
+        td.appendChild(text);
+        tr.appendChild(td);
+
+      })
+      return tr;
+    }
+  </script>
+</body>
+</html>
