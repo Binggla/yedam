@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>P20220426/dom2/main.html</title>
+  
+</head>
+<body>
+  <div id="addFrm">
+    <form action="" name="myFrm">
+        학생 번호 : <input type="text" name="sno" id="studNo"><br>
+        학생 이름 : <input type="text" name="sname" id="studName"><br>
+        국어 점수 : <input type="text" name="skor" id="korScore"><br>
+        영어 점수 : <input type="text" name="seng" id="engScore"><br>
+        <input type="submit" value="추가">
+        <input type="button" value="변경">
+
+    </form>
+  </div>
+  <div id="listFrm">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>학생 번호</th>
+            <th>학생 이름</th>
+            <th>국어 점수</th>
+            <th>영어 점수</th>
+            <th>기능</th>
+          </tr>
+        </thead>
+        <tbody id="list">
+
+        </tbody>
+      </table>
+  </div>
+  <script src="dom1.js"></script>
+</body>
+</html>

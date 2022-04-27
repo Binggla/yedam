@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>P20220426/dom2/fineText.html</title>
+  <style>
+    #show {
+      width: 300px;
+      height: 300px;
+      background-color: yellow;
+    }
+    span {
+      display: inline-block;
+      width: 90px;
+      height: 20px;
+      margin: 2px;
+      padding: 2px;
+      border: 1px solid red;
+    }
+    /* #show>span:nth-child(1) {
+      color: blue;
+    } */
+  </style>
+</head>
+<body>
+  <input type="text" name="" id="userVal">
+  <div id="show">
+
+  </div>
+
+<script>
+  let data = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus tempore animi dolor ea nostrum quis qui illo labore nihil modi culpa voluptate quod perspiciatis beatae, consequatur quisquam cupiditate dolore? Et.`;
+  let dataAry = data.split(' ');
+  dataAry.forEach(function(elem) {
+    let span = document.createElement('span');
+    span.innerHTML = elem;
+    document.getElementById('show').appendChild(span);
+  });
+
+  let user = document.getElementById('userVal');
+  user.addEventListener('change', function() {
+    let spans = document.querySelectorAll('span');
+    let uval = user.value;
+
+    spans.forEach(function(elem) {
+
+      if(elem.innerHTML == uval) {
+        // document.querySelector(`#show>span:nth-child(${idx+1})`).style.display='none';
+        elem.style.display='none';
+      } else {
+        user.value = '';
+      }
+    });
+    user.value = '';
+  });
+</script>
+</body>
+</html>
