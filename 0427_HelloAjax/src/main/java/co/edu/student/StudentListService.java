@@ -15,6 +15,10 @@ public class StudentListService extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// HelloAjax는 아래의 생명주기를 가진다.
+		// html 페이지 요청 -> Init() 최초 1회 실행 -> Service() -> Destroy()
+		// Init()은 만들어주지 않아도 기존에 가지고 있는 메서드가 실행된다.
+		
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		

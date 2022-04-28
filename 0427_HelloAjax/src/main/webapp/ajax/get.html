@@ -26,7 +26,7 @@
 		xhtp.open("get", "../studentList.json");	// 파일을 요청할 페이지 지정.
 		xhtp.send();	// 호출 시작.
 		xhtp.onload = function() {
-			document.getElementById('show').innerText = xhtp.response;
+			//document.getElementById('show').innerText = xhtp.response;
 			let data = JSON.parse(xhtp.response);
 			
 			let list = document.getElementById('list');
