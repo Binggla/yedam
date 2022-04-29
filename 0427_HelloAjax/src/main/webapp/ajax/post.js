@@ -126,6 +126,23 @@ function makeTr(student) {
 	return tr;
 } // end of makeTr()
 
+
+function successCallBack2(jsonResult) {
+	// console.log(jsonResult);
+	let obj = {
+		studentNo: jsonResult.studentNo,
+		studentName: jsonResult.studentName,
+		engScore: jsonResult.engScore,
+		korScore: jsonResult.korScore
+	}
+	document.getElementById('list').appendChild(makeTr(obj));
+
+} // end of successCallBack2()
+
+function failCallBack() {
+	alert('처리 중 에러 발생');
+}
+
 function successCallBack() {
 	// 사용자 입력값을 id='list' 하위에 추가.
 	let no = document.querySelector('input[name="studNo"]').value; // 106
@@ -144,20 +161,3 @@ function successCallBack() {
 
 	document.getElementById('list').appendChild(row);
 } // end of successCallBack()
-
-
-function successCallBack2(jsonResult) {
-	// console.log(jsonResult);
-	let obj = {
-		studentNo: jsonResult.studentNo,
-		studentName: jsonResult.studentName,
-		engScore: jsonResult.engScore,
-		korScore: jsonResult.korScore
-	}
-	document.getElementById('list').appendChild(makeTr(obj));
-
-} // end of successCallBack2()
-
-function failCallBack() {
-	alert('처리 중 에러 발생');
-}
