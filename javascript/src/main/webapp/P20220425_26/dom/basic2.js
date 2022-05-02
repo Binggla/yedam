@@ -29,3 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Element_node : <body>, <a>, <div> , <style>, <script>, <h1>, <span> ...
 // Attribute_node : id="myelement", class"align-right", width='300' ...
 // Text_node : 텍스트 문자열 노드, HTML 페이지 안의 모든 텍스트
+
+
+function makeTr(student) {
+  let tr = document.createElement('tr');
+  
+  for (let field in student) {
+    let td = document.createElement('td');
+    td.innerHTML = `${student[field]}`;
+    tr.appendChild(td);
+  }
+
+}
+
+document.getElementById('list').appendChild(makeTr(data));

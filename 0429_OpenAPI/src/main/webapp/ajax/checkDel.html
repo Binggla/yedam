@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ajax/checkDel.html</title>
+</head>
+<body>
+	<button id="allChk">전체 선택</button>
+	<button id="chkDel">삭제</button>
+	<table border="1">
+		<tr>
+			<td><input type="checkbox" name="selectCheck"></td>
+			<td>JeeSubin1</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="selectCheck"></td>
+			<td>JeeSubin2</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="selectCheck"></td>
+			<td>JeeSubin3</td>
+		</tr>
+	</table>
+	
+	<script>
+
+	  let chkDelBtn = document.getElementById('chkDel');
+		chkDelBtn.addEventListener('click', chkDelCallBack);
+		
+		let allChkBtn = document.getElementById('allChk');
+		allChkBtn.addEventListener('click', allChkCallBack);
+
+
+
+		// 선택 삭제 함수
+		function chkDelCallBack() {
+	
+			let allTr = document.querySelectorAll('tr');
+			allTr.forEach(function (tr) {
+				let chkTr = tr.firstElementChild.firstElementChild.checked;
+
+				if (chkTr == true) {
+					tr.remove();
+				}
+
+			});
+
+		}
+
+		// 전체 선택 함수
+		function allChkCallBack() {
+
+			let allTr = document.querySelectorAll('tr');
+			allTr.forEach(function (tr) {
+				tr.firstElementChild.firstElementChild.checked = true;
+			});
+
+		}
+	</script>
+	
+</body>
+</html>

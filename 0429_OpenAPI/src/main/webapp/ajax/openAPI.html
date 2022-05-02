@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OpenAPI.html</title>
+</head>
+<body>
+
+	<input type="text" id="sido" value="대전광역시"><button id="findBtn">찾기</button>
+	<hr>
+
+	<div id="show">
+		<table border="1">
+			<thead id="thead"></thead>
+			<tbody id="tbody"></tbody>
+		</table>
+	</div>
+
+	<script>
+		
+		let fields = ['id', 'sido', 'address', 'phoneNumber'];
+		
+		
+
+		function init() {
+		
+			let url = //
+			    `https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&returnType=JSON&serviceKey=zeKG6aKRBfX1q7Xwbm8DHh6h6G87%2BKzV%2F5NyXIMfEDKMoCPH2Uqvft7lD6LTkb1GCLgVkhulB%2FK9Q5P%2F8Tz0%2BQ%3D%3D`;	
+			let xhtp = new XMLHttpRequest();
+			let result = '';
+			xhtp.open('get', url);
+			xhtp.send();
+			xhtp.onload = loadCallBack; // loadCallBack() 하지 않는 이유? loading되는 시점에 실행하고자 하면 ()을 빼고 쓴다.
+
+			// 찾기 버튼
+			let findBtn = document.getElementById('findBtn');
+			findBtn.addEventListener('click', findCallBack);
+		
+		}
+		init(); // 실행
+		
+
+		// function : onload CallBackFunc
+		function loadCallBack() {
+	
+			result = JSON.parse(this.responseText);  // this.responseText == xhtp.responseText
+			console.log(result.data);
+			// thead 구현
+			let head = document.getElementById('thead');
+			let tr = document.createElement('tr');
+			head.appendChild(tr);
+			fields.forEach(function(elem) {
+				let td = document.createElement('th');
+				td.innerHTML = elem.toUpperCase();
+				tr.appendChild(td);
+			});			
+			
+			// tbody 구현
+			let filterAry = result.data.filter(function(elem) {
+				return elem.sido == '대전광역시';
+			});	
+				
+			makeBody(filterAry); //
+			
+		} // end of loadCallBack()
+		
+
+		// function : tbody 구현
+		function makeBody(ary) {
+			let body = document.getElementById('tbody');
+			
+			let childTr = document.querySelectorAll('#tbody>tr');		// tbody에 이미 tr 값이 있는지 확인한 후,
+			childTr.forEach(function(elem) {						    // 그 tr들을 삭제.
+				// elem.remove();
+				// 요소 자체를 선택하여 삭제한다.
+				body.removeChild(elem);
+				// removeChild()는 하위 요소를 삭제하는 것으로,부모 요소를 선택해야 사용 가능.
+				
+			});
+			ary.forEach(function(center) {
+				let tr = document.createElement('tr');
+				body.appendChild(tr);
+				
+				fields.forEach(function(elem) {
+					let td = document.createElement('td');
+					// address 필드일 경우에는 링크를 걸어보자. 카카오 API로 지도에 위치 찍어주는 거 구현할거임.
+					if (elem == 'address') {
+						let a = document.createElement('a');
+						a.setAttribute('href', `daumAPI.html?x=${center.lat}&y=${center.lng}&f=${center.facilityName}`); // 위도 경도 정보 입력
+						a.setAttribute('target', '_blank');
+						a.innerHTML = center[elem];
+						td.appendChild(a);
+					} else {
+						td.innerHTML = center[elem];
+					}
+					tr.appendChild(td);
+				});
+			});
+		
+		} // end of makeBody()
+		
+		
+		// function : 찾기 버튼 이벤트
+		function findCallBack() {
+			
+			console.log(this);
+			// input.value 속성을 읽어와서 filterAry => 헤더, 바디 찾기
+			let searchSido = document.getElementById('sido').value;
+			let filterAry = result.data.filter(function(elem) {
+				// return elem.sido == searchSido;
+				return elem.sido.indexOf(searchSido) != -1;  // 포함
+				// indexOf() 메서드는 호출한 String 객체에서 주어진 값과 일치하는 첫 번째 인덱스를 반환한다. 일치하는 값이 없으면 -1을 반환한다. 
+			});
+			
+			makeBody(filterAry);
+			
+			// text칸 비우기.
+			document.getElementById('sido').value = '';
+			
+		} // end of findCallBack()
+		
+	</script>
+	
+</body>
+</html>

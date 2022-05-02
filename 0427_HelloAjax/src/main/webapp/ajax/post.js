@@ -30,7 +30,6 @@ function init() {
 		xhtp.open('get', `modStudServlet?a=${no}&b=${name}&c=${eng}&d=${kor}`);
 		xhtp.send();
 		xhtp.onload = function() {
-			console.log(xhtp.responseText);
 			let result = JSON.parse(xhtp.responseText);
 			if (result.retCode == 'OK') {
 				let obj = {

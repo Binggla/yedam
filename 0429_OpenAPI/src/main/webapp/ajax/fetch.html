@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>ajax/fetch.html</title>
+  <script src="ajax2.js"></script>
+</head>
+<body>
+  <script>
+    let xhtp = new XMLHttpRequest();
+    xhtp.open('get', '../studentList.json');
+    xhtp.send();
+    xhtp.onload = function() {
+      console.log('-xmlhttprequest-')
+      console.log(xhtp.responseText);
+    }
+
+    // 위와 동일한 기능
+    // fetch
+    fetch('../studentList.json') 
+    .then(function(result) {    // fetch가 정상적으로 실행됐을 때
+          console.log('-fetch-');
+          let val = result.json();  // pending
+          return val;
+        })
+        .then(function(result) {
+          console.log(result);
+        })
+        .catch(function() {         // fetch가 정상적을 실행되지 않았을 때
+          console.log(error);
+        })
+  </script>
+</body>
+</html>
