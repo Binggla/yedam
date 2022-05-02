@@ -31,12 +31,29 @@
             </article>
         </section>
         <section id="second_sec">
-            <button id="chkAll">전체 선택</button>
-            <button id="chkDel">선택 삭제</button>
-            <table border="1">
-                <thead id="thead"></thead>
-                <tbody id="tbody"></tbody>
-            </table>
+            <article id="second_left">
+                <button id="chkAll">전체 선택</button>
+                <button id="chkDel">삭제</button>
+                <button id="updateInfo">수정</button>
+                <table border="1">
+                    <thead id="thead"></thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </article>
+            <article id="second_right">
+                <ul>
+                    <li><label for="modName">이름</label>
+                        <input id="modName" type="text" name="mName" value="대니"></li>
+                    <li><label for="modEmail">이메일</label>
+                        <input id="modEmail" type="email" name="mEmail" value="danny@email.com"></li>
+                    <li><label for="modTel">전화번호</label>
+                        <input id="modTel" type="tel" name="mTel" value="010-2345-2345"></li>
+                    <li><label for="modBirth">생년월일</label>
+                        <input id="modBirth" type="date" name="mBirth" value="2000-01-01"></li>
+                    <li></li>
+                    
+                </ul>
+            </article>
         </section>
     </div>
     

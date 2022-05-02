@@ -54,6 +54,10 @@ label {
     background-color: rgb(177, 177, 177);
 }
 
+#second_letf {
+    float: left;
+}
+
 #second_sec button {
     margin-bottom: 10px;
 }

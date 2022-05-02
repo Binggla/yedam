@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DAO {
+public class DAO_mac {
 	static Connection conn;
 	static ResultSet rs;
 	static PreparedStatement psmt;
@@ -18,9 +18,10 @@ public class DAO {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost", "hr", "hr"); // 192.168.0.109
-			
+			String url = "jdbc:oracle:thin:@jeedb_high?TNS_ADMIN=/Users/binggla/Wallet_JEEDB";
+			conn = DriverManager.getConnection(url, "hr", "Tnqtnql12!@#$");
 			System.out.println("서버 연결 완");
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO extends DAO {
+public class StudentDAO extends DAO_mac {
 
 	// id로 한 건 조회
 	public Student searchStudent(String id) {
