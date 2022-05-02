@@ -1,0 +1,74 @@
+#container {
+    box-sizing: border-box;
+    width: 800px;
+    margin: 0 auto;
+}
+
+#first_sec {
+    overflow: hidden;
+    height:300px;
+}
+
+#first_left {
+    width: 498px;
+    height: 100%;
+    border: 1px solid black;
+    float: left;
+    background-color: rgb(218, 218, 218);
+}
+
+ul {
+    padding: 70px;
+    margin: 0;
+    list-style: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+label {
+    float: left;
+    width: 150px;
+}
+
+#first_right {
+    width: 298px;
+    height: 100%;
+    border: 1px solid black;
+    display: inline-block;
+    text-align: center;
+    background-color: rgb(196, 196, 196);
+}
+
+#insertBtn {
+    padding: 50px;
+    margin-top: 90px;
+}
+
+#second_sec {
+    clear: both;
+    border: 1px solid black;
+    text-align: left;
+    padding: 70px;
+    background-color: rgb(177, 177, 177);
+}
+
+#second_sec button {
+    margin-bottom: 10px;
+}
+
+#second_sec table {
+    background: white;
+    border-collapse: collapse;
+}
+
+thead td {
+    background: rgb(229, 229, 229);
+}
+
+td {
+    text-align: center;
+    padding:5px;
+    font-size: 10pt;
+}
