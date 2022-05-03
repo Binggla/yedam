@@ -33,38 +33,47 @@ public class StudentGetServlet extends HttpServlet {
 		
 		String cmd = request.getParameter("cmd");
 		
+		String id = request.getParameter("student_id");
+		
 		// 한 건 조회
 		if (cmd != null && cmd.equals("search")) {
 			
-			String id = request.getParameter("student_id");
-
 			StudentDAO dao = new StudentDAO();
 			Student stud = dao.searchStudent(id);
 			
+//			 if (student != null) {
+//		            response.setContentType("text/html; charset=utf-8");
+//		            response.getWriter().println("<form action='StudentGetServlet' method='post'>");
+//		            response.getWriter().println("<h3>학생번호: " + student.getStudentNo() + "</h3>");
+//		            response.getWriter().println("<h3>이름 : " + student.getStudentName() + "</h3>");
+//		            response.getWriter().println(
+//		                  "<h3>영어:<input type='number' name='eng_score' value='" + student.getEngScore() + "'> </h3>");
+//		            response.getWriter().println(
+//		                  "<h3>국어: <input type='number' name='kor_score' value='" + student.getKorScore() + "'> </h3>");
+//		            response.getWriter().println("<input type='hidden' name='cmd' value='mod'>");
+//		            response.getWriter()
+//		                  .println("<input type='hidden' name='user_id' value=" + student.getStudentNo() + ">");
+//		            response.getWriter()
+//		                  .println("<input type='hidden' name='user_name' value="+ student.getStudentName()+">");
+//		            response.getWriter().println("<input type='submit' id='mod' value='수정'>");
+//		            response.getWriter().println("</form>");
+//		         } else {
+			
 			if (stud != null) {
-				response.getWriter().println("<form name=\"scoreFrm\">");
 				response.getWriter().println("<h3 name=\"student_id\">학생 번호 : " + stud.getStudentNo() + "</h3>");
 				response.getWriter().println("<h3 name=\"student_name\">학생 이름 : " + stud.getStudentName() + "</h3>");
+				response.getWriter().println("<form name=\"scoreFrm\" action=\"StudentGetServlet\" method=\"post\" value=\"modScore\">");
 				response.getWriter().println("<input type=\"hidden\" name=\"cmd\" value=\"modScore\">");
-				response.getWriter().println("<input type=\"hidden\" name=\"student_no\"");
-				response.getWriter().println("<input type=\"hidden\" name=\"student_name\">");
+				response.getWriter().println("<input type=\"hidden\" name=\"student_id\" value=\""+stud.getStudentNo()+"\">");
+				response.getWriter().println("<input type=\"hidden\" name=\"student_name\" value=\""+stud.getStudentName()+"\">");
 				response.getWriter().println("<h3>영어 점수 : <input type=\"number\" name=\"eng_score\" value=" + stud.getEngScore() + "></h3>");
-				response.getWriter().println("<h3>국어 점수 : <input type=\"number\" name=\"kor_score\" value=" + stud.getKorScore() + "></h3></form>");
-				response.getWriter().println("<input type=\"button\" value=\"점수 변경\" name=\"modScoreBtn\"><br>");
+				response.getWriter().println("<h3>국어 점수 : <input type=\"number\" name=\"kor_score\" value=" + stud.getKorScore() + "></h3>");
+				response.getWriter().println("<input type=\"submit\" value=\"점수 변경\" name=\"modScoreBtn\"></form><br>");
 				response.getWriter().println("<a href=\"studentList.jsp\">학생 목록으로 이동</a>");
 				response.getWriter().println(
 						"<script>let modScoreBtn = document.getElementById('modScoreBtn'); "
-						+ "modScoreBtn.addEventListener('click', () => {"
-						+ "let scoreFrm = document.forms.scoreFrm;"
-						+ "frm.action = \"StudentGetServlet\";"
-						+ "scoreFrm.student_no=\"" + stud.getStudentNo() + "\";"
-						+ "scoreFrm.student_name=\"" + stud.getStudentName() + "\";"
-						+ "scoreFrm.method = \"post\";"
-						+ "scoreFrm.cmd.value = \"modScore\";"
-						+ "scoreFrm.submit();"
-						+ "});"
+						+ "modScoreBtn.addEventListener('click', () => { let scoreFrm = document.forms.scoreFrm; console.log(\"click\"); scoreFrm.submit(); });</script>"
 						);
-	
 	
 			} else {
 				response.getWriter().print("<script>alert('존재하지 않는 번호입니다.')</script>");
@@ -136,10 +145,12 @@ public class StudentGetServlet extends HttpServlet {
 			StudentDAO dao = new StudentDAO();
 			dao.modStudent(stud);
 
-		} else if (cmd != null && cmd.equals("modScore")) {
+		}  else if (cmd != null && cmd.equals("modScore")) {
 			
 			Student stud = new Student();
 			
+			stud.setStudentNo(Integer.parseInt(id));
+			stud.setStudentName(name);
 			stud.setEngScore(Integer.parseInt(eng));
 			stud.setKorScore(Integer.parseInt(kor));
 			
