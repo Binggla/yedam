@@ -5,10 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>메인화면(index.jsp)</title>
+<link rel="stylesheet" href="./css/web.css">
+
+</style>
 </head>
 <body>
-	<h3>첫 페이지입니다.</h3>
-	<a href="memberView/memberInsert.jsp">회원 정보 생성</a>
-	<a href="memberList.do">모든 회원 정보</a>
+	<h3>Welcome!</h3>
+	<a href="memberView/memberInsert.jsp">회원 정보 생성</a><br>
+	<a href="memberView/memberSearch.jsp">회원 정보 검색</a><br>
+	<a href="memberView/memberUpdate.jsp">회원 정보 수정</a><br>
+	<a href="memberView/memberDelete.jsp">회원 정보 삭제</a><br>
+	<a href="memberList.do">회원 목록</a>
 </body>
 </html>

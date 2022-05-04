@@ -21,6 +21,12 @@ public class MemberInsertControl implements Control {
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		
+		if(id.isEmpty() || name.isBlank() || pwd.isBlank() || email.isBlank()) {
+			req.setAttribute("error", "모든 항목을 입력하세요.");
+			req.getRequestDispatcher("memberView/memberInsert.jsp").forward(req, resp);
+			return;
+		}
+		
 		MemberVo vo = new MemberVo();
 		vo.setId(id);
 		vo.setName(name);

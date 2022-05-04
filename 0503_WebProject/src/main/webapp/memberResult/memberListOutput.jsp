@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memberResult/memberListOutput.jsp</title>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
 </head>
 <body>
 <c:choose>
