@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>memberResult/memberDeleteOutput.jsp</title>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
 </head>
 <body>

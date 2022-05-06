@@ -2,12 +2,19 @@ package co.dev.web;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import co.dev.service.MemberService;
+import co.dev.vo.MemberVo;
 
 public class FrontController extends HttpServlet {
 	HashMap<String, Control> list = null;
@@ -22,6 +29,10 @@ public class FrontController extends HttpServlet {
 		list.put("/memberList.do", new MemberListControl());
 		list.put("/memberSearch.do", new MemberSearchControl());
 		list.put("/memberDelete.do", new MemberDeleteControl());
+
+		//json 관련 등록
+		list.put("/memberListJson.do", new MemberListJson());
+		list.put("/memberInsertJson.do", new MemberInsertJson());
 	}
 	
 	@Override
@@ -41,3 +52,4 @@ public class FrontController extends HttpServlet {
 	}
 	
 }
+

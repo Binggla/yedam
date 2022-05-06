@@ -87,13 +87,14 @@ public class MemberDAO extends DAO {
 	// 한 건 추가
 	public void insertMember(MemberVo member) {
 		conn = getConnect();
-		String sql = "INSERT INTO member(id, name, pwd, email) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO member(id, name, pwd, email, profile) VALUES(?,?,?,?,?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, member.getId());
 			psmt.setString(2, member.getName());
 			psmt.setString(3, member.getPwd());
 			psmt.setString(4, member.getEmail());
+			psmt.setString(5, member.getProfile());
 			
 			int r = psmt.executeUpdate();
 			
@@ -125,6 +126,7 @@ public class MemberDAO extends DAO {
 				vo.setPwd(rs.getString("pwd"));
 				vo.setName(rs.getString("name"));
 				vo.setEmail(rs.getString("email"));
+				vo.setProfile(rs.getString("profile"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {
