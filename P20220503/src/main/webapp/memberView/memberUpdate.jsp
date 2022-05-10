@@ -22,10 +22,10 @@
 		<c:otherwise>
 		
 			<form action="${pageContext.servletContext.contextPath }/memberUpdate.do" method="post">
-				아이디 : ${member.id } <input type="hidden" name="id" value="${member.id }"><br>
-				이름 : ${member.name } <input type="hidden" name="name" value="${member.name }"><br>
-				이메일 : ${member.email } <input type="hidden" name="email" value="${member.email }"><br>
-				비밀번호 : ${member.pwd } <input type="hidden" name="pwd" value="${member.pwd }">
+				아이디 : <input type="text" name="id" value="${member.id }"><br>
+				이름 : <input type="text" name="name" value="${member.name }"><br>
+				이메일 : <input type="text" name="email" value="${member.email }"><br>
+				비밀번호 : <input type="password" name="pwd" value="${member.pwd }">
 				<input type="submit" value="update">
 			</form>
 		</c:otherwise>

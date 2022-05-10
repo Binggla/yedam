@@ -18,9 +18,8 @@ public class DAO_mac {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@jeedb_medium?TNS_ADMIN=C:/db_test/Wallet_JEEDB";
+			String url = "jdbc:oracle:thin:@jeedb_high?TNS_ADMIN=C:\\db_test\\Wallet_JEEDB";
 			conn = DriverManager.getConnection(url, "hr", "Tnqtnql12!@#$");
-			System.out.println("서버 연결 완");
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

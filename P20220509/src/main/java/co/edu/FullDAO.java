@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FullDAO extends DAO {
+public class FullDAO extends DAO_mac {
 	
 	//리스트
 	
