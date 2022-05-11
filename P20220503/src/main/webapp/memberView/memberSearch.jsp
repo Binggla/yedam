@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memberView/memberSearch.jsp</title>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css ">--%>
 </head>
 <body>
 	<c:if test="${!empty error}"><script>alert('${error }')</script></c:if>

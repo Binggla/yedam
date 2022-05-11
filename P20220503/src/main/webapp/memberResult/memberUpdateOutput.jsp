@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memberResult/memberUpdateOutput.jsp</title>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css"> --%>
 </head>
 <body>
 		<h3>${id}님의 회원 정보 수정이 완료되었습니다.</h3>

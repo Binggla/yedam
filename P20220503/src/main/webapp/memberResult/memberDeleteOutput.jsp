@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memberResult/memberDeleteOutput.jsp</title>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css"> --%>
 </head>
 <body>
 	<h3>아이디 ${id }의 삭제가 완료되었습니다.</h3>

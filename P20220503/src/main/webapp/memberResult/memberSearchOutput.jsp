@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memberResult/memberSearchOutput.jsp</title>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css"> --%>
 </head>
 <body>
 	<h3>조회 결과</h3>

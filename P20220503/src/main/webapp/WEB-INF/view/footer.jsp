@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인화면(index.jsp)</title>
-<link rel="stylesheet" href="./css/web.css">
+<title>Insert title here</title>
 </head>
 <body>
-	<jsp:forward page="myapp.homepage.tiles"></jsp:forward>
+	푸터 테스트
 </body>
 </html>

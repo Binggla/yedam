@@ -20,7 +20,7 @@ public class MemberListControl implements Control {
 		
 		req.setAttribute("all", list);
 		
-		req.getRequestDispatcher("memberResult/memberListOutput.jsp").forward(req, resp);
+		req.getRequestDispatcher("memberResult/memberListOutput.tiles").forward(req, resp);
 
 	}
 

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memberView/memberSearch.jsp</title>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/web.css"> --%>
 </head>
 <body>
 	<c:if test="${!empty error}"><script>alert('${error }')</script></c:if>
@@ -22,11 +22,12 @@
 		<c:otherwise>
 		
 			<form action="${pageContext.servletContext.contextPath }/memberUpdate.do" method="post">
-				아이디 : <input type="text" name="id" value="${member.id }"><br>
-				이름 : <input type="text" name="name" value="${member.name }"><br>
-				이메일 : <input type="text" name="email" value="${member.email }"><br>
-				비밀번호 : <input type="password" name="pwd" value="${member.pwd }">
-				<input type="submit" value="update">
+				<ul>
+				<li><label for="uid">아이디</label><input id="uid" type="text" name="id" value="${member.id }"></li>
+				<li><label for="uname">이름</label><input id="uname" type="text" name="name" value="${member.name }"></li>
+				<li><label for="uemail">이메일</label><input id="uemail" type="text" name="email" value="${member.email }"></li>
+				<li><label for="upwd">비밀번호</label><input id="upwd" type="password" name="pwd" value="${member.pwd }"><input type="submit" value="update"></li>
+				</ul>
 			</form>
 		</c:otherwise>
 	</c:choose>
