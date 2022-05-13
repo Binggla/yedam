@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.dev.DAO;
+import co.dev.DAO_mac;
 import co.dev.vo.MemberVo;
 
-public class MemberDAO extends DAO {
+public class MemberDAO extends DAO_mac {
 	
 	// 한 건 수정
 	public void updateMember(MemberVo member) {
