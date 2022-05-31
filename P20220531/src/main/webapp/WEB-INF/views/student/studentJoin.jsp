@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>시작</h1>
-	<a href="studentList.do">학생 목록</a>
-	<a href="studentLoginForm.do">로그인</a>
+	<div align="center">
+		<div><h1>${message }</h1></div>
+	</div>
 </body>
 </html>
