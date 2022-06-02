@@ -80,17 +80,17 @@
 			body: formData
 		})
 			.then(response => response.json())
-			.then(result => {
+			.then(data => {
 				document.querySelector('tbody').remove();
-				makeTbody(result);
+				changeTbody(data);
 			})
 	}
 
-	function makeTbody(result) {
+	function changeTbody(noticeAry) {
 		let table = document.getElementById('tb');
 		let tbody = document.createElement('tbody');
 
-		result.forEach(function(notice) {
+		noticeAry.forEach(function(notice) {
 			let tr = makeTr(notice);
 			tbody.appendChild(tr);
 		})
@@ -114,7 +114,6 @@
 				}
 				
 				tr.appendChild(td);
-				
 			}
 		}
 		return tr;
