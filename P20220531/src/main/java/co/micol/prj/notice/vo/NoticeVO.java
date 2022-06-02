@@ -2,6 +2,8 @@ package co.micol.prj.notice.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +22,11 @@ public class NoticeVO {
 	private String noticeTitle;	// 제목
 	private String noticeContents;	// 내용
 	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date noticeDate;	// 작성일자
 	private int noticeHit;	// 조회수
 	private String noticeAttech;	// 첨부파일
 	private String noticeDir;	// 첨부파일 저장 경로
+	
+	
 }

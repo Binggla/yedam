@@ -50,9 +50,20 @@
 			FROM NOTICE
 		</selectKey>
 		
-		INSERT INTO NOTICE
-		VALUES(#{noticeId}, #{noticeName}, #{noticeTitle}, #{noticeContents},
-		#{noticeDate}, 0, #{noticeAttech}, #{noticeDir})
+		INSERT INTO NOTICE (NOTICE_ID, NOTICE_NAME, NOTICE_TITLE, NOTICE_CONTENTS, NOTICE_DATE, NOTICE_HIT 
+			<if test="noticeAttech != null">, NOTICE_ATTECH,</if>
+			<if test="noticeDir != null">NOTICE_DIR</if>
+		)
+		VALUES(
+			#{noticeId},
+			<if test="noticeName != null">#{noticeName},</if>
+			<if test="noticeTitle != null">#{noticeTitle},</if>
+			<if test="noticeContents != null">#{noticeContents},</if>
+			<if test="noticeDate != null">#{noticeDate},</if>
+			<if test="noticeHit != null">0</if>
+			<if test="noticeAttech != null">,#{noticeAttech},</if>
+			<if test="noticeDir != null">#{noticeDir}</if>
+		)
 		
 	</insert>
 	
@@ -60,12 +71,10 @@
 		parameterType="co.micol.prj.notice.vo.NoticeVO">
 		UPDATE NOTICE
 		<set>
-			<if test="noticeName != null">NOTICE_NAME = #{noticeName},</if>
 			<if test="noticeTitle != null">NOTICE_TITLE = #{noticeTitle},</if>
 			<if test="noticeContents != null">NOTICE_CONTENTS = #{noticeContents},</if>
-			<if test="noticeDate != null">NOTICE_DATE = #{noticeDate},</if>
 			<if test="noticeAttech != null">NOTICE_ATTECH = #{noticeAttech},</if>
-			<if test="noticeDir != null">NOTICE_DIR = #{noticeDir},</if>
+			<if test="noticeDir != null">NOTICE_DIR = #{noticeDir}</if>
 		</set>
 		WHERE NOTICE_ID = #{noticeId}
 	</update>
