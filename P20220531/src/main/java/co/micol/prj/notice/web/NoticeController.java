@@ -84,7 +84,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/downLoad.do")
-	public String downLoad(@RequestParam("saveName") String saveName, @RequestParam("fileName") String fileName, HttpServletResponse response) {
+	public void downLoad(@RequestParam("saveName") String saveName, @RequestParam("fileName") String fileName, HttpServletResponse response) {
 		// @RequestParam : 하나의 파라미터 값을 불러오는 어노테이션. GET 방식일 때만 사용 가능하다. 
 		// http://localhost/prj/getContent.do?saveName= 으로 넘어올 것.
 		// 파일을 다운받을 때, UDDI로 변환된 파일명이 아닌 실제 파일명으로 다운 받기 위해서 두 개의 파라미터를 모두 넘겨받는다.
@@ -114,7 +114,6 @@ public class NoticeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
 	@RequestMapping("/noticeDelete.do") 

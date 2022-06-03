@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-	table tr:hover{
-		cursor:pointer;
-		background:gray;
-	}
-</style>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		table tr:hover{
+			cursor:pointer;
+			background:gray;
+		}
+	</style>
 </head>
 <body>
 	<div align="center">
@@ -25,7 +25,7 @@
 					<option value="4">내용</option>
 				</select>&nbsp;
 				<input id="key" name="key" type="text" placeholder="검색어 입력">&nbsp;
-				<button type="button" onclick="ajaxSearchList();">검색</button>
+				<button type="button" onclick="searchList();">검색</button>
 			</form>
 		</div><br/>
 		<div>
@@ -43,7 +43,7 @@
 				<tbody>
 					<c:if test="${!empty notices }">
 						<c:forEach items="${notices }" var="n">
-							<tr>
+							<tr onclick="getContent(${n.noticeId });">
 								<td>${n.noticeId }</td>
 								<td>${n.noticeName }</td>
 								<td>${n.noticeTitle }</td>
@@ -69,9 +69,42 @@
 		</div>
 	</div>
 	
-<!-- function -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
+	// jQuery
+	function searchList() {
+		let state = $("#state").val();
+		let key = $("#key").val();
+		
+		$.ajax({
+			url : "ajaxSearchList.do",
+			type : "post",
+			data : {"state" : state, "key" : key},
+			dataType : "json",
+			success : function(data) {
+				let tbody = $("tbody");
+				tbody.text('');
+				$.each(data, function(index, n) {	// n = 한 행의 변수명
+					var row = $("<tr onclick='getContent("+n.noticeId+");'/>").append(
+							$("<td/>").text(n.noticeId),
+							$("<td/>").text(n.noticeName),
+							$("<td/>").text(n.noticeTitle),
+							$("<td/>").text(n.noticeDate),
+							$("<td/>").text(n.noticeHit),
+							$("<td/>").text(n.noticeAttech)
+						);
+					tbody.append(row);
+				})
+				$("#tb").append(tbody);
+			},
+			error : function() {
+				alert('의도치 않는 오류가 발생했습니다.');
+			}
+		})
+	
+	}
+	
 	function ajaxSearchList() {
 		let formData = new FormData(frm);
 		
@@ -81,62 +114,46 @@
 		})
 			.then(response => response.json())
 			.then(data => {
-				document.querySelector('tbody').remove();
 				changeTbody(data);
 			})
 	}
 
 	function changeTbody(noticeAry) {
-		let table = document.getElementById('tb');
-		let tbody = document.createElement('tbody');
+ 		let tbody = document.querySelector('tbody');
+ 		tbody.innerHTML = '';
 
-		noticeAry.forEach(function(notice) {
-			let tr = makeTr(notice);
-			tbody.appendChild(tr);
-		})
-		
-		table.appendChild(tbody);
+ 		noticeAry.forEach(function(notice) {
+ 			let tr = makeTr(notice);
+ 			tbody.appendChild(tr);
+ 		})
 	}
 	
-	function makeTr(notice) {
+	function makeTr(data) {
 	
+		let keyAry = ['noticeId', 'noticeName', 'noticeTitle', 'noticeDate', 'noticeHit', 'noticeAttech'];
 		let tr = document.createElement('tr');
-		for(let col in notice) {
-			console.log(col)
-			if(col != 'noticeContents' && col != 'noticeDir') {
-				let td = document.createElement('td');
-				td.innerHTML = notice[col];
-				
-				if(col == 'noticeAttech') {
-					if(!notice[col]) {
-						td.innerHTML = '';
-					}
-				}
-				
-				tr.appendChild(td);
-			}
+		
+		for(let key of keyAry) {
+			let td = document.createElement('td');
+			td.innerHTML = data[key];
+			tr.appendChild(td);
 		}
+		
 		return tr;
 	}
 
-</script>
-
-<!-- 이벤트 -->
-<script>
-
- 	let list = document.querySelector('tbody');
- 	list.addEventListener('click', function(e) {
- 		if(e.target.tagName === 'TD') {
- 			// GET 방식
- 			// location.href='getContent.do?noticeId='+e.target.parentNode.children[0].textContent;
- 			
- 			// POST 방식
- 			frm2.noticeId.value = e.target.parentNode.children[0].textContent;
- 			frm2.action = 'getContent.do';
- 			frm2.submit();
- 		}
+	// 이벤트
+	function getContent(noticeId) {
+		// GET 방식
+		// location.href='getContent.do?noticeId='+e.target.parentNode.children[0].textContent;
 		
- 	})
+		// POST 방식
+		frm2.noticeId.value = noticeId;
+		frm2.action = 'getContent.do';
+		frm2.submit();
+	
+}
+		
 </script>
 </body>
 </html>
