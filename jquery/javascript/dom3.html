@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <table id="table">
+    <tr><td>아디</td><td>상품명</td><td>금액</td></tr>
+  </table>
+  <div>총금액:<span id="total"></span></div>
+  <script>
+    let arr = [{name:"사과",price:5600, id:"g01"},
+               {name:'배',  price:300,  id:"g02"},
+               {name:"키위",price:60000, id:"g03"}];
+    let totalPrice = 0;
+
+    for (let i=0; i<arr.length; i++) {
+      let row = table.insertRow();
+      let idCell = row.insertCell();
+      let nameCell = row.insertCell();
+      let priceCell = row.insertCell();
+      idCell.innerHTML = arr[i].id;
+      nameCell.innerHTML = arr[i].name;
+      priceCell.innerHTML = arr[i].price;
+
+      totalPrice = totalPrice + arr[i].price;
+    }
+
+    total.innerHTML = totalPrice;
+  </script>
+</body>
+</html>

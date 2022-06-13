@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    span {
+      display:none;
+    }
+  </style>
+</head>
+<body>
+  <input id="fruit"><input id="price">
+  <button type="button" id="btn">추가</button>
+  <ul id="list">
+    <li>바나나<span>300</span></li>
+  </ul>
+  
+  <script>
+    btn.addEventListener('click', function() {
+      let li = document.createElement('li');
+      li.innerHTML = `${fruit.value}<span>${price.value}</span>`;
+      list.appendChild(li);
+    })
+
+    let lis =  document.getElementsByTagName('li');
+    for (li of lis) {
+      li.addEventListener("mouseover", function(){
+        this.getElementsByTagName('span')[0].style.display = 'inline-block';
+      });
+      li.addEventListener("mouseout", function(){
+        this.getElementsByTagName('span')[0].style.display = 'none';
+      });
+    }
+    
+    
+  </script>
+</body>
+</html>

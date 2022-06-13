@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <style>
+    .active {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div>hello</div>
+  <table id="goods" border="1">
+    <tr><td class="no" >1</td><td data-no="g01">2</td></tr>
+    <tr><td class="no">3</td><td data-no="g02">4</td></tr>
+    <tr><td class="no">5</td><td data-no="g03">6</td></tr>
+    <tr><td class="no">7</td><td data-no="g04">8</td></tr>
+  </table>
+  <table id="reply">
+    <tr><td class="no">1</td><td>2</td></tr>
+    <tr><td class="no">3</td><td>4</td></tr>
+    <tr><td class="no">5</td><td>6</td></tr>
+    <tr><td class="no">7</td><td>8</td></tr>
+  </table>
+  <form>
+    <input type="checkbox" name="hobby" value="ski">스키
+    <input type="checkbox" name="hobby" value="read">독서
+    <input type="checkbox" name="hobby" value="game">게임
+    <input type="radio" name="job" value="dg">디자이너
+    <input type="radio" name="job" value="pg">프로그래머
+    <input type="radio" name="job" value="pb">퍼블리셔
+  </form>
+  <script>
+    let tds = $("td");
+    tds.hover(function(){
+      $(this).addClass("active");
+    }, function() {
+      $(this).removeClass("active");
+    })
+    tds.click(function() {
+      $(this).addClass("active");   // style="display:none;"
+    })
+
+    // var td = document.getElementsByTagName("td");
+    // for(t of td) {
+    //   t.addEventListener('click', function() {
+    //     this.classList.add("active");
+    //   })
+    // }
+  </script>
+</body>
+</html>

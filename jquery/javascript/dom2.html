@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+</head>
+<body>
+  <div id="list">
+    <!-- <div class="goods">
+      <div data-id="g01">상품명</div>
+      <div>5000원</div>
+    </div> -->
+  </div>
+  <script>
+    let arr = [{name:"사과",price:5600, id:"g01"},
+               {name:'배',  price:300,  id:"g02"},
+               {name:"키위",price:60000, id:"g03"}];
+    
+    for (let i=0; i<arr.length; i++) {
+      let goodsDiv = document.createElement('div');
+      let nameDiv = document.createElement('div');
+      let priceDiv = document.createElement('div');
+
+      goodsDiv.classList.add("goods");
+      nameDiv.setAttribute('data-id', arr[i].id);
+      nameDiv.innerHTML = arr[i].name;
+      priceDiv.innerHTML = arr[i].price;
+
+      goodsDiv.appendChild(nameDiv);
+      goodsDiv.appendChild(priceDiv);
+      
+      list.appendChild(goodsDiv);
+    }
+    
+    for (let i=0; i<arr.length; i++) {
+      let div = document.createElement('div');
+      div.innerHTML = `<div class="goods">
+                        <div data-id="${arr[i].id}">${arr[i].name}</div>
+                        <div>${arr[i].price}</div>
+                       </div>`;
+      list.appendChild(div);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 객체 생성 (1)
+    var obj = {};
+    obj.name = '길동';
+    obj.age = 20;
+    obj.dept = '개발';
+    obj.hobby = ['독서', '게임'];
+    
+    // 객체 생성 (2)
+    var obj2 = { name:'기자', age:30, dept:'디자인'};
+
+    var arr = [obj, obj2];
+
+    console.log(arr[0].dept);
+    console.log(arr[0].hobby[0]);
+
+    for(let i=0; i<arr.length; i++) {
+      console.log('for : ' + arr[i].name);
+    }
+
+    for(let member of arr) {
+      console.log('for of : ' + member.name);
+    }
+
+    arr.forEach(function(member) {
+      console.log('forEach : ' + member.name);
+    })
+
+    for(let data of arr[0].hobby) {
+      console.log('for of : ' + data);
+    }
+
+    arr[0].hobby.forEach(function(data) {
+      console.log('forEach : ' + data);
+    })
+  </script>
+</body>
+</html>
