@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head><title>select 태그</title>
+<style>
+#result { border : 1px solid blue;
+width : 300px;
+height : 100px; }
+select {width: 300px;}
+</style>
+<script>
+window.addEventListener("load", function(){
+//확인 버튼 이벤트
+btn.addEventListener("click", function(){
+//선택과목 수와 선택과목명을 div에 출력(다중선택이 가능함)
+    let subCnt = 0;
+    let subTxt = '';
+    for (let i=0; i<subject.options.length; i++) {
+        if(subject.options[i].selected) {
+            ++subCnt;
+            let text = subject.options[i].text;
+            if (subTxt == '') {
+                subTxt += text;
+            } else {
+                subTxt += `, ${text}`;
+            }
+        };
+    }
+    
+    result.innerHTML = `선택과목 수 : ${subCnt} <br>
+                        선택과목 : ${subTxt}`;
+
+});
+});
+</script>
+</head>
+<body>
+<select id="subject" multiple="multiple" size="5">
+    <option value="java">자바
+    <option value="jsp">JSP
+    <option value="spring">스프링
+</select><br>
+<button id="btn">확인</button><br>
+<div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>중복입력값체크.jsp</title>
+<style>
+[name="no"] { width: 30px; margin: 0px 5px 0px 0px;}
+</style>
+<script>
+    window.addEventListener("load", function(){
+        btnInsCheck();
+    });
+    function btnInsCheck(){
+        btnIns.addEventListener("click", function(){
+            var nos = document.getElementsByName("no");
+            var names = document.getElementsByName("name");
+
+            // 중복값 체크: 입력된 이름중에 중복된 이름이 있으면 경고창을 출력하고 리턴
+
+            const noSet = new Set(), nameSet = new Set();
+            for (let i=0; i<names.length; i++) {
+                noSet.add(nos[i].value)
+                nameSet.add(names[i].value);
+            }
+
+            if (names.length !== nameSet.size || nos.length !== noSet.size) {
+                alert('중복된 값이 있습니다. 다시 입력해 주세요.');
+            } else {
+                //배열에 담기 :
+                var arr = [];
+                for (let i=0; i<names.length; i++) {
+                    let obj = { no:`${nos[i].value}`, name:`${names[i].value}` }
+                    arr.push(obj);
+                }
+                
+                //배열 출력
+                console.log(JSON.stringify(arr));
+                
+            }
+        });
+    }
+    </script>
+</head>
+<body>
+<form id="frm" name="frm">
+<div><span>번호</span> <span>이름</span></div>
+<div><input name="no"><input name="name"/></div>
+<div><input name="no"><input name="name"/></div>
+<div><input name="no"><input name="name"/></div>
+<div><input name="no"><input name="name"/></div>
+<div><button type="button" id="btnIns">등록</button></div>
+</form>
+</body>
+</html>
