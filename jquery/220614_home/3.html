@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>텍스트 추가/검색</title>
+<style>
+#result { border : 1px solid blue;
+width : 300px;
+height : 200px; }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+let txtArr = [];
+$(function(){
+    $('#btnAdd').click(funcAdd)
+    $('#btnDelete').click(funcDelete)
+    $('#btnSearch').click(funcSearch)
+    $('#txtFruit').focus(function(){this.select();})
+})
+function funcAdd(){
+//텍스트필드에 입력한 값을 배열에 추가하고 배열을 div에 출력 
+    txtArr.push($('#txtFruit').val());
+    resultPrint();
+}
+function funcDelete(){
+//텍스트필드에 입력한 값을 배열에서 삭제하고 배열을 div에 출력
+    let txtInx = txtArr.indexOf($('#txtFruit').val());
+    if (txtInx != -1) {
+        txtArr.splice(txtInx, 1);
+        resultPrint();
+    } else {
+        noDataAlert();
+    }
+}
+function funcSearch(){
+//텍스트필드에 입력한 값을 배열에서 검색해서 검색위치를 div출력
+    let txtInx = txtArr.indexOf($('#txtFruit').val());
+    if (txtInx != -1) {
+        let searchTxt = `검색위치 : ${(txtInx+1)}`;
+        resultPrint();
+        $('#result').html(`${$('#result').html()}<br>${searchTxt}`);
+    } else {
+        noDataAlert();
+    }
+
+}
+function resultPrint() {
+    $('#result').html('');
+    txtArr.forEach(function(txt, idx) {
+        if(idx === 0) {
+            $('#result').html(txt);
+        } else {
+            $('#result').html(`${$('#result').html()}, ${txt}`);
+        }
+    })
+    $('#txtFruit').val('');
+    $('#txtFruit').focus();
+}
+function noDataAlert() {
+    alert('값을 찾을 수 없습니다. 다시 입력해 주세요.');
+    txtFruit.value = '';
+    txtFruit.focus();
+}
+</script>
+</head>
+<body>
+<input type="text" id="txtFruit">
+<button type="button" id="btnAdd">추가</button>
+<button type="button" id="btnDelete">삭제</button>
+<button type="button" id="btnSearch">검색</button>
+<div id="result"></div>
+</body>
+</html>

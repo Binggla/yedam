@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>중복입력값체크.jsp</title>
+<style>
+[name="no"] { width: 30px; margin: 0px 5px 0px 0px;}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+    $(function() {
+        btnInsCheck();
+    })
+
+    function btnInsCheck(){
+
+        $('#btnIns').click(function() {
+
+            let nos = $('[name=no]');
+            let names = $('[name=name]');
+
+            const noSet = new Set(), nameSet = new Set();
+            for (let i=0; i<names.length; i++) {
+                noSet.add(nos.eq(i).val())
+                nameSet.add(names.eq(i).val());
+            }
+
+            if (names.length !== nameSet.size || nos.length !== noSet.size) {
+                alert('중복된 값이 있습니다. 다시 입력해 주세요.');
+            } else {
+                var arr = [];
+                for (let i=0; i<names.length; i++) {
+                    let obj = { no:`${nos.eq(i).val()}`, name:`${names.eq(i).val()}` }
+                    arr.push(obj);
+                }
+                console.log(JSON.stringify(arr));
+            }
+        })
+
+    }
+    </script>
+</head>
+<body>
+<form id="frm" name="frm">
+<div><span>번호</span> <span>이름</span></div>
+<div><input name="no"><input name="name"/></div>
+<div><input name="no"><input name="name"/></div>
+<div><input name="no"><input name="name"/></div>
+<div><input name="no"><input name="name"/></div>
+<div><button type="button" id="btnIns">등록</button></div>
+</form>
+</body>
+</html>

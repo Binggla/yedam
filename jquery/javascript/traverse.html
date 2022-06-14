@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>javascript/traverse.html</title>
+  <style>
+    .active {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <table id="goods" border="1">
+    <tr>
+      <td class="no" >1</td>
+      <td data-no="g01" id="g01">2</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+    <tr>
+      <td class="no" >3</td>
+      <td data-no="g02" id="g02">4</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+    <tr>
+      <td class="no" >5</td>
+      <td data-no="g03" id="g03">6</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+    <tr>
+      <td class="no" >7</td>
+      <td data-no="g04" id="g04">8</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+  </table>
+
+  <script>
+    let btns = document.getElementsByClassName('btn');
+    for (btn of btns) {
+      btn.addEventListener('click', function(){
+        let firval = this.closest('tr').firstElementChild.innerHTML;
+        let secval = this.parentElement.previousElementSibling.innerHTML;
+        secval = this.closest('tr').children[1].innerHTML;
+        secno = this.closest('tr').children[1].getAttribute('data-no');
+
+        console.log(`first val : ${firval}`);
+        console.log(`second val : ${secval}`);
+        console.log(`second data-no : ${secno}`);
+      })
+    }
+  </script>
+</body>
+</html>

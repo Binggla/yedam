@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jquery/event3_delegate</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script>
+
+    $(function() {
+      $('#list').on('mouseover', function(e) {
+          $(e.target).find('span').show(500);
+      })
+      $('#list').on('mouseout', function(e) {
+          $(e.target).find('span').hide(500);
+      })
+
+      $('#btn').on('click', function() {
+        $('<li>').html($('#fruit').val())
+            .append($('<span>').html($('#price').val()))
+            .appendTo($('#list'));
+      })
+
+    })
+
+  </script>
+  <style>
+    span {
+      display:none;
+    }
+  </style>
+</head>
+<body>
+  <input id="fruit"><input id="price">
+  <button type="button" id="btn">추가</button>
+  <ul id="list">
+    <li>바나나<span>300</span></li>
+  </ul>
+  
+
+</body>
+</html>

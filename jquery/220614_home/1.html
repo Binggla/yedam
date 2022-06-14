@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>문자열자르기</title>
+<style>
+label { display: inline-block; width: 70px; text-align: right; }
+#btn {width : 250px; }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+$(function() {
+    btnEvent();
+})
+
+function btnEvent(){
+    $('#btn').click(function() {
+        let dataAry = $('#result').val().split(',');
+        dataAry.forEach(function (data, idx) {
+            $('input').eq(idx).val(data.trim());
+        })
+    })
+}
+
+</script>
+</head>
+<body>
+<textarea id="result" rows="3" cols="35">1, 홍길동, hong, 2019/12/01</textarea>
+<div><button id="btn">텍스트필드에 값 넣기</button></div>
+<div><label>번호</label><input name="no" type="text"></div>
+<div><label>이름</label><input name="name" type="text"></div>
+<div><label>아디</label><input name="id" type="text"></div>
+<div><label>등록일자</label><input name="regDate" type="text"></div>
+</body>
+</html>

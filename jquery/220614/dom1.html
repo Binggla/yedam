@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
   <select id="fruit">
@@ -14,11 +15,12 @@
     let arr = [{name:"사과",val:"a"},{name:'배',val:"b"},{name:"키위",val:"c"}];
     
     for(i=0; i<arr.length; i++) {
-      var op = document.createElement("option");
-      op.value = arr[i].val;
-      op.innerHTML = arr[i].name;
-      fruit.appendChild(op);
+      // appendTo()
+      $('<option>').val(arr[i].val).html(arr[i].name).appendTo('#fruit');
+      // append()
+      $('#fruit').append($('<option>').val(arr[i].val).html(arr[i].name));
     }
+
     //태그생성
     //추가
   </script>

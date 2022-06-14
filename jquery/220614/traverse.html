@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>javascript/traverse.html</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <style>
+    .active {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <table id="goods" border="1">
+    <tr>
+      <td class="no" >1</td>
+      <td data-no="g01" id="g01">2</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+    <tr>
+      <td class="no" >3</td>
+      <td data-no="g02" id="g02">4</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+    <tr>
+      <td class="no" >5</td>
+      <td data-no="g03" id="g03">6</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+    <tr>
+      <td class="no" >7</td>
+      <td data-no="g04" id="g04">8</td>
+      <td><button type="button" class="btn">조회</button></td>
+    </tr>
+  </table>
+
+  <script>
+
+    $('.btn').click( function () {
+      let firval = $(this).closest('tr').children().first().html();
+      let secval = $(this).parent().prev().html();
+      secval = $(this).closest('tr').children().eq(1).html();
+
+      console.log(`first val : ${firval}`);
+      console.log(`second val : ${secval}`);
+
+    } );
+  </script>
+</body>
+</html>

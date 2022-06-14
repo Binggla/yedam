@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <input type="checkbox" id="ck">
+  <div id="list">
+    <!-- <div class="goods">
+      <div data-id="g01">상품명</div>
+      <div>5000원</div>
+    </div> -->
+  </div>
+  <script>
+    let arr = [{name:"사과",price:5600, id:"g01"},
+               {name:'배',  price:300,  id:"g02"},
+               {name:"키위",price:60000, id:"g03"}];
+    
+    for (let i=0; i<arr.length; i++) {
+
+      let goodsDiv = $('<div>').addClass('goods');
+      let nameDiv = $('<div>').data('id', arr[i].id).html(arr[i].name);
+      let priceDiv = $('<div>').html(arr[i].price);
+      goodsDiv.append(nameDiv).append(priceDiv).appendTo($('#list'));
+
+      // $('<div>').addClass('goods')
+      //           .append($('<div>').data('id', arr[i].id).html(arr[i].name))
+      //           .append($('<div>').html(arr[i].price))
+      //           .appendTo($('#list'));
+
+    }
+    
+    for (let i=0; i<arr.length; i++) {
+
+      let div = $('<div>').html(`<div class="goods">
+                                  <div data-id="${arr[i].id}">${arr[i].name}</div>
+                                  <div>${arr[i].price}</div>
+                                </div>`);
+      div.appendTo($('#list'));
+      
+    }
+  </script>
+</body>
+</html>
