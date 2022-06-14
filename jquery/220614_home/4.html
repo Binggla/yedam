@@ -7,30 +7,22 @@ width : 300px;
 height : 100px; }
 select {width: 300px;}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-window.addEventListener("load", function(){
-//확인 버튼 이벤트
-btn.addEventListener("click", function(){
-//선택과목 수와 선택과목명을 div에 출력(다중선택이 가능함)
-    let subCnt = 0;
-    let subTxt = '';
-    for (let i=0; i<subject.options.length; i++) {
-        if(subject.options[i].selected) {
-            ++subCnt;
-            let text = subject.options[i].text;
-            if (subTxt == '') {
-                subTxt += text;
-            } else {
-                subTxt += `, ${text}`;
-            }
-        };
-    }
-    
-    result.innerHTML = `선택과목 수 : ${subCnt} <br>
-                        선택과목 : ${subTxt}`;
 
-});
-});
+$(function() {
+    $('#btn').click(function() {
+        let subCnt = 0;
+        let subTxt = '';
+
+        $('#subject option:selected').each(function(){
+            ++subCnt;
+            subTxt += `${$(this).text().trim()}, `;
+        });
+
+        $('#result').html(`선택과목 수  : ${subCnt}<br>선택과목 : ${subTxt}`)
+    })
+})
 </script>
 </head>
 <body>

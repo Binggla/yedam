@@ -16,7 +16,7 @@ $(function() {
 function btnEvent(){
     $('#btn').click(function() {
         let dataAry = $('#result').val().split(',');
-        dataAry.forEach(function (data, idx) {
+        dataAry.forEach(function(data, idx) {
             $('input').eq(idx).val(data.trim());
         })
     })

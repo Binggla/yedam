@@ -15,21 +15,23 @@
 
         $('#btnIns').click(function() {
 
-            let nos = $('[name=no]');
-            let names = $('[name=name]');
+            // 중복 값 체크 (Set)
+            let datas = $('[name=no], [name=name]');
+            const dataSet = new Set();
+            datas.each(function(idx, data) {
+                dataSet.add($(data).val());
+            })
 
-            const noSet = new Set(), nameSet = new Set();
-            for (let i=0; i<names.length; i++) {
-                noSet.add(nos.eq(i).val())
-                nameSet.add(names.eq(i).val());
-            }
-
-            if (names.length !== nameSet.size || nos.length !== noSet.size) {
+            if (datas.length !== dataSet.size) {
                 alert('중복된 값이 있습니다. 다시 입력해 주세요.');
+
+            // 중복값이 없다면
             } else {
                 var arr = [];
-                for (let i=0; i<names.length; i++) {
-                    let obj = { no:`${nos.eq(i).val()}`, name:`${names.eq(i).val()}` }
+                let nos = $('[name=no]');
+                let names = $('[name=names]');
+                for (let i=0; i<nos.length; i++) {
+                    let obj = { no : nos.eq(i).val(), name: names.eq(i).val() }
                     arr.push(obj);
                 }
                 console.log(JSON.stringify(arr));
