@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<body>
+  <div id="grid"></div>
+  <script>
+  var Grid = tui.Grid;
+
+  // case 1 : 인스턴스 생성시 data 옵션으로 데이터 입력
+  const grid = new Grid({
+    el: document.getElementById('grid'),
+    columns: [
+      {
+        header: 'ID',
+        name: 'id'
+      },
+      {
+        header: 'CITY',
+        name: 'city',
+        editor: 'text'
+      },
+      {
+        header: 'COUNTRY',
+        name: 'country'
+      }
+    ]
+  });
+
+  // ajax조회하고 grid
+  $.ajax({
+    url: 'data.json'
+  }).done( result => grid.resetData(result))
+
+  grid.on('click', ev => {
+    console.log(ev.rowKey);
+    console.log(ev.columnName);
+    let value = grid.getValue(ev.rowKey,ev.columnName);
+    console.log(value);
+  
+});
+
+  </script>
+</body>
+</html>

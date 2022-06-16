@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xhr.html</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <style>
+    #boxList, #movieInfo {
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+  <input type="date" id="date">
+  <button type="button" id="btn">박스 오피스 조회</button>
+  <div id="boxList"></div>
+  <div id="movieInfo">
+
+  </div>
+  <script>
+
+  $('#btn').click(dailyBoxOffice);
+  $('#boxList').on('click', 'div',movieInfo);
+
+  function dailyBoxOffice() {
+
+    var date = $('#date').val().replace(/\-/g, '');
+    var url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${date}`;
+
+    $.get(url, function (result) {
+
+      var list = result.boxOfficeResult.dailyBoxOfficeList;
+
+      $('#boxList').html('');
+      for (mv of list) {
+        $('<div>').text(mv.movieNm).addClass('mv').data('code', mv.movieCd).css('cursor', 'pointer')
+                  .appendTo($('#boxList'))
+      }
+
+    });
+  }
+
+  function movieInfo() {
+
+    var code = $(this).data('code');
+    var url = `https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=${code}`;
+
+    $.get(url, function (result) {
+   
+      var info = result.movieInfoResult.movieInfo;
+      var dirNm = info.directors[0].peopleNm;
+      var actNm = info.actors[0].peopleNm;
+      var actCnt = info.actors.length-1;
+      var time = info.showTm;
+      var open = `${info.openDt.substr(0, 4)}년 ${info.openDt.substr(4, 2)}월 ${info.openDt.substr(6, 2)}일`;
+
+      $('#movieInfo').html('');
+      let mvInfo = `<div>감독 : ${dirNm}</div>
+                  <div>출연진 : ${actNm}`;
+      if (actCnt != 0) {
+        mvInfo += ` 외 ${actCnt}명`;
+      }
+      mvInfo += `</div>
+                  <div>상영 시간 : ${time}분</div>
+                  <div>개봉일 : ${open}</div>`;
+      $('#movieInfo').html(mvInfo);
+
+    });
+  }
+  </script>
+</body>
+</html>

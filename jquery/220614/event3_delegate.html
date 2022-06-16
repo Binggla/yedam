@@ -9,17 +9,19 @@
   <script>
 
     $(function() {
-      $('#list').on('mouseover', function(e) {
-          $(e.target).find('span').show(500);
+      $('#list').on('mouseover', 'li', function() {
+          $(this).find('span').show();
       })
-      $('#list').on('mouseout', function(e) {
-          $(e.target).find('span').hide(500);
+      $('#list').on('mouseout', 'li',  function() {
+          $(this).find('span').hide();
       })
 
       $('#btn').on('click', function() {
-        $('<li>').html($('#fruit').val())
-            .append($('<span>').html($('#price').val()))
-            .appendTo($('#list'));
+        let fruitVal = $('#fruit').val();
+        let priceVal = $('#price').val();
+
+        $('<li>').html(`${fruitVal}<span>${priceVal}</span>`)
+                 .appendTo($('#list'));
       })
 
     })

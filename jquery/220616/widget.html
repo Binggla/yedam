@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function(){
+
+      //accordion
+      $('#accd').accordion({
+        collapsible:true,
+        active:0,
+        activate: function(e, ui) {
+          console.log(ui.newHeader.text());
+        }
+      });
+
+      //datepicker
+      $('#rdt').datepicker({
+        dateFormat: 'yy-mm-dd',
+        maxDate: '+1w',
+        minDate: '-1w',
+        onSelect: function(str, obj) {
+          console.log(str);
+          console.log(obj);
+          console.log(obj.currentMonth+1);
+        }
+      });
+
+      //modal(dialog)
+    function makeModal() {
+      let dialog = $('#dialog').dialog({
+          autoOpen: false,
+          height: 400,
+          width: 350,
+          modal: true,
+          buttons: { 
+                    '등록': userAdd, 
+                    '수정': function() {
+                      dialog.dialog('close');
+                    }
+                  }
+        });
+        return dialog;
+      }
+
+      //modal open
+      $( "#btnModal" ).on( "click", function() {
+        $('#dialog').load('form.html', function(){
+          let dialog = makeModal();
+          dialog.dialog( "open" );
+        });
+      // $.ajax({
+      //   url: 'form.html',
+      //   dataType: 'html'
+      // }).done(function(result) {
+      //    $('#dialog').html(result);
+      // })
+      });
+
+    })
+  </script>
+</head>
+<body>
+  <div id="accd">
+    <h3>java</h3>
+      <div>
+        작성일자<input name="rdt" id="rdt">
+        <button id="btnModal">modal open</button>
+      </div>
+        <h3>java</h3>
+    <div>자바란</div>
+    <h3>java</h3>
+    <div>자바란</div>
+  </div>
+
+  <div id="dialog" title="Basic dialog">
+    <p></p>
+  </div>
+
+</body>
+</html>
