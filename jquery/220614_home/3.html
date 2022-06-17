@@ -20,14 +20,14 @@ $(function(){
 function funcAdd(){
 //텍스트필드에 입력한 값을 배열에 추가하고 배열을 div에 출력 
     txtArr.push($('#txtFruit').val());
-    $('#result').html(getResultTxt());
+    $('#result').text(txtArr);
 }
 function funcDelete(){
 //텍스트필드에 입력한 값을 배열에서 삭제하고 배열을 div에 출력
     let txtInx = txtArr.indexOf($('#txtFruit').val());
     if (txtInx != -1) {
         txtArr.splice(txtInx, 1);
-        $('#result').html(getResultTxt());
+        $('#result').text(txtArr);
     } else {
         noDataAlert();
     }
@@ -37,29 +37,12 @@ function funcSearch(){
     let txtInx = txtArr.indexOf($('#txtFruit').val());
     if (txtInx != -1) {
         let searchTxt = `검색위치 : ${(txtInx+1)}`;
-        $('#result').html(getResultTxt() + `<br>${searchTxt}`);
+        $('#result').html(txtArr + `<br>${searchTxt}`);
     } else {
         noDataAlert();
     }
 }
-function getResultTxt() {
-    // result text 초기화
-    $('#result').html('');
-    // result text 값 지정
-    let resultTxt = '';
-    txtArr.forEach(function(txt, idx) {
-        if(idx === 0) {
-            resultTxt = txt;
-        } else {
-            resultTxt += `, ${txt}`;
-        }
-    })
-    // input text 초기화
-    $('#txtFruit').val('');
-    $('#txtFruit').focus();
-    // result text 반환
-    return resultTxt;
-}
+fgdfgdfgd
 function noDataAlert() {
     alert('값을 찾을 수 없습니다. 다시 입력해 주세요.');
     $('#txtFruit').val('');
