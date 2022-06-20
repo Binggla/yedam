@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.myserver.emp.mapper.EmployeeMapper"> 
+
+<resultMap id="jobEmployeeMap" type="jobs">
+	<collection property="employees" 
+				javaType="ArrayList" 
+				column="job_id" 
+				ofType="Employee" 
+				select="findJobEmployees"/>
+</resultMap>
+
+
+<select id="findJobEmployees" resultType="employee">
+	 SELECT *
+	 FROM EMPLOYEES
+	 WHERE JOB_ID = #{job_id}
+	 ORDER BY JOB_ID 
+</select>
+
+<select id="findJobs" resultMap="jobEmployeeMap">
+	SELECT JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY
+	FROM JOBS
+	ORDER BY JOB_ID 
+</select>
+
+
+<!-- findDepartment의 결과값을 불러서 employee의 department 변수에 담자. -->
+<resultMap id="employeeMapSelect" type="employee">
+	<association property="department" column="department_id" 
+				javaType="Departments" select="findDepartment" />
+</resultMap>
+
+<select id="findDepartment" resultType="Departments">
+	SELECT *
+	FROM DEPARTMENTS
+	WHERE DEPARTMENT_ID = #{department_id}
+</select>
+
+<resultMap type="employee" id="employeeMap">
+	<id property="employee_id" column="EMPLOYEE_ID" />
+	<result property="first_name" column="FIRST_NAME" />
+	<result property="email" column="EMAIL" />
+	<association property="department">
+		<id property="department_id" column="DEPARTMENT_ID" /> 
+		<result property="department_name" column="DEPARTMENT_NAME" />
+		<result property="location_id" column="LOCATION_ID" />
+		<result property="manager_id" column="MANAGER_ID" />
+	</association>
+</resultMap>
+
+<select id="findEmployees"  resultMap="employeeMapSelect">
+	SELECT *
+	FROM EMPLOYEES
+	ORDER BY EMPLOYEE_ID  
+</select>
+
+<insert id="persist" >
+	INSERT INTO EMPLOYEES (
+			EMPLOYEE_ID,
+			FIRST_NAME,
+			LAST_NAME,
+			EMAIL,
+			HIRE_DATE,
+			JOB_ID
+	) VALUES (
+			#{employee_id},
+			#{first_name},
+			#{last_name},
+			#{email},
+			#{hire_date},
+			#{job_id}
+	)
+</insert>
+
+<insert id="remove" >
+	delete from employees
+	where employee_id = #{employee_id}
+</insert>
+
+<update id="merge" >
+	update employees
+	   set first_name = #{first_name},
+		   last_name = #{last_name},
+		   email = #{email},
+		   phone_number = #{phone_number},
+		   job_id = #{job_id},	
+		   salary = #{salary}    
+	where employee_id = #{employee_id}
+</update>
+
+
+<select id="findDepartments" resultType="departments">
+	select a.department_id, a.department_name 
+	  from departments a
+	 order by a.department_id 
+</select>
+
+<select id="empStat" resultType="map">
+	SELECT DEPARTMENT_ID  "dpetId"
+	       , COUNT(*)     "cnt"
+	FROM EMPLOYEES
+	WHERE DEPARTMENT_ID IS NOT NULL
+	GROUP BY DEPARTMENT_ID
+</select>
+
+</mapper>

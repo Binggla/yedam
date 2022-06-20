@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<security:http pattern="/css/**" security="none" />
+	<security:http>
+		<security:intercept-url pattern="/top.jsp"
+			access="permitAll()" />
+		<security:intercept-url pattern="/login.jsp"
+			access="permitAll()" />
+		<security:intercept-url pattern="/admin/**"
+			access="hasAuthority('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+			
+		<!-- 시작하고싶은 로그인 페이지 설정 -->
+		<!-- authentication-success-handler-ref : 로그인 success 후 추가 작업할 handler -->
+		<security:form-login 
+			login-page="/login.jsp" 
+			login-processing-url="/processLogin"
+			username-parameter="id"
+			authentication-success-handler-ref="loginSuccessHandler"
+			default-target-url="/top.jsp"
+		/>
+
+		<security:logout logout-url="/logout"
+			logout-success-url="/top.jsp" />
+			
+		<!-- 에러 발생 시 이동할 페이지 -->
+		<security:access-denied-handler error-page="/accessDenied.jsp"/>
+		<security:csrf disabled="true" />
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<!-- users-by : 유저 정보 조회 -->
+			<!-- authorities : 롤 정보 조회. -->
+			<!-- 'ROLE_'||UPPER(ROLE) : 롤 이름의 접두어는 ROLE_이어야하며, 모두 대문자여야 한다. -->
+			<security:jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="SELECT ID, '{noop}'||PASSWORD, 1 FROM USERS WHERE ID = ?"
+			authorities-by-username-query="SELECT ID, 'ROLE_'||UPPER(ROLE) FROM USERS WHERE ID = ?" 
+			/>
+
+	<!-- <security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				{noop} : 암호화되지 않았음을 미리 알린다.
+				<security:user name="user" password="{noop}1234"
+					authorities="ROLE_USER" />
+				<security:user name="admin" password="{noop}1234"
+					authorities="ROLE_ADMIN" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager> -->
+	
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>
