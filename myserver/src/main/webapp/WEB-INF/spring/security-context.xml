@@ -31,30 +31,12 @@
 			
 		<!-- 에러 발생 시 이동할 페이지 -->
 		<security:access-denied-handler error-page="/accessDenied.jsp"/>
-		<security:csrf disabled="true" />
+		<security:csrf disabled="false" />
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<!-- users-by : 유저 정보 조회 -->
-			<!-- authorities : 롤 정보 조회. -->
-			<!-- 'ROLE_'||UPPER(ROLE) : 롤 이름의 접두어는 ROLE_이어야하며, 모두 대문자여야 한다. -->
-			<security:jdbc-user-service data-source-ref="dataSource"
-			users-by-username-query="SELECT ID, '{noop}'||PASSWORD, 1 FROM USERS WHERE ID = ?"
-			authorities-by-username-query="SELECT ID, 'ROLE_'||UPPER(ROLE) FROM USERS WHERE ID = ?" 
-			/>
-
-	<!-- <security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				{noop} : 암호화되지 않았음을 미리 알린다.
-				<security:user name="user" password="{noop}1234"
-					authorities="ROLE_USER" />
-				<security:user name="admin" password="{noop}1234"
-					authorities="ROLE_ADMIN" />
-			</security:user-service>
-		</security:authentication-provider>
-	</security:authentication-manager> -->
+		<security:authentication-provider user-service-ref="userServiceImpl">
+		<security:password-encoder hash="bcrypt" />
 	
 		</security:authentication-provider>
 	</security:authentication-manager>
