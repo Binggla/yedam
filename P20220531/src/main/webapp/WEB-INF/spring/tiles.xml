@@ -10,15 +10,26 @@
 	    <put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp" />
 	</definition>
 	
-	<definition name="admin.homepage" template="/WEB-INF/views/admin/adminlayout.jsp">
+	<definition name="admin.homepage" template="/WEB-INF/views/admin/layout.jsp">
 		<put-attribute name="title" value="Admin" />
 	    <put-attribute name="header" value="/WEB-INF/views/admin/header.jsp" />
 	    <put-attribute name="body" value="" />
 	    <put-attribute name="footer" value="/WEB-INF/views/admin/footer.jsp" />
 	</definition>
 	
+	<definition name="student.homepage" template="/WEB-INF/views/student/layout.jsp">
+		<put-attribute name="title" value="Student" />
+	    <put-attribute name="header" value="/WEB-INF/views/student/header.jsp" />
+	    <put-attribute name="body" value="" />
+	    <put-attribute name="footer" value="/WEB-INF/views/student/footer.jsp" />
+	</definition>
+	
 	<definition name="admin/*" extends="admin.homepage">
 		<put-attribute name="body" value="/WEB-INF/views/admin/{1}.jsp" />
+	</definition>
+	
+	<definition name="student/*" extends="student.homepage">
+		<put-attribute name="body" value="/WEB-INF/views/student/{1}.jsp" />
 	</definition>
 	
 	<definition name="*/*" extends="myapp.homepage">
