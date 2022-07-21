@@ -24,7 +24,6 @@
 	ORDER BY JOB_ID 
 </select>
 
-
 <!-- findDepartment의 결과값을 불러서 employee의 department 변수에 담자. -->
 <resultMap id="employeeMapSelect" type="employee">
 	<association property="department" column="department_id" 
@@ -102,6 +101,15 @@
 	FROM EMPLOYEES
 	WHERE DEPARTMENT_ID IS NOT NULL
 	GROUP BY DEPARTMENT_ID
+</select>
+
+<select id="getDeptListMap" resultType="map">
+	SELECT DEPARTMENT_ID "부서번호"
+	       ,DEPARTMENT_NAME "부서명"
+	       ,MANAGER_ID "부서장"
+	       ,LOCATION_ID "위치"
+	FROM   DEPARTMENTS
+	ORDER BY DEPARTMENT_ID
 </select>
 
 </mapper>
