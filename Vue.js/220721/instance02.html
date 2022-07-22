@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+
+    .strike-through {
+      text-decoration : line-through;
+      color : lightgray;
+    }
+
+    .dark {
+      background-color: gray;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <img src="photo20.jpg" v-bind:style="{width:mySize}">직접 소스 지정</img><br>
+    <img v-bind:src="fileName" v-bind:style="myStyle">v-bind로 소스 지정</img><br>
+    <a href="https://www.naver.com">직접 링크 지정</a><br>
+    <a :href="myURL">v-bind로 링크 지정</a><br>
+  </div>
+  <script>
+    /*
+      v-bind : 각 태그의 속성에 데이터를 바인딩
+    */
+    let app = new Vue({
+      el : '#app',
+      data : {
+        fileName : 'photo20.jpg',
+        myURL : 'https://www.naver.com',
+        mySize : '300px',
+        myStyle : {
+          width : '500px',
+          border : 'solid 5px gray'
+        }
+      }
+
+    })
+  </script>
+
+  <div id="app2">
+    <p class="strike-through">직접 클래스 지정</p>
+    <p v-bind:class="myClass">v-bind로 클래스 지정</p>
+    <p v-bind:class="[ myClass, drakClass ]">v-bind로 복수의 클래스 지정</p>
+    <p v-blind:class="{ 'strike-through' : isOn }">데이터로 클래스 on/off</p>
+  </div>
+  <script>
+    let app2 = new Vue({
+      el : '#app2',
+      data : {
+        myClass : 'strike-through',
+        darkClass : 'dark',
+        isOn : false
+      }
+    })
+  </script>
+</body>
+</html>

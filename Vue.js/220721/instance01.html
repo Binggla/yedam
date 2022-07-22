@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <script>
+    /*
+      new Vue({
+        el : HTML 요소 중 연결할 요소를 정의
+        data : {} 뷰에서 처리할 원본 데이터. 객체 형태로 값을 가진다.
+        computed : {} 원본 데이터를 사용하여 계산하여 리턴. 요소가 연속적으로 어떠한 값을 가져야할 때. 출력용.
+        watch : {} 데이터를 감시하여 변화가 발생했을 때 일어나야 하는 프로세스.
+        methods : {} 함수. 
+      })
+
+    */
+    document.addEventListener('DOMContentLoaded', function() {
+      let app = new Vue({
+        el : '#app',
+        data : {
+          myText : '<h1>HI!</h1>',
+          myHtml : '<h1>HI!</h1>',
+          myPrice : 500,
+          myName : '홍길동',
+          myArray : ['다즐링', '얼그레이', '실론'],
+          myTea : {
+            name : '홍차',
+            price : 600
+          }
+        }
+      })
+    })
+  </script>
+  <div id="app">
+    <p v-text="myText"></p> <!-- v-text : text 속성. directive 방식으로 보여줄 때. 태그 미반영 -->
+    
+    <!-- vue data 사용-->
+    <!-- instance가 연결이 된 상태에서는 {{ }} 내부가 javascript 영역이 된다. 연산도 가능하다. -->
+    <p>{{ myText }}</p>
+    <p>{{ myPrice * 1.1 }}</p>
+    <p>{{ `안녕하세요! ${myName.substr(0,1)}님` }}</p>
+    <p>{{ `${myArray[0]}, ${myArray[1]}, ${myArray[2]}` }}</p>
+    <p>{{ `${myTea.name}는 ${myTea.price}원입니다.` }}</p>
+
+    <p>{{ myText }}</p>
+    <p v-html="myHtml"></p> <!-- v-html(=innerHTML) : html 속성. 태그 반영 -->
+   
+  </div>
+</body>
+</html>

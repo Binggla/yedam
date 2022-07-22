@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message + ' 추가합니다.' }}
+  </div>
+
+  <hr>
+
+  <!-- 1. JavaScript -->
+    <!-- <p id="count"></p>
+    <button id="counter">카운터</button> -->
+  <!-- 2. Vue -->
+  <h2>클릭하면 카운터가 올라갑니다.</h2>
+  <div id="app2">
+    <p>{{ count }}회</p>
+    <p v-show="isOpen">{{ message }}</p>  <!-- v-show : true일 때 보여지고 flase일 때 숨겨진다. -->
+    <button v-on:click="countUp">카운터</button>
+  </div>
+
+  <script>
+    // binding : 묶어주는 것.
+    let app = new Vue({
+      el : '#app', // element, 연결될 태그. app이라는 이름을 가진 요소와 연결.
+      data : { // data, 객체 형태로 들어간다.
+        message : '안녕하세요 Vue!' 
+      }
+    });
+  </script>
+
+  <script>
+    // 1. JavaScript
+    // counter.addEventListener('click', function() {
+    //   count.innerHTML = Number(count.innerHTML) + 1;
+    //   count.style.color = 'black';
+
+    //   if (count.innerHTML % 5 == 0) {
+    //     count.style.color = 'red';
+    //   }
+    // })
+
+    // 2. Vue
+    let app2 = new Vue({
+      el : '#app2',
+      data : {
+          count : 0,
+          isOpen : false
+      },
+      watch : { // 데이터 감지. count의 변화를 감지해서 isOpen요소에 true, false 값을 넣어준다.
+        count : function() {
+          if(this.count % 5 == 0) {
+            this.isOpen = true;
+          } else {
+            this.isOpen = false;
+          }
+        }
+      },
+      computed : { // 연산을 하여 리턴. count
+        message : function() {
+          return `현재 ${this.count}회를 초과했습니다.`;
+        }
+      },
+      methods : { // v-on:click과 연결
+        countUp : function() {
+          this.count = this.count + 1;
+        }
+      }
+    })
+
+
+  </script>
+
+</body>
+
+</html>
