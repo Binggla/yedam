@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /*
+      - v-model : 입력폼에 연결, 양방향 통신
+          1. Vue 인스턴스를 생성
+          2. 객체를 통해 설정값을 전달
+      - v-on:keyup="" v-bind:value=""
+    */
+
+    document.addEventListener('DOMContentLoaded', function() {
+      let app = new Vue({
+        el : '#app',
+        data : {
+          myName : '홍길동',
+          myText : '',
+          myCheck : false,
+          myChecks : [],
+          myPick : ''
+        }
+      });
+    })
+  </script>
+  <div id="app">
+    <input v-model="myName" placeholder="이름">
+    <p> 나는 {{ myName }}입니다.</p>
+    <hr>
+    <textarea v-model="myText"></textarea>
+    <p>문장은, [{{ myText }}]</p>
+    <p>문자 수는 {{ myText.length }}입니다.</p>
+    <hr>
+    <label><input type="checkbox" v-model="myCheck">체크박스의 상태는 {{myCheck}}</label>
+    <label><input type="checkbox" value="red" v-model="myChecks">적</label>
+    <label><input type="checkbox" value="blue" v-model="myChecks">청</label>
+    <label><input type="checkbox" value="green" v-model="myChecks">녹</label>
+    <p>선택한 색은 {{ myChecks }} </p>
+    <hr>
+    <label><input type="radio" value="red" v-model="myPick">적</label>
+    <label><input type="radio" value="blue" v-model="myPick">청</label>
+    <label><input type="radio" value="green" v-model="myPick">녹</label>
+    <p>선택한 색은 {{ myPick }} </p>
+  </div>
+
+</body>
+</html>
